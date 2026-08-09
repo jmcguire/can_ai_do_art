@@ -61,7 +61,7 @@ roomtone \
   --start seeds/first.txt \
   --generations 100 \
   --profile profiles/default \
-  --resume runs/20260809T143210.123456Z
+  --resume runs/20260809T143210Z
 ```
 
 ## Profiles and overrides
@@ -102,27 +102,34 @@ The resolved settings are recorded in each run's `manifest.json`.
 Each run receives a timestamp-only directory under `runs/`, for example:
 
 ```text
-runs/20260809T143210.123456Z/
+runs/20260809T143210Z/
 ├── manifest.json
 ├── commands.txt
 ├── index.html
 ├── profile/
-├── seed/
-├── 0001/
+├── 0000/
+│   └── first.txt
+├── 0001-image/
 │   ├── image.png
 │   ├── request.json
 │   └── response.json
-└── 0002/
+└── 0002-text/
     ├── description.md
     ├── request.json
     └── response.json
 ```
 
+The `0000/` directory contains the archived seed. Every transformation directory
+is labeled by its output kind, making images and descriptions easy to find while
+browsing the filesystem.
+
 The manifest records timestamps, Roomtone version, Git commit when available,
 effective settings, checksums, step status, and elapsed time for each completed
-transformation. Image response base64 is decoded to the image file; its location
-and checksum replace the duplicate base64 string in `response.json`. No API key
-is archived.
+transformation. A completed run also records a summary with total wall time,
+artifact counts and bytes, token usage by model, and estimated API cost together
+with the exact pricing assumptions and date used. Image response base64 is
+decoded to the image file; its location and checksum replace the duplicate
+base64 string in `response.json`. No API key is archived.
 
 Each run also receives a self-contained HTML gallery. Open its `index.html` to
 flip through images with the buttons, thumbnails, or left and right arrow keys.

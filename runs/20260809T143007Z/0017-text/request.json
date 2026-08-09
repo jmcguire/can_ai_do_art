@@ -10,8 +10,8 @@
           "detail": "high",
           "image_url": {
             "encoding_note": "Sent as a base64 data URL; duplicate bytes omitted here.",
-            "sha256": "9b54f5589eeae68f8b588d33233bdabf48dca5fb6976c499f7d822e3498ec6f6",
-            "source_file": "/Users/justin/Code/iterative_image_generation/runs/20260809T143007.617541Z/0008/image.png"
+            "sha256": "0de7e55c92d19b04e719378d3593e3155323fd50669d223d69e5f5d7728c9bcb",
+            "source_file": "/Users/justin/Code/iterative_image_generation/runs/20260809T143007Z/0016-image/image.png"
           },
           "type": "input_image"
         }

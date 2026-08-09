@@ -1,4 +1,5 @@
 {
+  "completed_at": "2026-08-09T14:37:27.668282+00:00",
   "created_at": "2026-08-09T14:30:07.618498+00:00",
   "effective_settings": {
     "image_format": "png",
@@ -24,7 +25,7 @@
   "roomtone_version": "0.1.0",
   "schema_version": 1,
   "start": {
-    "archived_path": "seed/dnd-2024-player-handbook-art.jpg",
+    "archived_path": "0000/dnd-2024-player-handbook-art.jpg",
     "kind": "image",
     "original_path": "/Users/justin/Code/iterative_image_generation/seeds/dnd-2024-player-handbook-art.jpg",
     "sha256": "2e15ca3a073bad44741d463b7a857d0103978a1e225842c323f5b5e3e23a1f32"
@@ -33,164 +34,216 @@
   "steps": [
     {
       "input_kind": "image",
-      "input_path": "seed/dnd-2024-player-handbook-art.jpg",
+      "input_path": "0000/dnd-2024-player-handbook-art.jpg",
       "number": 1,
       "output_kind": "text",
-      "output_path": "0001/description.md",
+      "output_path": "0001-text/description.md",
       "output_sha256": "16a46e4a8725bdb196be610958605c0ce5978edf6486d0b7af8e30bbfcc59ad8"
     },
     {
       "input_kind": "text",
-      "input_path": "0001/description.md",
+      "input_path": "0001-text/description.md",
       "number": 2,
       "output_kind": "image",
-      "output_path": "0002/image.png",
+      "output_path": "0002-image/image.png",
       "output_sha256": "cc0df2f3b930ab7cbcbb60cf82d63283a86876bfc5a1b9bb071c93f858f11aed"
     },
     {
       "input_kind": "image",
-      "input_path": "0002/image.png",
+      "input_path": "0002-image/image.png",
       "number": 3,
       "output_kind": "text",
-      "output_path": "0003/description.md",
+      "output_path": "0003-text/description.md",
       "output_sha256": "07afc4e02f622ea2521dfa9e148d6c637f0d67c95563b8a49313ece87294fbdb"
     },
     {
       "input_kind": "text",
-      "input_path": "0003/description.md",
+      "input_path": "0003-text/description.md",
       "number": 4,
       "output_kind": "image",
-      "output_path": "0004/image.png",
+      "output_path": "0004-image/image.png",
       "output_sha256": "4f78ed3a85511662b4e7863a3431cf75e9170a77169fde806dad8272726d14b1"
     },
     {
       "input_kind": "image",
-      "input_path": "0004/image.png",
+      "input_path": "0004-image/image.png",
       "number": 5,
       "output_kind": "text",
-      "output_path": "0005/description.md",
+      "output_path": "0005-text/description.md",
       "output_sha256": "3ebb98264b3ae81ab4fd278e906f1a29cc78478ed696fe75ff360a9f2cd256e1"
     },
     {
       "input_kind": "text",
-      "input_path": "0005/description.md",
+      "input_path": "0005-text/description.md",
       "number": 6,
       "output_kind": "image",
-      "output_path": "0006/image.png",
+      "output_path": "0006-image/image.png",
       "output_sha256": "2740571a097d45a0ca754f551cf2329621b10df1a69ac74852635b93fb1a7191"
     },
     {
       "input_kind": "image",
-      "input_path": "0006/image.png",
+      "input_path": "0006-image/image.png",
       "number": 7,
       "output_kind": "text",
-      "output_path": "0007/description.md",
+      "output_path": "0007-text/description.md",
       "output_sha256": "d9df7b5843b5424c57844afae66a1e8e00e0ea42375c0a79308ab932f3e9ea52"
     },
     {
       "input_kind": "text",
-      "input_path": "0007/description.md",
+      "input_path": "0007-text/description.md",
       "number": 8,
       "output_kind": "image",
-      "output_path": "0008/image.png",
+      "output_path": "0008-image/image.png",
       "output_sha256": "9b54f5589eeae68f8b588d33233bdabf48dca5fb6976c499f7d822e3498ec6f6"
     },
     {
       "input_kind": "image",
-      "input_path": "0008/image.png",
+      "input_path": "0008-image/image.png",
       "number": 9,
       "output_kind": "text",
-      "output_path": "0009/description.md",
+      "output_path": "0009-text/description.md",
       "output_sha256": "d793ee7050d03253694111c6535311cd6e3d262a4ce62fdd9c3f0ab0966429a3"
     },
     {
       "input_kind": "text",
-      "input_path": "0009/description.md",
+      "input_path": "0009-text/description.md",
       "number": 10,
       "output_kind": "image",
-      "output_path": "0010/image.png",
+      "output_path": "0010-image/image.png",
       "output_sha256": "5036753585d812ff809a31b2e2246467170bd2418bde95048926a2b41782e25d"
     },
     {
       "input_kind": "image",
-      "input_path": "0010/image.png",
+      "input_path": "0010-image/image.png",
       "number": 11,
       "output_kind": "text",
-      "output_path": "0011/description.md",
+      "output_path": "0011-text/description.md",
       "output_sha256": "8b2419ca182f4a91408b0dc5a6006300eacf4897e29bbde3ca1f2ad521e2998a"
     },
     {
       "input_kind": "text",
-      "input_path": "0011/description.md",
+      "input_path": "0011-text/description.md",
       "number": 12,
       "output_kind": "image",
-      "output_path": "0012/image.png",
+      "output_path": "0012-image/image.png",
       "output_sha256": "76c20b984fe0a619cc1a8a68cd29080a8bfa7d3608553a4f11a17f212ba37185"
     },
     {
       "input_kind": "image",
-      "input_path": "0012/image.png",
+      "input_path": "0012-image/image.png",
       "number": 13,
       "output_kind": "text",
-      "output_path": "0013/description.md",
+      "output_path": "0013-text/description.md",
       "output_sha256": "49a00652a2bd908e58f2c9888f357ca424cfb848f882a64e25dcfd7ecae519ee"
     },
     {
       "input_kind": "text",
-      "input_path": "0013/description.md",
+      "input_path": "0013-text/description.md",
       "number": 14,
       "output_kind": "image",
-      "output_path": "0014/image.png",
+      "output_path": "0014-image/image.png",
       "output_sha256": "9ce3dbaf205638d38f2cba8c486107b5bc6970b0d08686e07a7b9712a35d571b"
     },
     {
       "input_kind": "image",
-      "input_path": "0014/image.png",
+      "input_path": "0014-image/image.png",
       "number": 15,
       "output_kind": "text",
-      "output_path": "0015/description.md",
+      "output_path": "0015-text/description.md",
       "output_sha256": "ac7f7a720ee0255b459f9ead449f9031f0dab93e76807f47415d09659a53fe9f"
     },
     {
       "input_kind": "text",
-      "input_path": "0015/description.md",
+      "input_path": "0015-text/description.md",
       "number": 16,
       "output_kind": "image",
-      "output_path": "0016/image.png",
+      "output_path": "0016-image/image.png",
       "output_sha256": "0de7e55c92d19b04e719378d3593e3155323fd50669d223d69e5f5d7728c9bcb"
     },
     {
       "input_kind": "image",
-      "input_path": "0016/image.png",
+      "input_path": "0016-image/image.png",
       "number": 17,
       "output_kind": "text",
-      "output_path": "0017/description.md",
+      "output_path": "0017-text/description.md",
       "output_sha256": "453e0df081773095d9032bb06703183a2f162b1c2a12653ddb4f23b9ef1faf69"
     },
     {
       "input_kind": "text",
-      "input_path": "0017/description.md",
+      "input_path": "0017-text/description.md",
       "number": 18,
       "output_kind": "image",
-      "output_path": "0018/image.png",
+      "output_path": "0018-image/image.png",
       "output_sha256": "cb12e456dc5d3adc9f9962cacc328af9448d826e4460b9d8a4c3acb3ce5ee97e"
     },
     {
       "input_kind": "image",
-      "input_path": "0018/image.png",
+      "input_path": "0018-image/image.png",
       "number": 19,
       "output_kind": "text",
-      "output_path": "0019/description.md",
+      "output_path": "0019-text/description.md",
       "output_sha256": "f5de1ab28588b252ef862289c14c34ba8f21efbd41de116eef34543e2eb00f47"
     },
     {
       "input_kind": "text",
-      "input_path": "0019/description.md",
+      "input_path": "0019-text/description.md",
       "number": 20,
       "output_kind": "image",
-      "output_path": "0020/image.png",
+      "output_path": "0020-image/image.png",
       "output_sha256": "05747013f878b93f6dfe72d41812214b8d32a6dd438eb469eaa9b65758d32113"
     }
   ],
-  "updated_at": "2026-08-09T14:37:27.668282+00:00"
+  "summary": {
+    "average_measured_transformation_seconds": null,
+    "completed_at": "2026-08-09T14:37:27.668282+00:00",
+    "descriptions_generated": 10,
+    "estimated_cost_usd": 0.313934,
+    "generated_artifact_bytes": 21586566,
+    "images_generated": 10,
+    "measured_processing_seconds": 0,
+    "pricing": {
+      "as_of": "2026-08-09",
+      "basis": "OpenAI standard API token pricing; regional or service-tier uplifts are not included.",
+      "currency": "USD",
+      "is_estimate": true,
+      "rates_per_million_tokens": {
+        "gpt-5.6-sol": {
+          "cache_write_input": 6.25,
+          "cached_input": 0.5,
+          "output": 30.0,
+          "uncached_input": 5.0
+        },
+        "gpt-image-2": {
+          "image_input": 8.0,
+          "image_output": 30.0,
+          "text_input": 5.0
+        }
+      },
+      "unpriced_models": []
+    },
+    "successful_api_requests": 20,
+    "timed_transformations": 0,
+    "tokens": {
+      "by_model": {
+        "gpt-5.6-sol": {
+          "input_tokens": 12905,
+          "output_tokens": 4909,
+          "requests": 10,
+          "total_tokens": 17814
+        },
+        "gpt-image-2": {
+          "input_tokens": 5449,
+          "output_tokens": 1960,
+          "requests": 10,
+          "total_tokens": 7409
+        }
+      },
+      "input": 18354,
+      "output": 6869,
+      "total": 25223
+    },
+    "transformations_completed": 20,
+    "wall_time_seconds": 440.05
+  },
+  "updated_at": "2026-08-09T15:08:29.516545+00:00"
 }

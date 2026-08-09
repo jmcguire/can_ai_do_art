@@ -24,14 +24,36 @@ class FakeProvider:
         destination.write_bytes(b"fake-png-" + str(len(self.calls)).encode())
         return (
             {"model": "fake-image", "prompt": prompt},
-            {"id": f"image-{len(self.calls)}"},
+            {
+                "id": f"image-{len(self.calls)}",
+                "model": "gpt-image-2",
+                "usage": {
+                    "input_tokens": 10,
+                    "output_tokens": 20,
+                    "total_tokens": 30,
+                    "input_tokens_details": {"text_tokens": 10, "image_tokens": 0},
+                    "output_tokens_details": {"image_tokens": 20},
+                },
+            },
         )
 
     def image_to_text(self, image_path: Path, prompt: str):
         self.calls.append("image_to_text")
         return (
             {"model": "fake-vision", "source": image_path.name},
-            {"id": f"text-{len(self.calls)}"},
+            {
+                "id": f"text-{len(self.calls)}",
+                "model": "gpt-5.6-sol",
+                "usage": {
+                    "input_tokens": 100,
+                    "output_tokens": 30,
+                    "total_tokens": 130,
+                    "input_tokens_details": {
+                        "cached_tokens": 0,
+                        "cache_write_tokens": 80,
+                    },
+                },
+            },
             f"description produced at call {len(self.calls)}",
         )
 
@@ -74,7 +96,10 @@ class RoomtoneTests(unittest.TestCase):
             self.assertEqual(manifest["status"], "completed")
             self.assertEqual(len(manifest["steps"]), 4)
             self.assertEqual(manifest["steps"][-1]["output_kind"], "text")
-            self.assertTrue((run_dir / "0004" / "description.md").is_file())
+            self.assertRegex(run_dir.name, r"^\d{8}T\d{6}Z$")
+            self.assertTrue((run_dir / "0000" / "seed.txt").is_file())
+            self.assertTrue((run_dir / "0004-text" / "description.md").is_file())
+            self.assertTrue((run_dir / "0001-image" / "image.png").is_file())
             self.assertTrue((run_dir / "profile" / "profile.toml").is_file())
             self.assertTrue((run_dir / "index.html").is_file())
             self.assertTrue((run_dir.parent / "index.html").is_file())
@@ -82,6 +107,10 @@ class RoomtoneTests(unittest.TestCase):
             gallery = (run_dir / "index.html").read_text(encoding="utf-8")
             self.assertIn("Generation 1", gallery)
             self.assertIn("Generation 3", gallery)
+            self.assertEqual(manifest["summary"]["images_generated"], 2)
+            self.assertEqual(manifest["summary"]["descriptions_generated"], 2)
+            self.assertEqual(manifest["summary"]["tokens"]["total"], 320)
+            self.assertAlmostEqual(manifest["summary"]["estimated_cost_usd"], 0.0043)
 
     def test_help_groups_arguments_and_documents_optional_defaults(self):
         help_text = build_parser().format_help()
@@ -192,8 +221,8 @@ class RoomtoneTests(unittest.TestCase):
                 argv=["roomtone", "--resume", str(run_dir)],
                 resume=run_dir,
             )
-            self.assertTrue((run_dir / "0001" / "image.png").is_file())
-            self.assertEqual(len(list(run_dir.glob("0001.incomplete-*"))), 1)
+            self.assertTrue((run_dir / "0001-image" / "image.png").is_file())
+            self.assertEqual(len(list(run_dir.glob("0001-image.incomplete-*"))), 1)
 
 
 if __name__ == "__main__":

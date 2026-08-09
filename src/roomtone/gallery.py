@@ -22,6 +22,23 @@ def _display_timestamp(value: str) -> str:
         return value
 
 
+def _format_duration(seconds: object) -> str:
+    if not isinstance(seconds, (int, float)):
+        return "—"
+    rounded = int(round(seconds))
+    minutes, remaining = divmod(rounded, 60)
+    hours, minutes = divmod(minutes, 60)
+    if hours:
+        return f"{hours}h {minutes}m {remaining}s"
+    if minutes:
+        return f"{minutes}m {remaining}s"
+    return f"{remaining}s"
+
+
+def _format_cost(value: object) -> str:
+    return f"${value:.4f}" if isinstance(value, (int, float)) else "—"
+
+
 def _page_shell(title: str, body: str, *, script: str = "") -> str:
     return f"""<!doctype html>
 <html lang="en">
@@ -41,6 +58,9 @@ def _page_shell(title: str, body: str, *, script: str = "") -> str:
     h2 {{ font:1.4rem/1.2 Georgia,serif; font-weight:400; }}
     .eyebrow,.meta {{ color:var(--muted); text-transform:uppercase; letter-spacing:.08em; font-size:.78rem; }}
     .deck {{ color:#cbc5ba; max-width:68ch; }}
+    .facts {{ display:flex; flex-wrap:wrap; gap:8px; margin:22px 0; }}
+    .fact {{ min-width:150px; padding:10px 12px; border:1px solid var(--line); background:var(--panel); }}
+    .fact strong {{ display:block; color:var(--ink); font-size:1.1rem; }}
     .stage {{ display:grid; grid-template-columns:minmax(0,1fr) minmax(260px,360px); gap:24px; align-items:start; }}
     .stage > * {{ min-width:0; }}
     .frame {{ background:var(--panel); border:1px solid var(--line); border-radius:4px; overflow:hidden; }}
@@ -127,12 +147,24 @@ def generate_run_gallery(run_dir: Path, manifest: dict[str, Any] | None = None) 
         gallery = '<div class="empty">No images have been completed in this run.</div>'
 
     title = f"Roomtone · {run_dir.name}"
+    summary = manifest.get("summary") or {}
+    tokens = (summary.get("tokens") or {}).get("total")
+    facts = ""
+    if summary:
+        facts = f"""
+  <div class="facts">
+    <div class="fact"><span class="eyebrow">Elapsed</span><strong>{_format_duration(summary.get("wall_time_seconds"))}</strong></div>
+    <div class="fact"><span class="eyebrow">Tokens</span><strong>{tokens:,}</strong></div>
+    <div class="fact"><span class="eyebrow">Est. cost</span><strong>{_format_cost(summary.get("estimated_cost_usd"))}</strong></div>
+    <div class="fact"><span class="eyebrow">Artifacts</span><strong>{len(images)} images</strong></div>
+  </div>"""
     body = f"""
 <header>
   <div class="eyebrow"><a href="../">Roomtone runs</a> / {escape(run_dir.name)}</div>
   <h1>Visual roomtone</h1>
   <p class="deck">{len(images)} images across {len(steps)} completed transformations. Status: {escape(str(manifest.get("status", "unknown")))}.</p>
   <p class="meta">Started {_display_timestamp(str(manifest.get("created_at", "")))} · {escape(str(manifest.get("effective_settings", {}).get("image_model", "")))} ↔ {escape(str(manifest.get("effective_settings", {}).get("vision_model", "")))}</p>
+  {facts}
 </header>
 {gallery}
 """
@@ -165,6 +197,7 @@ def generate_runs_index(output_dir: Path) -> Path:
         except (OSError, json.JSONDecodeError):
             continue
         images = [s for s in manifest.get("steps", []) if s.get("output_kind") == "image"]
+        summary = manifest.get("summary") or {}
         preview = (
             f'<img src="{escape(run_dir.name + "/" + images[0]["output_path"], quote=True)}" alt="">'
             if images else '<div class="placeholder">No images yet</div>'
@@ -176,6 +209,7 @@ def generate_runs_index(output_dir: Path) -> Path:
     <div class="eyebrow">{_display_timestamp(str(manifest.get("created_at", "")))}</div>
     <h2>{len(images)} images</h2>
     <div>{len(manifest.get("steps", []))} / {manifest.get("generations_requested", "?")} transformations</div>
+    <div>{_format_duration(summary.get("wall_time_seconds"))} · {_format_cost(summary.get("estimated_cost_usd"))}</div>
     <span class="status">{escape(str(manifest.get("status", "unknown")))}</span>
   </div>
 </a>""")

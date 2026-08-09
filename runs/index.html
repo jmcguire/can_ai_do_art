@@ -16,6 +16,9 @@
     h2 { font:1.4rem/1.2 Georgia,serif; font-weight:400; }
     .eyebrow,.meta { color:var(--muted); text-transform:uppercase; letter-spacing:.08em; font-size:.78rem; }
     .deck { color:#cbc5ba; max-width:68ch; }
+    .facts { display:flex; flex-wrap:wrap; gap:8px; margin:22px 0; }
+    .fact { min-width:150px; padding:10px 12px; border:1px solid var(--line); background:var(--panel); }
+    .fact strong { display:block; color:var(--ink); font-size:1.1rem; }
     .stage { display:grid; grid-template-columns:minmax(0,1fr) minmax(260px,360px); gap:24px; align-items:start; }
     .stage > * { min-width:0; }
     .frame { background:var(--panel); border:1px solid var(--line); border-radius:4px; overflow:hidden; }
@@ -49,30 +52,33 @@
   <p class="deck">Text becomes image; image becomes text. Each step knows only the artifact immediately before it.</p>
 </header>
 <div class="runs">
-<a class="run" href="20260809T143007.617541Z/">
-  <img src="20260809T143007.617541Z/0002/image.png" alt="">
+<a class="run" href="20260809T143007Z/">
+  <img src="20260809T143007Z/0002-image/image.png" alt="">
   <div class="run-copy">
     <div class="eyebrow">August 09, 2026 · 14:30 UTC</div>
     <h2>10 images</h2>
     <div>20 / 20 transformations</div>
+    <div>7m 20s · $0.3139</div>
     <span class="status">completed</span>
   </div>
 </a>
-<a class="run" href="20260809T140032.796441Z/">
-  <img src="20260809T140032.796441Z/0001/image.png" alt="">
+<a class="run" href="20260809T140032Z/">
+  <img src="20260809T140032Z/0001-image/image.png" alt="">
   <div class="run-copy">
     <div class="eyebrow">August 09, 2026 · 14:00 UTC</div>
     <h2>1 images</h2>
     <div>2 / 2 transformations</div>
+    <div>22s · $0.0212</div>
     <span class="status">completed</span>
   </div>
 </a>
-<a class="run" href="20260809T135939.987095Z/">
+<a class="run" href="20260809T135939Z/">
   <div class="placeholder">No images yet</div>
   <div class="run-copy">
     <div class="eyebrow">August 09, 2026 · 13:59 UTC</div>
     <h2>0 images</h2>
     <div>0 / 2 transformations</div>
+    <div>— · —</div>
     <span class="status">failed</span>
   </div>
 </a></div>

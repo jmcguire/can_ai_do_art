@@ -38,7 +38,7 @@ def code_revision() -> str | None:
 
 
 def timestamp() -> str:
-    return datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S.%fZ")
+    return datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
 
 
 def create_run(
@@ -59,7 +59,7 @@ def create_run(
         destination = archived_profile / relative
         destination.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(prompt_path, destination)
-    seed_dir = run_dir / "seed"
+    seed_dir = run_dir / "0000"
     seed_dir.mkdir()
     seed_copy = seed_dir / start.name
     shutil.copy2(start, seed_copy)

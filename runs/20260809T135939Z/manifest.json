@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-08-09T14:00:32.797514+00:00",
+  "created_at": "2026-08-09T13:59:39.988408+00:00",
   "effective_settings": {
     "image_format": "png",
     "image_model": "gpt-image-2",
@@ -14,6 +14,10 @@
     "vision_detail": "high",
     "vision_model": "gpt-5.6"
   },
+  "error": {
+    "message": "Connection error.",
+    "type": "APIConnectionError"
+  },
   "generations_requested": 2,
   "git_commit": "743ab5076b052f52f0456b95040208024f0671a8",
   "profile": {
@@ -24,29 +28,12 @@
   "roomtone_version": "0.1.0",
   "schema_version": 1,
   "start": {
-    "archived_path": "seed/example.txt",
+    "archived_path": "0000/example.txt",
     "kind": "text",
     "original_path": "/Users/justin/Code/iterative_image_generation/seeds/example.txt",
     "sha256": "4f954b2cf8485bd0b23ce3f15a250dcfd27708f884263924b543d87b384c15dd"
   },
-  "status": "completed",
-  "steps": [
-    {
-      "input_kind": "text",
-      "input_path": "seed/example.txt",
-      "number": 1,
-      "output_kind": "image",
-      "output_path": "0001/image.png",
-      "output_sha256": "3e9d5997d80ff299fb460521daec6a10d868482d3de4050c9adfb6e63f9fac14"
-    },
-    {
-      "input_kind": "image",
-      "input_path": "0001/image.png",
-      "number": 2,
-      "output_kind": "text",
-      "output_path": "0002/description.md",
-      "output_sha256": "8eaafc14488ed4e2303e40815232dae1a6f6fbd5c45ad5639cc2c4b4c46afafd"
-    }
-  ],
-  "updated_at": "2026-08-09T14:00:55.013664+00:00"
+  "status": "failed",
+  "steps": [],
+  "updated_at": "2026-08-09T14:00:20.358773+00:00"
 }

@@ -10,8 +10,8 @@
           "detail": "high",
           "image_url": {
             "encoding_note": "Sent as a base64 data URL; duplicate bytes omitted here.",
-            "sha256": "2e15ca3a073bad44741d463b7a857d0103978a1e225842c323f5b5e3e23a1f32",
-            "source_file": "/Users/justin/Code/iterative_image_generation/runs/20260809T143007.617541Z/seed/dnd-2024-player-handbook-art.jpg"
+            "sha256": "cc0df2f3b930ab7cbcbb60cf82d63283a86876bfc5a1b9bb071c93f858f11aed",
+            "source_file": "/Users/justin/Code/iterative_image_generation/runs/20260809T143007Z/0002-image/image.png"
           },
           "type": "input_image"
         }

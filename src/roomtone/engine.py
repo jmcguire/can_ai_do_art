@@ -17,6 +17,7 @@ from .archive import (
 from .config import Profile, Settings
 from .gallery import refresh_galleries
 from .provider import write_json
+from .summary import summarize_run
 
 
 class Provider(Protocol):
@@ -86,9 +87,10 @@ def run_transformations(
 
     try:
         for number in range(len(manifest["steps"]) + 1, generations + 1):
-            step_dir = run_dir / f"{number:04d}"
+            output_kind = "image" if current_kind == "text" else "text"
+            step_dir = run_dir / f"{number:04d}-{output_kind}"
             if step_dir.exists():
-                step_dir.rename(run_dir / f"{number:04d}.incomplete-{timestamp()}")
+                step_dir.rename(run_dir / f"{step_dir.name}.incomplete-{timestamp()}")
             step_dir.mkdir(exist_ok=False)
             started_at = datetime.now(timezone.utc).isoformat()
             started = time.monotonic()
@@ -104,7 +106,6 @@ def run_transformations(
                 request, response = provider.text_to_image(prompt, output_path)
                 write_json(step_dir / "request.json", request)
                 write_json(step_dir / "response.json", response)
-                output_kind = "image"
             else:
                 output_path = step_dir / "description.md"
                 progress(f"[{number}/{generations}] image -> text")
@@ -114,7 +115,6 @@ def run_transformations(
                 output_path.write_text(description.strip() + "\n", encoding="utf-8")
                 write_json(step_dir / "request.json", request)
                 write_json(step_dir / "response.json", response)
-                output_kind = "text"
 
             manifest["steps"].append(
                 {
@@ -140,7 +140,10 @@ def run_transformations(
         refresh_galleries(run_dir, manifest)
         raise
 
+    completed_at = datetime.now(timezone.utc).isoformat()
     manifest["status"] = "completed"
+    manifest["completed_at"] = completed_at
+    manifest["summary"] = summarize_run(run_dir, manifest, completed_at)
     save_manifest(run_dir, manifest)
     refresh_galleries(run_dir, manifest)
     return run_dir
