@@ -1,0 +1,98 @@
+{
+  "background": false,
+  "billing": {
+    "payer": "developer"
+  },
+  "completed_at": 1786301329.0,
+  "conversation": null,
+  "created_at": 1786301319.0,
+  "error": null,
+  "frequency_penalty": 0.0,
+  "id": "resp_00aa52a85961c273006a78cb858cb0819caf9001eef87e388f",
+  "incomplete_details": null,
+  "instructions": null,
+  "max_output_tokens": 1500,
+  "max_tool_calls": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "moderation": null,
+  "object": "response",
+  "output": [
+    {
+      "content": [
+        {
+          "annotations": [],
+          "logprobs": [],
+          "text": "A vertically oriented Renaissance oil portrait of a seated young woman shown from the waist up in three-quarter view, her torso angled slightly left while her face turns toward the viewer. She has pale golden skin, a high smooth forehead, softly arched nearly invisible eyebrows, half-lidded brown eyes, a long straight nose, and a subtle closed-mouth smile. Her dark brown hair is center-parted and falls in long, smooth waves past her shoulders.\n\nShe wears a dark brown-black gown with a low, softly rounded neckline, fine gold embroidery along the bodice, warm brown gathered sleeves, and a muted olive-brown translucent shawl draped diagonally over her right shoulder. Her forearms rest calmly on the arm of a chair or ledge at the bottom of the composition. Her right hand lies gently over her left wrist, with long relaxed fingers; the left hand is partially visible beneath.\n\nBehind her is a hazy, imaginary landscape viewed from an elevated position: winding pale roads or rivers, blue-green water, rocky reddish-brown formations, distant jagged mountains, and soft atmospheric valleys fading into a muted green-blue sky. The horizon heights differ on either side of her head. Lighting is soft and diffuse, warmly illuminating her face, chest, and hands while the clothing remains in deep shadow. The painting uses subtle smoky transitions, subdued earth tones, olive greens, ochres, browns, and blue-gray greens. The entire surface has visible aged varnish, fine crackling, and worn oil-paint texture. No text is present.",
+          "type": "output_text"
+        }
+      ],
+      "id": "msg_00aa52a85961c273006a78cb88b890819c936a803e111de48d",
+      "phase": "final_answer",
+      "role": "assistant",
+      "status": "completed",
+      "type": "message"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "presence_penalty": 0.0,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "none",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "store": true,
+  "temperature": 1.0,
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "tool_choice": "auto",
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  },
+  "tools": [],
+  "top_logprobs": 0,
+  "top_p": 0.98,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 2965,
+    "input_tokens_details": {
+      "cache_write_tokens": 2962,
+      "cached_tokens": 0
+    },
+    "output_tokens": 316,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 3281
+  },
+  "user": null
+}

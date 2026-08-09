@@ -50,6 +50,7 @@ def run_transformations(
     generations: int,
     output_dir: Path,
     argv: list[str],
+    title: str | None = None,
     resume: Path | None = None,
     progress: callable = print,
 ) -> Path:
@@ -61,12 +62,14 @@ def run_transformations(
 
     if resume is None:
         run_dir, manifest = create_run(
-            output_dir, start, profile, settings, generations, argv
+            output_dir, start, profile, settings, generations, argv, title
         )
     else:
         run_dir = resume.expanduser().resolve()
         manifest = load_run(run_dir)
         _validate_resume(manifest, start, profile, settings)
+        if title is not None and " ".join(title.split()) != manifest.get("title"):
+            raise ValueError("--title does not match this run")
         if generations < len(manifest["steps"]):
             raise ValueError("generations is less than the number of completed steps")
         manifest["generations_requested"] = generations

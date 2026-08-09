@@ -1,0 +1,98 @@
+{
+  "background": false,
+  "billing": {
+    "payer": "developer"
+  },
+  "completed_at": 1786301606.0,
+  "conversation": null,
+  "created_at": 1786301595.0,
+  "error": null,
+  "frequency_penalty": 0.0,
+  "id": "resp_02545a4e75d27d13006a78cc9b4dc8819cab43082f227df248",
+  "incomplete_details": null,
+  "instructions": null,
+  "max_output_tokens": 1500,
+  "max_tool_calls": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "moderation": null,
+  "object": "response",
+  "output": [
+    {
+      "content": [
+        {
+          "annotations": [],
+          "logprobs": [],
+          "text": "A square-format Renaissance-style oil portrait of a seated young woman, shown from the waist up in a three-quarter pose against a distant landscape. She occupies the center, facing slightly toward the viewer’s left while looking directly outward with a calm, restrained expression and a subtle closed-mouth smile. Her oval face has softly modeled warm golden skin, a high forehead, thin arched brows, almond-shaped brown eyes, a long straight nose, and rounded cheeks. Dark brown, center-parted hair falls smoothly past her shoulders and blends into the shadows.\n\nShe wears a nearly black, low square-necked gown with fine vertical pleating and a dark draped mantle crossing over her right shoulder. The sleeves are deep reddish brown, decorated near the wrists with delicate curved gold embroidery. Her forearms rest on a dark wooden ledge at the bottom of the composition; one hand lies gently over the opposite wrist, with long relaxed fingers crossing at center.\n\nBehind her is an atmospheric, fantastical landscape in muted olive green, brown, and smoky blue-gray: winding roads or waterways, rocky hills, distant jagged mountains, and hazy valleys receding toward a high horizon. Soft warm light illuminates the face, upper chest, and hands, while the clothing and corners remain heavily shadowed. The painting has pronounced aged varnish, dense craquelure across the entire surface, darkened tones, worn edges, scratches, and an irregular distressed black-and-gold border. No text is visible.",
+          "type": "output_text"
+        }
+      ],
+      "id": "msg_02545a4e75d27d13006a78cc9cb434819cb32157c125769e92",
+      "phase": "final_answer",
+      "role": "assistant",
+      "status": "completed",
+      "type": "message"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "presence_penalty": 0.0,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "none",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "store": true,
+  "temperature": 1.0,
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "tool_choice": "auto",
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  },
+  "tools": [],
+  "top_logprobs": 0,
+  "top_p": 0.98,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 1313,
+    "input_tokens_details": {
+      "cache_write_tokens": 1310,
+      "cached_tokens": 0
+    },
+    "output_tokens": 301,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 1614
+  },
+  "user": null
+}

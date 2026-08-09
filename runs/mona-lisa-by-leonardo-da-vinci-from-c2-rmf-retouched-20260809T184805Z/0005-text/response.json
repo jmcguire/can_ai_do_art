@@ -1,0 +1,98 @@
+{
+  "background": false,
+  "billing": {
+    "payer": "developer"
+  },
+  "completed_at": 1786301397.0,
+  "conversation": null,
+  "created_at": 1786301387.0,
+  "error": null,
+  "frequency_penalty": 0.0,
+  "id": "resp_0a18f9f79fe19267006a78cbcae590819ea70fc0a96edcbfad",
+  "incomplete_details": null,
+  "instructions": null,
+  "max_output_tokens": 1500,
+  "max_tool_calls": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "moderation": null,
+  "object": "response",
+  "output": [
+    {
+      "content": [
+        {
+          "annotations": [],
+          "logprobs": [],
+          "text": "A square-format Renaissance oil portrait of a seated young woman shown from the waist up, centered against a distant landscape. Her body is turned slightly toward the viewer’s right while her face looks directly outward with a restrained, enigmatic half-smile. She has a broad smooth forehead, softly arched brows, almond-shaped brown eyes, a long straight nose, and warm golden-olive skin. Dark brown, center-parted hair falls in long subtle waves on both sides of her face and merges into a nearly black translucent veil.\n\nShe wears a dark, low square-necked gown with fine gold embroidery along the neckline and warm brown-gold patterned sleeves. A heavy black drape crosses over her left shoulder. Her forearms rest on a dark ledge at the bottom of the composition; one hand lies gently across the opposite wrist and forearm, with elongated relaxed fingers.\n\nBehind her is an atmospheric, fantastical landscape of winding roads and waterways, rust-brown rocky ground, steep jagged mountains, and blue-green distant peaks beneath a muted hazy sky. The horizon sits around shoulder height and appears lower on the right. Lighting is soft, warm, and frontal, illuminating the face, chest, and hands while the clothing remains in deep shadow. The palette is subdued ochre, umber, olive, charcoal black, and dusty blue-green. The image has aged varnish, darkened edges, fine surface cracks and craquelure throughout, delicate sfumato transitions, and highly detailed classical oil-paint texture. No visible text.",
+          "type": "output_text"
+        }
+      ],
+      "id": "msg_0a18f9f79fe19267006a78cbcc0e4c819e81815db3508befaf",
+      "phase": "final_answer",
+      "role": "assistant",
+      "status": "completed",
+      "type": "message"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "presence_penalty": 0.0,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "none",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "store": true,
+  "temperature": 1.0,
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "tool_choice": "auto",
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  },
+  "tools": [],
+  "top_logprobs": 0,
+  "top_p": 0.98,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 1313,
+    "input_tokens_details": {
+      "cache_write_tokens": 1310,
+      "cached_tokens": 0
+    },
+    "output_tokens": 311,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 1624
+  },
+  "user": null
+}

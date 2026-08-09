@@ -7,7 +7,7 @@ from pathlib import Path
 import sys
 
 from . import __version__
-from .archive import detect_start_kind
+from .archive import derive_run_title, detect_start_kind, slugify_title
 from .config import Settings, load_profile, override_settings
 from .engine import run_transformations
 
@@ -46,6 +46,10 @@ def build_parser() -> argparse.ArgumentParser:
     optional.add_argument(
         "--output-dir", type=Path, default=Path("runs"),
         help="Parent directory for run archives (default: runs)",
+    )
+    optional.add_argument(
+        "--title",
+        help="Run title and URL basis (default: derived from the text seed or image filename)",
     )
     optional.add_argument(
         "--image-model",
@@ -151,6 +155,7 @@ def main(argv: list[str] | None = None) -> int:
         first = "text -> image" if start_kind == "text" else "image -> text"
         image_count = (args.generations + (1 if start_kind == "text" else 0)) // 2
         text_count = args.generations - image_count
+        title = derive_run_title(args.start, args.title)
         print(
             json.dumps(
                 {
@@ -160,6 +165,8 @@ def main(argv: list[str] | None = None) -> int:
                     "images_to_create": image_count,
                     "descriptions_to_create": text_count,
                     "output_dir": str(args.output_dir),
+                    "title": title,
+                    "slug": slugify_title(title),
                     "profile_sha256": profile.sha256,
                     "effective_settings": settings.to_dict(),
                 },
@@ -189,6 +196,7 @@ def main(argv: list[str] | None = None) -> int:
             generations=args.generations,
             output_dir=args.output_dir,
             argv=command,
+            title=args.title,
             resume=args.resume,
         )
     except KeyboardInterrupt:

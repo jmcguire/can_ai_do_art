@@ -5,7 +5,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from roomtone.archive import load_run
+from roomtone.archive import derive_run_title, load_run, slugify_title
 from roomtone.cli import build_parser, main
 from roomtone.config import load_profile
 from roomtone.engine import run_transformations
@@ -96,7 +96,9 @@ class RoomtoneTests(unittest.TestCase):
             self.assertEqual(manifest["status"], "completed")
             self.assertEqual(len(manifest["steps"]), 4)
             self.assertEqual(manifest["steps"][-1]["output_kind"], "text")
-            self.assertRegex(run_dir.name, r"^\d{8}T\d{6}Z$")
+            self.assertRegex(run_dir.name, r"^a-red-circle-\d{8}T\d{6}Z$")
+            self.assertEqual(manifest["title"], "a red circle")
+            self.assertEqual(manifest["slug"], "a-red-circle")
             self.assertTrue((run_dir / "0000" / "seed.txt").is_file())
             self.assertTrue((run_dir / "0004-text" / "description.md").is_file())
             self.assertTrue((run_dir / "0001-image" / "image.png").is_file())
@@ -105,6 +107,10 @@ class RoomtoneTests(unittest.TestCase):
             self.assertTrue((run_dir.parent / "index.html").is_file())
             self.assertIn("elapsed_seconds", manifest["steps"][0])
             gallery = (run_dir / "index.html").read_text(encoding="utf-8")
+            self.assertIn("<title>a red circle · Roomtone</title>", gallery)
+            self.assertIn("<h1>a red circle</h1>", gallery)
+            self.assertIn("Generation 0", gallery)
+            self.assertIn("0000/seed.txt", gallery)
             self.assertIn("Generation 1", gallery)
             self.assertIn("Generation 3", gallery)
             self.assertEqual(manifest["summary"]["images_generated"], 2)
@@ -120,6 +126,22 @@ class RoomtoneTests(unittest.TestCase):
         self.assertIn("default: runs", help_text)
         self.assertIn("gpt-image-2", help_text)
         self.assertIn("false", help_text)
+        self.assertIn("--title", help_text)
+        self.assertIn("text seed or image filename", help_text)
+
+    def test_title_derivation_and_slugging(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            text_seed = root / "seed.txt"
+            text_seed.write_text(
+                "A red chair, standing alone. This is ignored.", encoding="utf-8"
+            )
+            image_seed = root / "Mona_Lisa-study.png"
+            image_seed.write_bytes(b"image")
+            self.assertEqual(derive_run_title(text_seed), "A red chair")
+            self.assertEqual(derive_run_title(image_seed), "Mona Lisa Study")
+            self.assertEqual(derive_run_title(text_seed, "  My   Run  "), "My Run")
+            self.assertEqual(slugify_title("Café / Night #1"), "cafe-night-1")
 
     def test_image_start_begins_with_description(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -128,7 +150,7 @@ class RoomtoneTests(unittest.TestCase):
             start.write_bytes(base64.b64decode("iVBORw0KGgo="))
             profile = load_profile(DEFAULT_PROFILE)
             provider = FakeProvider()
-            run_transformations(
+            run_dir = run_transformations(
                 provider=provider,
                 start=start,
                 profile=profile,
@@ -140,6 +162,11 @@ class RoomtoneTests(unittest.TestCase):
             self.assertEqual(
                 provider.calls, ["image_to_text", "text_to_image", "image_to_text"]
             )
+            manifest = load_run(run_dir)
+            self.assertEqual(manifest["title"], "Seed")
+            gallery = (run_dir / "index.html").read_text(encoding="utf-8")
+            self.assertIn("Generation 0", gallery)
+            self.assertIn("0000/seed.png", gallery)
 
     def test_dry_run_makes_no_run_directory(self):
         with tempfile.TemporaryDirectory() as temporary:

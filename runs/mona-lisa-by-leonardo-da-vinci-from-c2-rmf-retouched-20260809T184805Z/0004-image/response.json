@@ -1,0 +1,32 @@
+{
+  "background": "opaque",
+  "created": 1786301384,
+  "data": [
+    {
+      "b64_json": {
+        "bytes": 2017726,
+        "encoding_note": "Original base64 decoded into the saved image file.",
+        "saved_to": "image.png",
+        "sha256": "085184f5c7a20f945203e2ee08259908fd49df2eab248a97179963eb56fe1bc3"
+      },
+      "revised_prompt": null,
+      "url": null
+    }
+  ],
+  "output_format": "png",
+  "quality": "low",
+  "size": "1024x1024",
+  "usage": {
+    "input_tokens": 419,
+    "input_tokens_details": {
+      "image_tokens": 0,
+      "text_tokens": 419
+    },
+    "output_tokens": 196,
+    "output_tokens_details": {
+      "image_tokens": 196,
+      "text_tokens": 0
+    },
+    "total_tokens": 615
+  }
+}

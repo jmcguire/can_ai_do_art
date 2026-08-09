@@ -1,0 +1,98 @@
+{
+  "background": false,
+  "billing": {
+    "payer": "developer"
+  },
+  "completed_at": 1786301456.0,
+  "conversation": null,
+  "created_at": 1786301447.0,
+  "error": null,
+  "frequency_penalty": 0.0,
+  "id": "resp_0ea9addc940887f8006a78cc0750e0819da7937046ba1c602a",
+  "incomplete_details": null,
+  "instructions": null,
+  "max_output_tokens": 1500,
+  "max_tool_calls": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "moderation": null,
+  "object": "response",
+  "output": [
+    {
+      "content": [
+        {
+          "annotations": [],
+          "logprobs": [],
+          "text": "A square-format Renaissance-style oil portrait of a seated young woman, shown from the waist up in a three-quarter pose behind a dark stone parapet. She occupies the center foreground, with her torso angled slightly to the viewer’s right while her face turns toward the viewer. Her expression is calm and enigmatic, with a faint closed-mouth smile, softly modeled cheeks, almond-shaped brown eyes, a straight nose, and nearly invisible eyebrows. Her pale golden-olive skin is illuminated by warm, diffuse light.\n\nHer long, dark brown hair is center-parted, smooth over the crown, and falls in loose subtle waves along both sides of her face and shoulders. She wears a dark brown-black Renaissance gown with a low square neckline edged in delicate gold embroidery. A heavy dark mantle drapes over her shoulders in broad folds. The sleeves are deep brown with warm ochre-gold highlights and intricate folded or stitched patterns. Her hands rest gracefully crossed at the bottom center: one forearm lies horizontally while the upper hand extends diagonally across it, with long relaxed fingers.\n\nBehind her is an expansive imaginary landscape viewed from above: rugged bluish-green mountains and jagged rock formations on both sides, a winding river or road threading through valleys, distant water, and layered hills fading toward the horizon. The sky is muted teal-green and ochre, with atmospheric haze and no distinct clouds. Dark rocky masses frame the landscape near both edges.\n\nThe image has aged oil-paint texture throughout, including fine craquelure, worn pigments, subtle scratches, darkened varnish, and distressed edges. The palette is dominated by deep umber, black, muted green, ochre, and warm gold. Soft chiaroscuro gives the face and hands a gentle glow against the dark clothing and shadowed landscape. No visible text.",
+          "type": "output_text"
+        }
+      ],
+      "id": "msg_0ea9addc940887f8006a78cc0851fc819d88e84c1274295331",
+      "phase": "final_answer",
+      "role": "assistant",
+      "status": "completed",
+      "type": "message"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "presence_penalty": 0.0,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "none",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "store": true,
+  "temperature": 1.0,
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "tool_choice": "auto",
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  },
+  "tools": [],
+  "top_logprobs": 0,
+  "top_p": 0.98,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 1313,
+    "input_tokens_details": {
+      "cache_write_tokens": 1310,
+      "cached_tokens": 0
+    },
+    "output_tokens": 366,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 1679
+  },
+  "user": null
+}

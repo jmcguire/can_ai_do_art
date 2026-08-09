@@ -63,7 +63,7 @@ roomtone \
   --start seeds/first.txt \
   --generations 100 \
   --profile profiles/default \
-  --resume runs/20260809T143210Z
+  --resume runs/a-simple-wooden-chair-20260809T143210Z
 ```
 
 ## Profiles and overrides
@@ -101,10 +101,11 @@ The resolved settings are recorded in each run's `manifest.json`.
 
 ## Run archive
 
-Each run receives a timestamp-only directory under `runs/`, for example:
+Each run receives a title-based directory under `runs/`, ending in a UTC timestamp
+for uniqueness, for example:
 
 ```text
-runs/20260809T143210Z/
+runs/a-simple-wooden-chair-20260809T143210Z/
 ├── manifest.json
 ├── commands.txt
 ├── index.html
@@ -125,6 +126,11 @@ The `0000/` directory contains the archived seed. Every transformation directory
 is labeled by its output kind, making images and descriptions easy to find while
 browsing the filesystem.
 
+By default, the title is the first text-seed fragment before a comma or period,
+or the image seed's filename with separators converted to spaces. Override it with
+`--title "My experiment"`. The title appears in the run page's browser title and
+heading, and its slug forms the beginning of the published URL.
+
 The manifest records timestamps, Roomtone version, Git commit when available,
 effective settings, checksums, step status, and elapsed time for each completed
 transformation. A completed run also records a summary with total wall time,
@@ -133,9 +139,10 @@ with the exact pricing assumptions and date used. Image response base64 is
 decoded to the image file; its location and checksum replace the duplicate
 base64 string in `response.json`. No API key is archived.
 
-Each run also receives a self-contained HTML gallery. Open its `index.html` to
-flip through images with the buttons, thumbnails, or left and right arrow keys.
-The parent `runs/index.html` catalogs every archived run.
+Each run also receives a self-contained HTML gallery. It begins with the seed as
+generation 0, followed by the generated images. Open its `index.html` to flip
+through them with the buttons, thumbnails, or left and right arrow keys. The
+parent `runs/index.html` catalogs every archived run.
 
 Each step sees only the immediately preceding artifact. Earlier images,
 descriptions, and conversation state are not sent back to the model.

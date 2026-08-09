@@ -67,6 +67,8 @@ def _page_shell(title: str, body: str, *, script: str = "") -> str:
     .slide,.slide-notes {{ display:none; }} .slide.active,.slide-notes.active {{ display:block; }}
     .slide {{ margin:0; }}
     .slide img {{ display:block; width:100%; height:auto; aspect-ratio:1; object-fit:contain; background:#090908; }}
+    .text-seed {{ display:grid; place-items:center; min-height:min(70vh,760px); padding:clamp(24px,7vw,80px); background:#171612; }}
+    .text-seed pre {{ margin:0; max-width:42ch; white-space:pre-wrap; overflow-wrap:anywhere; font:clamp(1.2rem,3vw,2.2rem)/1.45 Georgia,serif; }}
     .caption {{ padding:14px 16px; border-top:1px solid var(--line); }}
     .notes {{ background:var(--panel); border:1px solid var(--line); padding:18px; max-height:72vh; overflow:auto; }}
     .notes pre {{ color:#d2ccc1; white-space:pre-wrap; overflow-wrap:anywhere; font:13px/1.55 inherit; margin:8px 0 22px; }}
@@ -77,6 +79,7 @@ def _page_shell(title: str, body: str, *, script: str = "") -> str:
     .thumbs {{ display:flex; gap:8px; max-width:100%; overflow-x:auto; padding-bottom:8px; }}
     .thumb {{ padding:0; flex:0 0 72px; opacity:.55; }} .thumb.active {{ opacity:1; border-color:var(--accent); }}
     .thumb img {{ width:70px; height:70px; display:block; object-fit:cover; }}
+    .text-thumb {{ display:grid; place-items:center; width:70px; height:70px; color:var(--accent); font-weight:700; }}
     .runs {{ display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:18px; }}
     .run {{ display:block; color:inherit; text-decoration:none; border:1px solid var(--line); background:var(--panel); }}
     .run:hover {{ border-color:var(--accent); }} .run img,.placeholder {{ display:block; width:100%; aspect-ratio:1.6; object-fit:cover; background:#0a0a09; }}
@@ -99,41 +102,80 @@ def generate_run_gallery(run_dir: Path, manifest: dict[str, Any] | None = None) 
 
     steps = manifest.get("steps", [])
     images = [step for step in steps if step.get("output_kind") == "image"]
+    seed = manifest["start"]
+    gallery_items = [
+        {
+            "number": 0,
+            "kind": seed["kind"],
+            "path": seed["archived_path"],
+            "input_text": _read_text(run_dir / seed["archived_path"])
+            if seed["kind"] == "text"
+            else "Original image seed.",
+        }
+    ]
+    gallery_items.extend(
+        {
+            "number": step["number"],
+            "kind": "image",
+            "path": step["output_path"],
+            "input_text": _read_text(run_dir / step["input_path"]),
+        }
+        for step in images
+    )
     slides: list[str] = []
     thumbs: list[str] = []
     note_sections: list[str] = []
-    for index, step in enumerate(images):
-        image_path = step["output_path"]
-        source_text = _read_text(run_dir / step["input_path"])
+    for index, item in enumerate(gallery_items):
+        artifact_path = item["path"]
+        generation = item["number"]
         next_description = ""
         for candidate in steps:
             if (
-                candidate.get("input_path") == image_path
+                candidate.get("input_path") == artifact_path
                 and candidate.get("output_kind") == "text"
             ):
                 next_description = _read_text(run_dir / candidate["output_path"])
                 break
         active = " active" if index == 0 else ""
+        if item["kind"] == "image":
+            visual = f'<img src="{escape(artifact_path, quote=True)}" alt="Generation {generation}">'
+            thumbnail = f'<img src="{escape(artifact_path, quote=True)}" alt="">'
+        else:
+            visual = f'<div class="text-seed"><pre>{escape(item["input_text"])}</pre></div>'
+            thumbnail = '<span class="text-thumb">TXT</span>'
         slides.append(
-            f'<figure class="slide{active}" data-index="{index}">'
-            f'<img src="{escape(image_path, quote=True)}" alt="Generation {step["number"]}">'
-            f'<figcaption class="caption">Generation {step["number"]} · {escape(image_path)}</figcaption>'
+            f'<figure class="slide{active}" data-index="{index}" data-generation="{generation}">'
+            f'{visual}<figcaption class="caption">Generation {generation} · {escape(artifact_path)}</figcaption>'
             "</figure>"
         )
         thumbs.append(
-            f'<button class="thumb{active}" data-index="{index}" aria-label="Show generation {step["number"]}">'
-            f'<img src="{escape(image_path, quote=True)}" alt=""></button>'
+            f'<button class="thumb{active}" data-index="{index}" aria-label="Show generation {generation}">'
+            f'{thumbnail}</button>'
+        )
+        if generation == 0:
+            input_label = "Starting text" if item["kind"] == "text" else "Starting image"
+        else:
+            input_label = f"Input to generation {generation}"
+        result_label = (
+            "First generated artifact"
+            if generation == 0 and item["kind"] == "text"
+            else "Description produced from this image"
+        )
+        result_text = next_description or (
+            "The first generated image follows this seed."
+            if generation == 0 and item["kind"] == "text"
+            else "Not generated in this run."
         )
         note_sections.append(
             f'<section class="slide-notes{active}" data-index="{index}">'
-            f'<div class="eyebrow">Input to generation {step["number"]}</div>'
-            f'<pre>{escape(source_text)}</pre>'
-            f'<div class="eyebrow">Description produced from this image</div>'
-            f'<pre>{escape(next_description or "Not generated in this run.")}</pre>'
+            f'<div class="eyebrow">{input_label}</div>'
+            f'<pre>{escape(item["input_text"])}</pre>'
+            f'<div class="eyebrow">{result_label}</div>'
+            f'<pre>{escape(result_text)}</pre>'
             "</section>"
         )
 
-    if images:
+    if gallery_items:
         notes = "".join(note_sections)
         gallery = (
             '<div class="stage"><div><div class="frame">'
@@ -146,13 +188,13 @@ def generate_run_gallery(run_dir: Path, manifest: dict[str, Any] | None = None) 
     else:
         gallery = '<div class="empty">No images have been completed in this run.</div>'
 
-    title = f"Roomtone · {run_dir.name}"
+    run_title = str(manifest.get("title") or run_dir.name)
+    title = f"{run_title} · Roomtone"
     summary = manifest.get("summary") or {}
     tokens = (summary.get("tokens") or {}).get("total")
     facts = ""
     if summary:
-        facts = f"""
-  <div class="facts">
+        facts = f"""<div class="facts">
     <div class="fact"><span class="eyebrow">Elapsed</span><strong>{_format_duration(summary.get("wall_time_seconds"))}</strong></div>
     <div class="fact"><span class="eyebrow">Tokens</span><strong>{tokens:,}</strong></div>
     <div class="fact"><span class="eyebrow">Est. cost</span><strong>{_format_cost(summary.get("estimated_cost_usd"))}</strong></div>
@@ -161,20 +203,20 @@ def generate_run_gallery(run_dir: Path, manifest: dict[str, Any] | None = None) 
     body = f"""
 <header>
   <div class="eyebrow"><a href="../">Roomtone runs</a> / {escape(run_dir.name)}</div>
-  <h1>Visual roomtone</h1>
+  <h1>{escape(run_title)}</h1>
   <p class="deck">{len(images)} images across {len(steps)} completed transformations. Status: {escape(str(manifest.get("status", "unknown")))}.</p>
   <p class="meta">Started {_display_timestamp(str(manifest.get("created_at", "")))} · {escape(str(manifest.get("effective_settings", {}).get("image_model", "")))} ↔ {escape(str(manifest.get("effective_settings", {}).get("vision_model", "")))}</p>
-  {facts}
+{facts}
 </header>
 {gallery}
 """
     script = ""
-    if images:
+    if gallery_items:
         script = """<script>
 (() => {
   const slides=[...document.querySelectorAll('.slide')], notes=[...document.querySelectorAll('.slide-notes')], thumbs=[...document.querySelectorAll('.thumb')];
   let current=0;
-  const show=(n)=>{ current=(n+slides.length)%slides.length; [...slides,...notes,...thumbs].forEach(el=>el.classList.toggle('active',Number(el.dataset.index)===current)); document.querySelector('#counter').textContent=`${current+1} / ${slides.length}`; thumbs[current].scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'}); };
+  const show=(n)=>{ current=(n+slides.length)%slides.length; [...slides,...notes,...thumbs].forEach(el=>el.classList.toggle('active',Number(el.dataset.index)===current)); document.querySelector('#counter').textContent=`Generation ${slides[current].dataset.generation} · ${current+1} / ${slides.length}`; thumbs[current].scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'}); };
   document.querySelector('#prev').addEventListener('click',()=>show(current-1)); document.querySelector('#next').addEventListener('click',()=>show(current+1)); thumbs.forEach(el=>el.addEventListener('click',()=>show(Number(el.dataset.index)))); document.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')show(current-1);if(e.key==='ArrowRight')show(current+1)}); show(0);
 })();
 </script>"""
@@ -198,17 +240,21 @@ def generate_runs_index(output_dir: Path) -> Path:
             continue
         images = [s for s in manifest.get("steps", []) if s.get("output_kind") == "image"]
         summary = manifest.get("summary") or {}
+        seed = manifest.get("start") or {}
+        seed_preview = seed.get("archived_path") if seed.get("kind") == "image" else None
+        preview_path = seed_preview or (images[0]["output_path"] if images else None)
         preview = (
-            f'<img src="{escape(run_dir.name + "/" + images[0]["output_path"], quote=True)}" alt="">'
-            if images else '<div class="placeholder">No images yet</div>'
+            f'<img src="{escape(run_dir.name + "/" + preview_path, quote=True)}" alt="">'
+            if preview_path else '<div class="placeholder">Text seed</div>'
         )
+        run_title = str(manifest.get("title") or run_dir.name)
         cards.append(f"""
 <a class="run" href="{escape(run_dir.name, quote=True)}/">
   {preview}
   <div class="run-copy">
     <div class="eyebrow">{_display_timestamp(str(manifest.get("created_at", "")))}</div>
-    <h2>{len(images)} images</h2>
-    <div>{len(manifest.get("steps", []))} / {manifest.get("generations_requested", "?")} transformations</div>
+    <h2>{escape(run_title)}</h2>
+    <div>{len(images)} images · {len(manifest.get("steps", []))} / {manifest.get("generations_requested", "?")} transformations</div>
     <div>{_format_duration(summary.get("wall_time_seconds"))} · {_format_cost(summary.get("estimated_cost_usd"))}</div>
     <span class="status">{escape(str(manifest.get("status", "unknown")))}</span>
   </div>

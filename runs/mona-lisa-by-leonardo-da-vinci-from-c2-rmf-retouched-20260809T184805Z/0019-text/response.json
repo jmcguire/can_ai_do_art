@@ -1,0 +1,98 @@
+{
+  "background": false,
+  "billing": {
+    "payer": "developer"
+  },
+  "completed_at": 1786301637.0,
+  "conversation": null,
+  "created_at": 1786301628.0,
+  "error": null,
+  "frequency_penalty": 0.0,
+  "id": "resp_05b587f2c8c19502006a78ccbce678819eb950aa361253a895",
+  "incomplete_details": null,
+  "instructions": null,
+  "max_output_tokens": 1500,
+  "max_tool_calls": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "moderation": null,
+  "object": "response",
+  "output": [
+    {
+      "content": [
+        {
+          "annotations": [],
+          "logprobs": [],
+          "text": "A square, aged Renaissance-style oil portrait of a seated young woman shown from the waist up in three-quarter view, her torso angled slightly right while her face turns toward the viewer. She has pale golden-olive skin, an oval face, softly arched brows, almond-shaped brown eyes, a long straight nose, and a subtle closed-mouth smile. Her dark brown hair is center-parted, smooth over the crown, and falls in long loose waves around her shoulders.\n\nShe wears a nearly black, low square-necked dress with fine vertical pleating and narrow gold trim along the neckline. A dark green-black draped mantle crosses her right shoulder. Deep burgundy sleeves emerge beneath the dark outer garment, decorated with thin curving gold embroidery. Her forearms rest on a dark horizontal ledge at the bottom of the image; one hand lies gracefully across the opposite wrist, with long relaxed fingers, while the lower hand is partly visible beneath.\n\nBehind her is a muted, atmospheric landscape with winding paths or water, dark rocky outcrops, sparse trees, distant blue-gray mountains, and tall jagged peaks on the right. The horizon sits around shoulder height beneath a hazy greenish-gold sky. Lighting is soft and frontal, illuminating the face, chest, and hands in warm ochre tones while the clothing and edges remain heavily shadowed.\n\nThe entire image has a dark amber-brown patina, dense fine craquelure across the painted surface, visible scratches, fading, and distressed blackened edges with chipped gold-brown abrasions. The corners are rounded and worn, creating the appearance of a centuries-old panel painting. No text is visible.",
+          "type": "output_text"
+        }
+      ],
+      "id": "msg_05b587f2c8c19502006a78ccbdc2b4819eb17ee195ebcf4ec0",
+      "phase": "final_answer",
+      "role": "assistant",
+      "status": "completed",
+      "type": "message"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "presence_penalty": 0.0,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "none",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "store": true,
+  "temperature": 1.0,
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "tool_choice": "auto",
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  },
+  "tools": [],
+  "top_logprobs": 0,
+  "top_p": 0.98,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 1313,
+    "input_tokens_details": {
+      "cache_write_tokens": 1310,
+      "cached_tokens": 0
+    },
+    "output_tokens": 337,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 1650
+  },
+  "user": null
+}

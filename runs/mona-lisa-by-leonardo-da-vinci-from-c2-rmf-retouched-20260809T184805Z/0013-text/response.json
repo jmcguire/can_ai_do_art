@@ -1,0 +1,98 @@
+{
+  "background": false,
+  "billing": {
+    "payer": "developer"
+  },
+  "completed_at": 1786301530.0,
+  "conversation": null,
+  "created_at": 1786301519.0,
+  "error": null,
+  "frequency_penalty": 0.0,
+  "id": "resp_0244e0876a099e63006a78cc4f8c1081929e14ace6ad2592a1",
+  "incomplete_details": null,
+  "instructions": null,
+  "max_output_tokens": 1500,
+  "max_tool_calls": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "moderation": null,
+  "object": "response",
+  "output": [
+    {
+      "content": [
+        {
+          "annotations": [],
+          "logprobs": [],
+          "text": "A square-format Renaissance oil portrait closely resembling the Mona Lisa. A seated adult woman is shown from the waist up in a three-quarter pose, centered against a distant atmospheric landscape. Her torso turns slightly toward the viewer’s right while her face looks directly outward. She has pale golden-olive skin, an oval face, softly modeled cheeks, narrow brown eyes, an elongated straight nose, thin brows, and a subtle closed-mouth smile. Long, dark brown, center-parted hair falls in loose waves over both shoulders.\n\nShe wears a nearly black, low square-necked Renaissance gown with fine vertical pleating and narrow gold embroidered trim around the neckline. A dark mantle drapes diagonally over her right shoulder and across her torso. The sleeves are deep reddish brown with warm ochre-gold highlights and decorative curved stitching. Her forearms rest on a dark stone or wooden ledge at the bottom of the image; one hand lies gracefully across the opposite wrist, with long relaxed fingers, while the lower hand rests along the ledge.\n\nBehind her is a fantastical rugged landscape painted in muted blue-green, olive, umber, and ochre tones: tall jagged rock formations frame both sides, layered mountains recede toward the horizon, and winding pale roads or rivers snake through valleys on the right and left. The horizon sits around shoulder level beneath a hazy greenish sky.\n\nThe lighting is soft and directional, warmly illuminating the face, chest, and hands while the clothing and foreground remain in deep shadow. The image has strong chiaroscuro, smoky sfumato transitions, subdued earthy colors, and a dark amber cast. Fine age-related craquelure covers the entire painted surface. The outer edges are heavily distressed and darkened, with worn golden-brown abrasions and an antique varnished patina, giving the portrait the appearance of an old Renaissance panel painting. No text is visible.",
+          "type": "output_text"
+        }
+      ],
+      "id": "msg_0244e0876a099e63006a78cc50b4dc8192887ceea06274615c",
+      "phase": "final_answer",
+      "role": "assistant",
+      "status": "completed",
+      "type": "message"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "presence_penalty": 0.0,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "none",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "store": true,
+  "temperature": 1.0,
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "tool_choice": "auto",
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  },
+  "tools": [],
+  "top_logprobs": 0,
+  "top_p": 0.98,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 1313,
+    "input_tokens_details": {
+      "cache_write_tokens": 1310,
+      "cached_tokens": 0
+    },
+    "output_tokens": 383,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 1696
+  },
+  "user": null
+}

@@ -1,0 +1,98 @@
+{
+  "background": false,
+  "billing": {
+    "payer": "developer"
+  },
+  "completed_at": 1786301568.0,
+  "conversation": null,
+  "created_at": 1786301555.0,
+  "error": null,
+  "frequency_penalty": 0.0,
+  "id": "resp_0734b9ca411c1ae0006a78cc73b59881a29fd1ecab4bca8d42",
+  "incomplete_details": null,
+  "instructions": null,
+  "max_output_tokens": 1500,
+  "max_tool_calls": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "moderation": null,
+  "object": "response",
+  "output": [
+    {
+      "content": [
+        {
+          "annotations": [],
+          "logprobs": [],
+          "text": "A square-format Renaissance oil portrait closely resembling Leonardo da Vinci’s Mona Lisa. A seated woman is shown from the waist up in a three-quarter pose, centered against a distant mountainous landscape. Her torso angles slightly to the viewer’s right while her face turns forward, meeting the viewer with a calm, faintly enigmatic smile. She has pale warm-ochre skin, softly modeled features, dark almond-shaped eyes, no visible eyebrows, and long dark brown hair parted at the center and falling loosely over both shoulders.\n\nShe wears a nearly black, low square-necked Renaissance gown with subtle gathered pleats and narrow gold embroidery along the neckline. A heavy dark mantle drapes diagonally across her right shoulder and chest. Her sleeves are muted reddish brown with fine gold linear ornament. Her forearms rest on a dark ledge at the bottom; one hand lies gracefully over the opposite wrist and hand, with long relaxed fingers.\n\nThe background is an atmospheric, fantastical landscape of jagged dark rock formations, winding pale roads or rivers, valleys, and distant blue-green mountains beneath a murky olive-green sky. The horizon is high, roughly level with her shoulders and head. Lighting is soft and directional, illuminating the face, chest, and hands with warm golden tones while the clothing and edges recede into deep shadow. The palette is dominated by aged browns, black, ochre, olive green, and muted teal.\n\nThe entire image has the appearance of a centuries-old oil painting on wood: fine craquelure covers the face, sky, clothing, and background; the surface is darkened by amber varnish; the corners and edges are heavily worn, blackened, scratched, and mottled with gold-brown abrasions, creating an irregular antique border. Soft sfumato transitions, subdued contrast, meticulous realism, and a solemn museum-masterpiece atmosphere. No visible text.",
+          "type": "output_text"
+        }
+      ],
+      "id": "msg_0734b9ca411c1ae0006a78cc74fb9081a29d05dc862ac67747",
+      "phase": "final_answer",
+      "role": "assistant",
+      "status": "completed",
+      "type": "message"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "presence_penalty": 0.0,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "none",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "store": true,
+  "temperature": 1.0,
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "tool_choice": "auto",
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  },
+  "tools": [],
+  "top_logprobs": 0,
+  "top_p": 0.98,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 1313,
+    "input_tokens_details": {
+      "cache_write_tokens": 1310,
+      "cached_tokens": 0
+    },
+    "output_tokens": 379,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 1692
+  },
+  "user": null
+}

@@ -25,6 +25,8 @@
     .slide,.slide-notes { display:none; } .slide.active,.slide-notes.active { display:block; }
     .slide { margin:0; }
     .slide img { display:block; width:100%; height:auto; aspect-ratio:1; object-fit:contain; background:#090908; }
+    .text-seed { display:grid; place-items:center; min-height:min(70vh,760px); padding:clamp(24px,7vw,80px); background:#171612; }
+    .text-seed pre { margin:0; max-width:42ch; white-space:pre-wrap; overflow-wrap:anywhere; font:clamp(1.2rem,3vw,2.2rem)/1.45 Georgia,serif; }
     .caption { padding:14px 16px; border-top:1px solid var(--line); }
     .notes { background:var(--panel); border:1px solid var(--line); padding:18px; max-height:72vh; overflow:auto; }
     .notes pre { color:#d2ccc1; white-space:pre-wrap; overflow-wrap:anywhere; font:13px/1.55 inherit; margin:8px 0 22px; }
@@ -35,6 +37,7 @@
     .thumbs { display:flex; gap:8px; max-width:100%; overflow-x:auto; padding-bottom:8px; }
     .thumb { padding:0; flex:0 0 72px; opacity:.55; } .thumb.active { opacity:1; border-color:var(--accent); }
     .thumb img { width:70px; height:70px; display:block; object-fit:cover; }
+    .text-thumb { display:grid; place-items:center; width:70px; height:70px; color:var(--accent); font-weight:700; }
     .runs { display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:18px; }
     .run { display:block; color:inherit; text-decoration:none; border:1px solid var(--line); background:var(--panel); }
     .run:hover { border-color:var(--accent); } .run img,.placeholder { display:block; width:100%; aspect-ratio:1.6; object-fit:cover; background:#0a0a09; }
@@ -52,32 +55,42 @@
   <p class="deck">Text becomes image; image becomes text. Each step knows only the artifact immediately before it.</p>
 </header>
 <div class="runs">
-<a class="run" href="20260809T143007Z/">
-  <img src="20260809T143007Z/0002-image/image.png" alt="">
+<a class="run" href="mona-lisa-by-leonardo-da-vinci-from-c2-rmf-retouched-20260809T184805Z/">
+  <img src="mona-lisa-by-leonardo-da-vinci-from-c2-rmf-retouched-20260809T184805Z/0000/Mona_Lisa,_by_Leonardo_da_Vinci,_from_C2RMF_retouched.jpg" alt="">
+  <div class="run-copy">
+    <div class="eyebrow">August 09, 2026 · 18:48 UTC</div>
+    <h2>Mona Lisa, By Leonardo Da Vinci, From C2 Rmf Retouched</h2>
+    <div>10 images · 20 / 20 transformations</div>
+    <div>6m 14s · $0.2718</div>
+    <span class="status">completed</span>
+  </div>
+</a>
+<a class="run" href="dnd-2024-player-handbook-art-20260809T143007Z/">
+  <img src="dnd-2024-player-handbook-art-20260809T143007Z/0000/dnd-2024-player-handbook-art.jpg" alt="">
   <div class="run-copy">
     <div class="eyebrow">August 09, 2026 · 14:30 UTC</div>
-    <h2>10 images</h2>
-    <div>20 / 20 transformations</div>
+    <h2>Dnd 2024 Player Handbook Art</h2>
+    <div>10 images · 20 / 20 transformations</div>
     <div>7m 20s · $0.3139</div>
     <span class="status">completed</span>
   </div>
 </a>
-<a class="run" href="20260809T140032Z/">
-  <img src="20260809T140032Z/0001-image/image.png" alt="">
+<a class="run" href="a-simple-wooden-chair-standing-alone-in-a-pale-20260809T140032Z/">
+  <img src="a-simple-wooden-chair-standing-alone-in-a-pale-20260809T140032Z/0001-image/image.png" alt="">
   <div class="run-copy">
     <div class="eyebrow">August 09, 2026 · 14:00 UTC</div>
-    <h2>1 images</h2>
-    <div>2 / 2 transformations</div>
+    <h2>A simple wooden chair standing alone in a pale</h2>
+    <div>1 images · 2 / 2 transformations</div>
     <div>22s · $0.0212</div>
     <span class="status">completed</span>
   </div>
 </a>
-<a class="run" href="20260809T135939Z/">
-  <div class="placeholder">No images yet</div>
+<a class="run" href="a-simple-wooden-chair-standing-alone-in-a-pale-20260809T135939Z/">
+  <div class="placeholder">Text seed</div>
   <div class="run-copy">
     <div class="eyebrow">August 09, 2026 · 13:59 UTC</div>
-    <h2>0 images</h2>
-    <div>0 / 2 transformations</div>
+    <h2>A simple wooden chair standing alone in a pale</h2>
+    <div>0 images · 0 / 2 transformations</div>
     <div>— · —</div>
     <span class="status">failed</span>
   </div>

@@ -1,0 +1,98 @@
+{
+  "background": false,
+  "billing": {
+    "payer": "developer"
+  },
+  "completed_at": 1786301363.0,
+  "conversation": null,
+  "created_at": 1786301353.0,
+  "error": null,
+  "frequency_penalty": 0.0,
+  "id": "resp_05564035f8e93661006a78cba9a13c819fb2530ed1d7005ce4",
+  "incomplete_details": null,
+  "instructions": null,
+  "max_output_tokens": 1500,
+  "max_tool_calls": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "moderation": null,
+  "object": "response",
+  "output": [
+    {
+      "content": [
+        {
+          "annotations": [],
+          "logprobs": [],
+          "text": "A square-format Renaissance oil portrait of a seated young woman shown from the waist up, centered against a distant mountainous landscape. She is turned slightly three-quarters toward the viewer’s left while looking directly outward with a calm, faintly enigmatic smile. Her face is softly modeled, with a high forehead, arched brows, almond-shaped brown eyes, a long straight nose, and softly closed lips. Long dark brown hair, center-parted and mostly covered by a translucent dark veil, falls around her shoulders in subtle waves.\n\nShe wears a dark brown-black gown with a low, gently curved neckline edged in intricate gold embroidery. A heavy dark mantle drapes diagonally over her right shoulder and across her torso. The sleeves are warm brown with muted golden highlights and fine gathered folds. Her forearms rest on the arm of a dark chair or ledge at the bottom; one hand lies gracefully over the other, with long relaxed fingers.\n\nBehind her is an atmospheric, imaginary landscape viewed from above: winding pale roads or rivers, rocky outcrops, valleys, distant jagged mountains, and hazy blue-green water. The horizon sits high behind her head, with misty ochre and blue-gray skies. Darker rust-brown terrain fills the lower background, while craggy formations frame both sides.\n\nLighting is soft and diffuse, illuminating the face, neck, chest, and hands with warm golden-brown tones while the clothing remains deep and shadowed. The entire image has a muted palette of umber, olive, ochre, charcoal, and smoky blue-green. The surface shows pronounced fine craquelure and aged varnish, giving the painting a centuries-old, slightly darkened texture. Highly detailed, naturalistic Renaissance oil painting with subtle atmospheric perspective, soft transitions, and no visible text.",
+          "type": "output_text"
+        }
+      ],
+      "id": "msg_05564035f8e93661006a78cbab7670819fba4643d975616582",
+      "phase": "final_answer",
+      "role": "assistant",
+      "status": "completed",
+      "type": "message"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "presence_penalty": 0.0,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "none",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "store": true,
+  "temperature": 1.0,
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "tool_choice": "auto",
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  },
+  "tools": [],
+  "top_logprobs": 0,
+  "top_p": 0.98,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 1313,
+    "input_tokens_details": {
+      "cache_write_tokens": 1310,
+      "cached_tokens": 0
+    },
+    "output_tokens": 365,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 1678
+  },
+  "user": null
+}

@@ -1,0 +1,8 @@
+{
+  "model": "gpt-image-2",
+  "n": 1,
+  "output_format": "png",
+  "prompt": "Create one image from the description below.\n\nTreat the description as the complete source of visual truth. Do not add captions,\nlabels, borders, or explanatory text unless the description explicitly calls for\nthem. Do not refer to this instruction in the image.\n\nDESCRIPTION\n\nA simple wooden chair standing alone in a pale, empty room.",
+  "quality": "low",
+  "size": "1024x1024"
+}

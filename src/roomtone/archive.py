@@ -4,10 +4,12 @@ from datetime import datetime, timezone
 import hashlib
 import json
 from pathlib import Path
+import re
 import shlex
 import shutil
 import subprocess
 from typing import Any
+import unicodedata
 
 from . import __version__
 from .config import Profile, Settings
@@ -41,6 +43,28 @@ def timestamp() -> str:
     return datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
 
 
+def derive_run_title(start: Path, explicit_title: str | None = None) -> str:
+    if explicit_title is not None:
+        title = " ".join(explicit_title.split())
+        if not title:
+            raise ValueError("--title cannot be empty")
+        return title
+
+    if detect_start_kind(start) == "text":
+        text = " ".join(start.read_text(encoding="utf-8").split())
+        title = re.split(r"[,.]", text, maxsplit=1)[0].strip()
+    else:
+        stem = re.sub(r"([a-z0-9])([A-Z])", r"\1 \2", start.stem)
+        title = re.sub(r"[-_]+", " ", stem).strip().title()
+    return title or "Untitled Roomtone"
+
+
+def slugify_title(title: str) -> str:
+    ascii_title = unicodedata.normalize("NFKD", title).encode("ascii", "ignore").decode()
+    slug = re.sub(r"[^a-z0-9]+", "-", ascii_title.lower()).strip("-")
+    return (slug[:72].rstrip("-") or "roomtone")
+
+
 def create_run(
     output_dir: Path,
     start: Path,
@@ -48,8 +72,11 @@ def create_run(
     settings: Settings,
     generations: int,
     argv: list[str],
+    title: str | None = None,
 ) -> tuple[Path, dict[str, Any]]:
-    run_dir = output_dir.expanduser().resolve() / timestamp()
+    resolved_title = derive_run_title(start, title)
+    slug = slugify_title(resolved_title)
+    run_dir = output_dir.expanduser().resolve() / f"{slug}-{timestamp()}"
     run_dir.mkdir(parents=True, exist_ok=False)
     archived_profile = run_dir / "profile"
     archived_profile.mkdir()
@@ -74,6 +101,8 @@ def create_run(
         "created_at": now,
         "updated_at": now,
         "status": "running",
+        "title": resolved_title,
+        "slug": slug,
         "generations_requested": generations,
         "start": {
             "original_path": str(start),

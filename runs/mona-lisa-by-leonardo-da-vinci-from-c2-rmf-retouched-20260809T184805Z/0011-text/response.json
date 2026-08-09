@@ -1,0 +1,98 @@
+{
+  "background": false,
+  "billing": {
+    "payer": "developer"
+  },
+  "completed_at": 1786301486.0,
+  "conversation": null,
+  "created_at": 1786301480.0,
+  "error": null,
+  "frequency_penalty": 0.0,
+  "id": "resp_09c4a5c88735841b006a78cc282be4819cadb8680fee3e2f71",
+  "incomplete_details": null,
+  "instructions": null,
+  "max_output_tokens": 1500,
+  "max_tool_calls": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "moderation": null,
+  "object": "response",
+  "output": [
+    {
+      "content": [
+        {
+          "annotations": [],
+          "logprobs": [],
+          "text": "A square-format Renaissance oil portrait of a seated young woman shown from the waist up, centered against a distant atmospheric landscape. She is turned slightly toward the viewer’s left while facing forward, with calm brown eyes, a faint enigmatic smile, softly modeled cheeks, no visible eyebrows, and a warm golden-olive complexion. Her long dark brown hair is center-parted, smooth over the crown, and falls in loose subtle curls around her shoulders.\n\nShe wears a nearly black, low square-necked gown with fine gold embroidery along the neckline and gathered bodice, plus brown-gold patterned sleeves. A heavy dark mantle drapes over her left shoulder and across her torso, edged with delicate gold ornament. Her forearms rest on a dark stone ledge at the bottom; one hand lies gently across the opposite wrist, with long relaxed fingers.\n\nBehind her is an expansive blue-green and ochre landscape with winding roads or rivers, layered valleys, rocky cliffs, jagged mountain formations, and distant hazy peaks. Tall dark rock masses frame both sides, while a muted greenish sky fades into warm haze near the horizon. The lighting is soft and diffuse, illuminating the face, chest, and hands while the clothing remains shadowy. The image has an aged oil-painting surface with visible craquelure, darkened varnish, worn edges, scratches, and a distressed black-brown border. The palette is subdued and antique: deep umber, black, olive green, muted teal, ochre, and warm gold. No text is visible.",
+          "type": "output_text"
+        }
+      ],
+      "id": "msg_09c4a5c88735841b006a78cc290000819c95fb4309981f4f75",
+      "phase": "final_answer",
+      "role": "assistant",
+      "status": "completed",
+      "type": "message"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "presence_penalty": 0.0,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "none",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "store": true,
+  "temperature": 1.0,
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "tool_choice": "auto",
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  },
+  "tools": [],
+  "top_logprobs": 0,
+  "top_p": 0.98,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 1313,
+    "input_tokens_details": {
+      "cache_write_tokens": 1310,
+      "cached_tokens": 0
+    },
+    "output_tokens": 314,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 1627
+  },
+  "user": null
+}
