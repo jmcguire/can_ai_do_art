@@ -1,9 +1,10 @@
 from __future__ import annotations
 
-import base64
 from pathlib import Path
 import tempfile
 import unittest
+
+from PIL import Image
 
 from roomtone.archive import derive_run_title, load_run, slugify_title
 from roomtone.cli import build_parser, main
@@ -155,7 +156,7 @@ class RoomtoneTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             start = root / "seed.png"
-            start.write_bytes(base64.b64decode("iVBORw0KGgo="))
+            Image.new("RGB", (24, 36), "navy").save(start)
             profile = load_profile(DEFAULT_PROFILE)
             provider = FakeProvider()
             run_dir = run_transformations(
@@ -172,9 +173,41 @@ class RoomtoneTests(unittest.TestCase):
             )
             manifest = load_run(run_dir)
             self.assertEqual(manifest["title"], "Seed")
+            self.assertFalse(manifest["start"]["resized"])
+            self.assertEqual(manifest["start"]["archived_dimensions"], [24, 36])
             gallery = (run_dir / "index.html").read_text(encoding="utf-8")
             self.assertIn("Generation 0", gallery)
             self.assertIn("0000/seed.png", gallery)
+
+    def test_large_image_seed_is_downscaled_without_distortion(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            start = root / "wide-seed.jpg"
+            Image.new("RGB", (2400, 1200), "goldenrod").save(
+                start, quality=95
+            )
+            profile = load_profile(DEFAULT_PROFILE)
+            run_dir = run_transformations(
+                provider=FakeProvider(),
+                start=start,
+                profile=profile,
+                settings=profile.settings,
+                generations=1,
+                output_dir=root / "runs",
+                argv=["roomtone"],
+            )
+
+            manifest = load_run(run_dir)
+            archived_seed = run_dir / manifest["start"]["archived_path"]
+            with Image.open(archived_seed) as image:
+                self.assertEqual(image.size, (1024, 512))
+            self.assertTrue(manifest["start"]["resized"])
+            self.assertEqual(manifest["start"]["original_dimensions"], [2400, 1200])
+            self.assertEqual(manifest["start"]["archived_dimensions"], [1024, 512])
+            self.assertNotEqual(
+                manifest["start"]["sha256"],
+                manifest["start"]["archived_sha256"],
+            )
 
     def test_dry_run_makes_no_run_directory(self):
         with tempfile.TemporaryDirectory() as temporary:

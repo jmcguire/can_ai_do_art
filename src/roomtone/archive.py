@@ -11,6 +11,8 @@ import subprocess
 from typing import Any
 import unicodedata
 
+from PIL import Image, ImageOps
+
 from . import __version__
 from .config import Profile, Settings
 
@@ -65,6 +67,69 @@ def slugify_title(title: str) -> str:
     return (slug[:72].rstrip("-") or "roomtone")
 
 
+def _image_bounds(image_size: str) -> tuple[int, int]:
+    if image_size == "auto":
+        return (1024, 1024)
+    match = re.fullmatch(r"(\d+)x(\d+)", image_size)
+    if match is None:
+        raise ValueError(f"Cannot resize the image seed for size: {image_size}")
+    return (int(match.group(1)), int(match.group(2)))
+
+
+def _save_resized_image(image: Image.Image, destination: Path) -> None:
+    suffix = destination.suffix.lower()
+    if suffix in {".jpg", ".jpeg"}:
+        if image.mode not in {"RGB", "L"}:
+            image = image.convert("RGB")
+        image.save(destination, format="JPEG", quality=90, optimize=True)
+    elif suffix == ".png":
+        image.save(destination, format="PNG", optimize=True)
+    elif suffix == ".webp":
+        image.save(destination, format="WEBP", quality=90, method=6)
+    elif suffix == ".gif":
+        image.save(destination, format="GIF", optimize=True)
+    else:
+        raise ValueError(f"Unsupported image seed format: {destination.suffix}")
+
+
+def _archive_seed(start: Path, destination: Path, image_size: str) -> dict[str, Any]:
+    original_sha256 = sha256_file(start)
+    original_bytes = start.stat().st_size
+    if detect_start_kind(start) == "text":
+        shutil.copy2(start, destination)
+        return {
+            "sha256": original_sha256,
+            "archived_sha256": original_sha256,
+            "original_bytes": original_bytes,
+            "archived_bytes": original_bytes,
+        }
+
+    bounds = _image_bounds(image_size)
+    with Image.open(start) as source:
+        oriented = ImageOps.exif_transpose(source)
+        original_dimensions = list(oriented.size)
+        resized = oriented.width > bounds[0] or oriented.height > bounds[1]
+        if resized:
+            archived = oriented.copy()
+            archived.thumbnail(bounds, Image.Resampling.LANCZOS)
+            _save_resized_image(archived, destination)
+            archived_dimensions = list(archived.size)
+        else:
+            shutil.copy2(start, destination)
+            archived_dimensions = original_dimensions
+
+    return {
+        "sha256": original_sha256,
+        "archived_sha256": sha256_file(destination),
+        "original_bytes": original_bytes,
+        "archived_bytes": destination.stat().st_size,
+        "original_dimensions": original_dimensions,
+        "archived_dimensions": archived_dimensions,
+        "resize_bounds": list(bounds),
+        "resized": resized,
+    }
+
+
 def create_run(
     output_dir: Path,
     start: Path,
@@ -89,7 +154,7 @@ def create_run(
     seed_dir = run_dir / "0000"
     seed_dir.mkdir()
     seed_copy = seed_dir / start.name
-    shutil.copy2(start, seed_copy)
+    seed_metadata = _archive_seed(start, seed_copy, settings.image_size)
     (run_dir / "commands.txt").write_text(
         shlex.join(argv) + "\n", encoding="utf-8"
     )
@@ -108,7 +173,7 @@ def create_run(
             "original_path": str(start),
             "archived_path": str(seed_copy.relative_to(run_dir)),
             "kind": detect_start_kind(start),
-            "sha256": sha256_file(start),
+            **seed_metadata,
         },
         "profile": {
             "original_path": str(profile.root),

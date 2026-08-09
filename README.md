@@ -128,6 +128,12 @@ The `0000/` directory contains the archived seed. Every transformation directory
 is labeled by its output kind, making images and descriptions easy to find while
 browsing the filesystem.
 
+Large image seeds are downscaled when archived to fit within the configured
+generated-image dimensions. Aspect ratio is preserved, and smaller seeds are
+not enlarged. The manifest records the original and archived dimensions, byte
+sizes, and checksums. When image size is `auto`, the seed is bounded to
+1024×1024.
+
 By default, the title is the first text-seed fragment before a comma or period,
 or the image seed's filename with separators converted to spaces. Override it with
 `--title "My experiment"`. The title appears in the run page's browser title and
