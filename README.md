@@ -1,5 +1,11 @@
 # Roomtone
 
+[![Roomtone archive deployment](https://github.com/jmcguire/can_ai_do_art/actions/workflows/pages.yml/badge.svg?branch=main)](https://github.com/jmcguire/can_ai_do_art/actions/workflows/pages.yml)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/downloads/)
+[![OpenAI API](https://img.shields.io/badge/OpenAI-API-412991?logo=openai&logoColor=white)](https://developers.openai.com/api/)
+[![Open issues](https://img.shields.io/github/issues/jmcguire/can_ai_do_art)](https://github.com/jmcguire/can_ai_do_art/issues)
+[![Browse the archive](https://img.shields.io/badge/GitHub%20Pages-browse%20the%20archive-222222?logo=githubpages&logoColor=white)](https://jmcguire.github.io/can_ai_do_art/)
+
 Roomtone repeatedly translates text into an image and an image back into text.
 It is inspired by Alvin Lucier's *I Am Sitting in a Room*: each transformation
 removes and introduces information until the characteristic tendencies of the
