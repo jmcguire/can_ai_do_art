@@ -55,6 +55,8 @@ roomtone \
   --dry-run
 ```
 
+The three required options also have short forms: `-s`, `-g`, and `-p`.
+
 Resume an interrupted run with the same start file, profile, and effective
 settings. `--generations` may be increased to extend it:
 
@@ -177,6 +179,16 @@ experiment; this is intentional for the archive, but very large experiments may
 eventually benefit from Git LFS or an object-storage-backed gallery.
 
 ## Development
+
+Enable the repository's commit guard once per clone:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+The guard keeps generated archives separate from code: a commit may contain
+project files or one run, but not both, and a run commit may contain only one
+top-level run directory plus the generated `runs/index.html` and `.nojekyll`.
 
 The test suite uses a fake provider and makes no network requests:
 

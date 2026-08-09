@@ -28,15 +28,17 @@ def build_parser() -> argparse.ArgumentParser:
     )
 
     required.add_argument(
-        "--start", required=True, type=Path, help="Starting text or image file"
+        "-s", "--start", required=True, type=Path, help="Starting text or image file"
     )
     required.add_argument(
+        "-g",
         "--generations",
         required=True,
         type=int,
         help="Number of individual transformations (100 normally produces 50 of each)",
     )
     required.add_argument(
+        "-p",
         "--profile",
         required=True,
         type=Path,

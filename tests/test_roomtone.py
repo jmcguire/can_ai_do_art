@@ -129,6 +129,14 @@ class RoomtoneTests(unittest.TestCase):
         self.assertIn("--title", help_text)
         self.assertIn("text seed or image filename", help_text)
 
+    def test_required_argument_shortcuts(self):
+        args = build_parser().parse_args(
+            ["-s", "seed.txt", "-g", "12", "-p", "profiles/default"]
+        )
+        self.assertEqual(args.start, Path("seed.txt"))
+        self.assertEqual(args.generations, 12)
+        self.assertEqual(args.profile, Path("profiles/default"))
+
     def test_title_derivation_and_slugging(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

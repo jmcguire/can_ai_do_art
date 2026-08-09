@@ -1,0 +1,29 @@
+#!/bin/sh
+set -eu
+
+staged_paths=$(git diff --cached --name-only --diff-filter=ACMRD)
+[ -n "$staged_paths" ] || exit 0
+
+run_paths=$(printf '%s\n' "$staged_paths" | awk '/^runs\//')
+non_run_paths=$(printf '%s\n' "$staged_paths" | awk '!/^runs\//')
+
+if [ -n "$run_paths" ] && [ -n "$non_run_paths" ]; then
+    echo "Roomtone commit guard: do not mix runs with project changes." >&2
+    echo "Commit the project changes and each run separately." >&2
+    exit 1
+fi
+
+[ -n "$run_paths" ] || exit 0
+
+run_directories=$(
+    printf '%s\n' "$run_paths" |
+        awk -F/ '$2 != "index.html" && $2 != ".nojekyll" && $2 != "" {print $2}' |
+        sort -u
+)
+run_count=$(printf '%s\n' "$run_directories" | awk 'NF {count++} END {print count + 0}')
+
+if [ "$run_count" -gt 1 ]; then
+    echo "Roomtone commit guard: a run commit may contain only one run directory." >&2
+    printf 'Staged run directories:\n%s\n' "$run_directories" >&2
+    exit 1
+fi
