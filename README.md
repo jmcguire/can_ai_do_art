@@ -5,6 +5,8 @@ It is inspired by Alvin Lucier's *I Am Sitting in a Room*: each transformation
 removes and introduces information until the characteristic tendencies of the
 models become audible—or, here, visible.
 
+[Browse the published Roomtone run archive.](https://jmcguire.github.io/can_ai_do_art/)
+
 `--generations` counts individual transformations. With a text seed, 100
 generations produce 50 images and 50 descriptions. With an image seed, the order
 is reversed.

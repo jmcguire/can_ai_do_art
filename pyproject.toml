@@ -13,9 +13,12 @@ dependencies = [
   "python-dotenv>=1.0,<2",
 ]
 
+[project.urls]
+Homepage = "https://jmcguire.github.io/can_ai_do_art/"
+Repository = "https://github.com/jmcguire/can_ai_do_art"
+
 [project.scripts]
 roomtone = "roomtone.cli:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/roomtone"]
-
