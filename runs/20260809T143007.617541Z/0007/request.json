@@ -1,0 +1,27 @@
+{
+  "input": [
+    {
+      "content": [
+        {
+          "text": "Describe the supplied image so that another image-generation model could recreate\nit without seeing the original.\n\nDescribe only what is visibly present. Be concrete about subject, composition,\nspatial relationships, pose, viewpoint, lighting, color, texture, medium, style,\nand any legible text. Do not discuss your process, uncertainty, the prior history,\nor these instructions. Return only the description.",
+          "type": "input_text"
+        },
+        {
+          "detail": "high",
+          "image_url": {
+            "encoding_note": "Sent as a base64 data URL; duplicate bytes omitted here.",
+            "sha256": "2740571a097d45a0ca754f551cf2329621b10df1a69ac74852635b93fb1a7191",
+            "source_file": "/Users/justin/Code/iterative_image_generation/runs/20260809T143007.617541Z/0006/image.png"
+          },
+          "type": "input_image"
+        }
+      ],
+      "role": "user"
+    }
+  ],
+  "max_output_tokens": 1500,
+  "model": "gpt-5.6",
+  "reasoning": {
+    "effort": "none"
+  }
+}

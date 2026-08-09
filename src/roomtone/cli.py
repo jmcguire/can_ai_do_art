@@ -8,48 +8,108 @@ import sys
 
 from . import __version__
 from .archive import detect_start_kind
-from .config import load_profile, override_settings
+from .config import Settings, load_profile, override_settings
 from .engine import run_transformations
 
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="roomtone",
+        add_help=False,
         description=(
             "Repeatedly alternate between OpenAI image generation and image "
             "description. Generations count individual transformations."
         ),
     )
-    parser.add_argument("--start", required=True, type=Path, help="Starting text or image file")
-    parser.add_argument(
+    required = parser.add_argument_group("required arguments")
+    optional = parser.add_argument_group("optional arguments")
+    misc = parser.add_argument_group(
+        "miscellaneous", "Testing, help, and informational options."
+    )
+
+    required.add_argument(
+        "--start", required=True, type=Path, help="Starting text or image file"
+    )
+    required.add_argument(
         "--generations",
         required=True,
         type=int,
         help="Number of individual transformations (100 normally produces 50 of each)",
     )
-    parser.add_argument(
+    required.add_argument(
         "--profile",
         required=True,
         type=Path,
         help="Profile directory, or its profile.toml file",
     )
-    parser.add_argument("--output-dir", type=Path, default=Path("runs"))
-    parser.add_argument("--image-model")
-    parser.add_argument("--vision-model")
-    parser.add_argument("--size", dest="image_size")
-    parser.add_argument("--quality", dest="image_quality")
-    parser.add_argument("--format", dest="image_format", choices=("png", "jpeg", "webp"))
-    parser.add_argument("--detail", dest="vision_detail", choices=("auto", "low", "high", "original"))
-    parser.add_argument("--reasoning-effort", choices=("none", "low", "medium", "high", "xhigh", "max"))
-    parser.add_argument("--max-output-tokens", type=int)
-    parser.add_argument("--timeout", dest="timeout_seconds", type=float)
-    parser.add_argument("--retries", dest="retry_attempts", type=int)
-    parser.add_argument("--retry-delay", dest="retry_initial_delay_seconds", type=float)
-    parser.add_argument("--retry-max-delay", dest="retry_max_delay_seconds", type=float)
-    parser.add_argument("--env-file", type=Path, default=Path(".env"))
-    parser.add_argument("--resume", type=Path, help="Resume an interrupted run directory")
-    parser.add_argument("--dry-run", action="store_true", help="Validate and show the plan without API calls")
-    parser.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
+
+    optional.add_argument(
+        "--output-dir", type=Path, default=Path("runs"),
+        help="Parent directory for run archives (default: runs)",
+    )
+    optional.add_argument(
+        "--image-model",
+        help=f"Text-to-image model (default: profile value; built-in: {Settings.image_model})",
+    )
+    optional.add_argument(
+        "--vision-model",
+        help=f"Image-to-text model (default: profile value; built-in: {Settings.vision_model})",
+    )
+    optional.add_argument(
+        "--size", dest="image_size",
+        help=f"Generated image size (default: profile value; built-in: {Settings.image_size})",
+    )
+    optional.add_argument(
+        "--quality", dest="image_quality",
+        help=f"Generated image quality (default: profile value; built-in: {Settings.image_quality})",
+    )
+    optional.add_argument(
+        "--format", dest="image_format", choices=("png", "jpeg", "webp"),
+        help=f"Generated image format (default: profile value; built-in: {Settings.image_format})",
+    )
+    optional.add_argument(
+        "--detail", dest="vision_detail", choices=("auto", "low", "high", "original"),
+        help=f"Vision input detail (default: profile value; built-in: {Settings.vision_detail})",
+    )
+    optional.add_argument(
+        "--reasoning-effort", choices=("none", "low", "medium", "high", "xhigh", "max"),
+        help=f"Vision reasoning effort (default: profile value; built-in: {Settings.reasoning_effort})",
+    )
+    optional.add_argument(
+        "--max-output-tokens", type=int,
+        help=f"Description output limit (default: profile value; built-in: {Settings.max_output_tokens})",
+    )
+    optional.add_argument(
+        "--timeout", dest="timeout_seconds", type=float,
+        help=f"API timeout in seconds (default: profile value; built-in: {Settings.timeout_seconds:g})",
+    )
+    optional.add_argument(
+        "--retries", dest="retry_attempts", type=int,
+        help=f"Maximum attempts per request (default: profile value; built-in: {Settings.retry_attempts})",
+    )
+    optional.add_argument(
+        "--retry-delay", dest="retry_initial_delay_seconds", type=float,
+        help=f"Initial retry delay in seconds (default: profile value; built-in: {Settings.retry_initial_delay_seconds:g})",
+    )
+    optional.add_argument(
+        "--retry-max-delay", dest="retry_max_delay_seconds", type=float,
+        help=f"Maximum retry delay in seconds (default: profile value; built-in: {Settings.retry_max_delay_seconds:g})",
+    )
+    optional.add_argument(
+        "--env-file", type=Path, default=Path(".env"),
+        help="Environment file containing OPENAI_API_KEY (default: .env)",
+    )
+    optional.add_argument(
+        "--resume", type=Path,
+        help="Interrupted run directory to continue (default: none)",
+    )
+
+    misc.add_argument(
+        "--dry-run", action="store_true",
+        help="Validate and show the plan without API calls (default: false)",
+    )
+    misc.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
+    misc.add_argument("-h", "--help", action="help", help="Show this help message and exit")
     return parser
 
 
@@ -140,4 +200,3 @@ def main(argv: list[str] | None = None) -> int:
 
     print(f"Completed run: {run_dir}")
     return 0
-

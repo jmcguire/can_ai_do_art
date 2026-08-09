@@ -6,7 +6,7 @@ import tempfile
 import unittest
 
 from roomtone.archive import load_run
-from roomtone.cli import main
+from roomtone.cli import build_parser, main
 from roomtone.config import load_profile
 from roomtone.engine import run_transformations
 
@@ -76,6 +76,21 @@ class RoomtoneTests(unittest.TestCase):
             self.assertEqual(manifest["steps"][-1]["output_kind"], "text")
             self.assertTrue((run_dir / "0004" / "description.md").is_file())
             self.assertTrue((run_dir / "profile" / "profile.toml").is_file())
+            self.assertTrue((run_dir / "index.html").is_file())
+            self.assertTrue((run_dir.parent / "index.html").is_file())
+            self.assertIn("elapsed_seconds", manifest["steps"][0])
+            gallery = (run_dir / "index.html").read_text(encoding="utf-8")
+            self.assertIn("Generation 1", gallery)
+            self.assertIn("Generation 3", gallery)
+
+    def test_help_groups_arguments_and_documents_optional_defaults(self):
+        help_text = build_parser().format_help()
+        self.assertIn("required arguments:", help_text)
+        self.assertIn("optional arguments:", help_text)
+        self.assertIn("miscellaneous:", help_text)
+        self.assertIn("default: runs", help_text)
+        self.assertIn("gpt-image-2", help_text)
+        self.assertIn("false", help_text)
 
     def test_image_start_begins_with_description(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -166,7 +181,7 @@ class RoomtoneTests(unittest.TestCase):
                     output_dir=root / "runs",
                     argv=["roomtone"],
                 )
-            run_dir = next((root / "runs").iterdir())
+            run_dir = next(path for path in (root / "runs").iterdir() if path.is_dir())
             run_transformations(
                 provider=FakeProvider(),
                 start=start,

@@ -1,0 +1,98 @@
+{
+  "background": false,
+  "billing": {
+    "payer": "developer"
+  },
+  "completed_at": 1786285820.0,
+  "conversation": null,
+  "created_at": 1786285809.0,
+  "error": null,
+  "frequency_penalty": 0.0,
+  "id": "resp_0246b5580518ba27006a788ef102f48191b483863141cfb717",
+  "incomplete_details": null,
+  "instructions": null,
+  "max_output_tokens": 1500,
+  "max_tool_calls": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "moderation": null,
+  "object": "response",
+  "output": [
+    {
+      "content": [
+        {
+          "annotations": [],
+          "logprobs": [],
+          "text": "Wide cinematic fantasy battle illustration in a richly painted digital style. A party of adventurers stands on a broken, sloping stone bridge amid jagged dark-blue rocks, viewed from slightly below. In the foreground, a huge black and crimson spined dragon or reptilian monster rises from the lower edge, its long red-tipped horns and serrated scales framing the heroes.\n\nAt center front, a heavily armored knight in blue cloth and a horned silver helmet braces with a glowing pale-violet longsword held diagonally upward. Behind him, a dark-skinned warrior with curly black hair, chainmail, and a flowing teal-green cloak lunges forward with a thin sword. To the left, a red-haired woman in armor crouches behind a translucent spherical blue magical shield, holding a staff or wand with a bright cyan orb. On the right, a smaller pale-haired fighter in dark clothing raises a hand axe toward the enemy.\n\nAbove the group, a dark-skinned male spellcaster in teal and orange robes spreads both arms, conjuring bright magical energy: a fiery golden humanoid-shaped glow in one hand and swirling cyan-blue rings around a staff topped by a luminous blue orb in the other. Behind everyone looms an enormous pale gold-and-white serpentine dragon with antler-like horns, a long coiling body, folded wings, glowing eyes, and its snarling head bent down over the party.\n\nSeveral red, bat-winged dragons attack from the right-middle distance, one carrying or accompanied by a spear-like weapon. The environment is chaotic and smoky, with warm orange firelight near the horizon contrasting against cool blue-purple rocks, armor, and magic. Strong directional highlights, atmospheric haze, dynamic diagonals, visible painterly brushwork, and dramatic high-fantasy cover-art composition. No visible text.",
+          "type": "output_text"
+        }
+      ],
+      "id": "msg_0246b5580518ba27006a788ef23210819194d40c1a94e326aa",
+      "phase": "final_answer",
+      "role": "assistant",
+      "status": "completed",
+      "type": "message"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "presence_penalty": 0.0,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "none",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "store": true,
+  "temperature": 1.0,
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "tool_choice": "auto",
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  },
+  "tools": [],
+  "top_logprobs": 0,
+  "top_p": 0.98,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 1088,
+    "input_tokens_details": {
+      "cache_write_tokens": 1085,
+      "cached_tokens": 0
+    },
+    "output_tokens": 368,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 1456
+  },
+  "user": null
+}

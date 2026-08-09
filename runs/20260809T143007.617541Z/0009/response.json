@@ -1,0 +1,98 @@
+{
+  "background": false,
+  "billing": {
+    "payer": "developer"
+  },
+  "completed_at": 1786286001.0,
+  "conversation": null,
+  "created_at": 1786285990.0,
+  "error": null,
+  "frequency_penalty": 0.0,
+  "id": "resp_01c722c6ad192c48006a788fa600fc81a2a4e0fa8cb7258166",
+  "incomplete_details": null,
+  "instructions": null,
+  "max_output_tokens": 1500,
+  "max_tool_calls": null,
+  "metadata": {},
+  "model": "gpt-5.6-sol",
+  "moderation": null,
+  "object": "response",
+  "output": [
+    {
+      "content": [
+        {
+          "annotations": [],
+          "logprobs": [],
+          "text": "Square-format epic dark-fantasy digital painting, viewed slightly from below, packed with dramatic action. At center foreground, a heavily armored knight in ornate black-and-gold plate armor and a horned, closed helmet stands wide-legged on jagged volcanic rock. A deep royal-blue cape billows behind him. He grips an enormous glowing violet energy sword diagonally upward toward the upper right; the blade is composed of multiple bright purple-white beams surrounded by sparks, magical particles, and crackling violet energy.\n\nBehind him at upper center, a dark-haired male mage in elaborate dark blue and gold robes raises one hand holding a bright orange fireball. In his other hand he carries a staff topped by a luminous circular blue arcane sigil filled with concentric rings and rune-like geometric markings. On the middle left, a dark-skinned male warrior in dark armor and a flowing green cape lunges horizontally with a long silver sword held forward. At lower left, a red-haired female sorceress in fitted black armor stands amid icy mist and splashing frost, holding a tall crystalline blue spear or staff; a large translucent blue spherical magical shield glows behind her. On the middle right, a pale, long white-haired female warrior in black leather-and-metal armor crouches on a rock, raising a double-headed battle axe while holding a short sword downward in her other hand.\n\nA colossal black dragon’s head dominates the upper left, covered in sharp layered scales and long horns. Its eye glows electric blue and its open jaws blaze with intense blue-white frost or magical fire, illuminating rows of teeth. Vast leathery dragon wings frame the upper right and background. Several smaller dragons fly as silhouettes against turbulent storm clouds near the top center.\n\nThe foreground is filled by the ridged back and curling horn or tail of another massive black dragon, its armor-like scales split by glowing molten-orange cracks. The right background burns with orange flames, embers, smoke, and silhouettes of jagged gothic towers or a ruined city. The left side is cold blue with ice particles, mist, and magical light, while the right side is hot orange and violet. High-contrast cinematic lighting, intricate metallic textures, dense sparks and debris, stormy charcoal clouds, glowing spell effects, and polished hyper-detailed fantasy concept-art style. No visible text.",
+          "type": "output_text"
+        }
+      ],
+      "id": "msg_01c722c6ad192c48006a788fa6f48c81a2acac8ce475f3cb2d",
+      "phase": "final_answer",
+      "role": "assistant",
+      "status": "completed",
+      "type": "message"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "presence_penalty": 0.0,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_options": null,
+  "prompt_cache_retention": "24h",
+  "reasoning": {
+    "context": "all_turns",
+    "effort": "none",
+    "generate_summary": null,
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "completed",
+  "store": true,
+  "temperature": 1.0,
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "tool_choice": "auto",
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  },
+  "tools": [],
+  "top_logprobs": 0,
+  "top_p": 0.98,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 1313,
+    "input_tokens_details": {
+      "cache_write_tokens": 1310,
+      "cached_tokens": 0
+    },
+    "output_tokens": 471,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 1784
+  },
+  "user": null
+}

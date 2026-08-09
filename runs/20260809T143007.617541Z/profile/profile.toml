@@ -1,0 +1,24 @@
+[models]
+text_to_image = "gpt-image-2"
+image_to_text = "gpt-5.6"
+
+[prompts]
+text_to_image = "text-to-image.md"
+image_to_text = "image-to-text.md"
+
+[image]
+size = "1024x1024"
+quality = "low"
+format = "png"
+
+[vision]
+detail = "high"
+reasoning_effort = "none"
+max_output_tokens = 1500
+
+[network]
+timeout_seconds = 300
+retry_attempts = 5
+retry_initial_delay_seconds = 2.0
+retry_max_delay_seconds = 30.0
+

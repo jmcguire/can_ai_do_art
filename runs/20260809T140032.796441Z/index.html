@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Roomtone · 20260809T140032.796441Z</title>
+  <style>
+    :root { --ink:#f4efe6; --muted:#aaa49a; --paper:#11110f; --panel:#1b1a17; --line:#38352f; --accent:#d8b77a; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font:16px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace; }
+    a { color:var(--accent); }
+    main { width:min(1120px, calc(100% - 32px)); margin:0 auto; padding:42px 0 64px; }
+    header { margin-bottom:30px; }
+    h1 { margin:.15em 0; font:clamp(2rem,6vw,4.6rem)/.95 Georgia,serif; font-weight:400; letter-spacing:-.04em; }
+    h2 { font:1.4rem/1.2 Georgia,serif; font-weight:400; }
+    .eyebrow,.meta { color:var(--muted); text-transform:uppercase; letter-spacing:.08em; font-size:.78rem; }
+    .deck { color:#cbc5ba; max-width:68ch; }
+    .stage { display:grid; grid-template-columns:minmax(0,1fr) minmax(260px,360px); gap:24px; align-items:start; }
+    .stage > * { min-width:0; }
+    .frame { background:var(--panel); border:1px solid var(--line); border-radius:4px; overflow:hidden; }
+    .slide,.slide-notes { display:none; } .slide.active,.slide-notes.active { display:block; }
+    .slide { margin:0; }
+    .slide img { display:block; width:100%; height:auto; aspect-ratio:1; object-fit:contain; background:#090908; }
+    .caption { padding:14px 16px; border-top:1px solid var(--line); }
+    .notes { background:var(--panel); border:1px solid var(--line); padding:18px; max-height:72vh; overflow:auto; }
+    .notes pre { color:#d2ccc1; white-space:pre-wrap; overflow-wrap:anywhere; font:13px/1.55 inherit; margin:8px 0 22px; }
+    .controls { display:flex; gap:10px; align-items:center; margin:16px 0; }
+    button { appearance:none; border:1px solid var(--line); background:var(--panel); color:var(--ink); padding:10px 14px; font:inherit; cursor:pointer; }
+    button:hover,button:focus-visible { border-color:var(--accent); }
+    #counter { margin-left:auto; color:var(--muted); }
+    .thumbs { display:flex; gap:8px; max-width:100%; overflow-x:auto; padding-bottom:8px; }
+    .thumb { padding:0; flex:0 0 72px; opacity:.55; } .thumb.active { opacity:1; border-color:var(--accent); }
+    .thumb img { width:70px; height:70px; display:block; object-fit:cover; }
+    .runs { display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:18px; }
+    .run { display:block; color:inherit; text-decoration:none; border:1px solid var(--line); background:var(--panel); }
+    .run:hover { border-color:var(--accent); } .run img,.placeholder { display:block; width:100%; aspect-ratio:1.6; object-fit:cover; background:#0a0a09; }
+    .placeholder { display:grid; place-items:center; color:var(--muted); }
+    .run-copy { padding:16px; } .run-copy h2 { margin:0 0 8px; }
+    .status { display:inline-block; padding:2px 6px; border:1px solid var(--line); margin-top:10px; }
+    .empty { padding:48px; border:1px solid var(--line); color:var(--muted); text-align:center; }
+    @media (max-width:760px) { .stage { grid-template-columns:1fr; } .notes { max-height:none; } main { padding-top:26px; } }
+  </style>
+</head>
+<body><main>
+<header>
+  <div class="eyebrow"><a href="../">Roomtone runs</a> / 20260809T140032.796441Z</div>
+  <h1>Visual roomtone</h1>
+  <p class="deck">1 images across 2 completed transformations. Status: completed.</p>
+  <p class="meta">Started August 09, 2026 · 14:00 UTC · gpt-image-2 ↔ gpt-5.6</p>
+</header>
+<div class="stage"><div><div class="frame"><figure class="slide active" data-index="0"><img src="0001/image.png" alt="Generation 1"><figcaption class="caption">Generation 1 · 0001/image.png</figcaption></figure></div><div class="controls"><button id="prev">← Previous</button><button id="next">Next →</button><span id="counter"></span></div><nav class="thumbs" aria-label="Generations"><button class="thumb active" data-index="0" aria-label="Show generation 1"><img src="0001/image.png" alt=""></button></nav></div><aside class="notes"><section class="slide-notes active" data-index="0"><div class="eyebrow">Input to generation 1</div><pre>A simple wooden chair standing alone in a pale, empty room.</pre><div class="eyebrow">Description produced from this image</div><pre>A minimalist square interior photograph of a single honey-brown wooden dining chair standing slightly right of center in the corner of an empty room. The chair is viewed from a front-left three-quarter angle at approximately seat height. It has a flat rectangular wooden seat with softly rounded edges, four straight square legs, horizontal side stretchers, a tall straight back with two thick outer posts, a broad curved top rail, and four narrow vertical back slats. Fine natural wood grain is visible throughout.
+
+The room has warm off-white walls meeting at a vertical corner left of center, simple white baseboards, and pale beige wood-plank flooring laid diagonally into the scene. A partially cropped bright window appears along the far left edge, with a narrow white sill. Soft daylight enters from the left, creating gentle tonal gradients on the walls and chair and casting a long, diffuse chair shadow toward the lower right. The palette is neutral and warm—cream, beige, pale wood, and medium oak brown. Clean, uncluttered composition, realistic product/interior photography, subtle textures, soft natural illumination, no people or text.</pre></section></aside></div>
+</main><script>
+(() => {
+  const slides=[...document.querySelectorAll('.slide')], notes=[...document.querySelectorAll('.slide-notes')], thumbs=[...document.querySelectorAll('.thumb')];
+  let current=0;
+  const show=(n)=>{ current=(n+slides.length)%slides.length; [...slides,...notes,...thumbs].forEach(el=>el.classList.toggle('active',Number(el.dataset.index)===current)); document.querySelector('#counter').textContent=`${current+1} / ${slides.length}`; thumbs[current].scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'}); };
+  document.querySelector('#prev').addEventListener('click',()=>show(current-1)); document.querySelector('#next').addEventListener('click',()=>show(current+1)); thumbs.forEach(el=>el.addEventListener('click',()=>show(Number(el.dataset.index)))); document.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')show(current-1);if(e.key==='ArrowRight')show(current+1)}); show(0);
+})();
+</script></body>
+</html>

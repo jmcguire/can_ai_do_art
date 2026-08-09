@@ -1,0 +1,39 @@
+{
+  "created_at": "2026-08-09T13:59:39.988408+00:00",
+  "effective_settings": {
+    "image_format": "png",
+    "image_model": "gpt-image-2",
+    "image_quality": "low",
+    "image_size": "1024x1024",
+    "max_output_tokens": 1500,
+    "reasoning_effort": "none",
+    "retry_attempts": 5,
+    "retry_initial_delay_seconds": 2.0,
+    "retry_max_delay_seconds": 30.0,
+    "timeout_seconds": 300.0,
+    "vision_detail": "high",
+    "vision_model": "gpt-5.6"
+  },
+  "error": {
+    "message": "Connection error.",
+    "type": "APIConnectionError"
+  },
+  "generations_requested": 2,
+  "git_commit": "743ab5076b052f52f0456b95040208024f0671a8",
+  "profile": {
+    "archived_path": "profile",
+    "original_path": "/Users/justin/Code/iterative_image_generation/profiles/default",
+    "sha256": "ead1103028993cabbd15266dda3f15aab7051d993dc47468c56994c6b031a2d9"
+  },
+  "roomtone_version": "0.1.0",
+  "schema_version": 1,
+  "start": {
+    "archived_path": "seed/example.txt",
+    "kind": "text",
+    "original_path": "/Users/justin/Code/iterative_image_generation/seeds/example.txt",
+    "sha256": "4f954b2cf8485bd0b23ce3f15a250dcfd27708f884263924b543d87b384c15dd"
+  },
+  "status": "failed",
+  "steps": [],
+  "updated_at": "2026-08-09T14:00:20.358773+00:00"
+}

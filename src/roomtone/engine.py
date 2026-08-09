@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 from pathlib import Path
+from datetime import datetime, timezone
+import time
 from typing import Any, Protocol
 
 from .archive import (
@@ -13,6 +15,7 @@ from .archive import (
     timestamp,
 )
 from .config import Profile, Settings
+from .gallery import refresh_galleries
 from .provider import write_json
 
 
@@ -71,6 +74,8 @@ def run_transformations(
         append_command(run_dir, argv)
         save_manifest(run_dir, manifest)
 
+    refresh_galleries(run_dir, manifest)
+
     if manifest["steps"]:
         previous = manifest["steps"][-1]
         current_kind = previous["output_kind"]
@@ -85,6 +90,8 @@ def run_transformations(
             if step_dir.exists():
                 step_dir.rename(run_dir / f"{number:04d}.incomplete-{timestamp()}")
             step_dir.mkdir(exist_ok=False)
+            started_at = datetime.now(timezone.utc).isoformat()
+            started = time.monotonic()
             if current_kind == "text":
                 description = current_path.read_text(encoding="utf-8").strip()
                 if not description:
@@ -117,17 +124,23 @@ def run_transformations(
                     "output_kind": output_kind,
                     "output_path": str(output_path.relative_to(run_dir)),
                     "output_sha256": sha256_file(output_path),
+                    "started_at": started_at,
+                    "completed_at": datetime.now(timezone.utc).isoformat(),
+                    "elapsed_seconds": round(time.monotonic() - started, 3),
                 }
             )
             save_manifest(run_dir, manifest)
+            refresh_galleries(run_dir, manifest)
             current_kind = output_kind
             current_path = output_path
     except BaseException as exc:
         manifest["status"] = "interrupted" if isinstance(exc, KeyboardInterrupt) else "failed"
         manifest["error"] = {"type": type(exc).__name__, "message": str(exc)}
         save_manifest(run_dir, manifest)
+        refresh_galleries(run_dir, manifest)
         raise
 
     manifest["status"] = "completed"
     save_manifest(run_dir, manifest)
+    refresh_galleries(run_dir, manifest)
     return run_dir
