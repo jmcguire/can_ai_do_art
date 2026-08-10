@@ -27,7 +27,7 @@ if [ "$run_count" -gt 1 ]; then
         printf '%s\n' "$run_paths" |
             awk -F/ '
                 $2 == "index.html" || $2 == ".nojekyll" || $2 == "" {next}
-                NF == 3 && $3 == "index.html" {next}
+                NF == 3 && ($3 == "index.html" || $3 == "drift.json") {next}
                 {print}
             '
     )
@@ -35,7 +35,7 @@ if [ "$run_count" -gt 1 ]; then
         exit 0
     fi
     echo "Roomtone commit guard: a run commit may contain only one run directory." >&2
-    echo "Exception: generated index.html pages may be refreshed across all runs together." >&2
+    echo "Exception: generated gallery HTML and drift.json files may be refreshed across all runs together." >&2
     printf 'Staged run directories:\n%s\n' "$run_directories" >&2
     printf 'Non-gallery paths preventing a bulk refresh:\n%s\n' "$non_gallery_paths" >&2
     exit 1
