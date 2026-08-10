@@ -26,9 +26,25 @@
   "schema_version": 1,
   "slug": "dnd-2024-player-handbook-art",
   "start": {
+    "archived_bytes": 113511,
+    "archived_dimensions": [
+      1024,
+      576
+    ],
     "archived_path": "0000/dnd-2024-player-handbook-art.jpg",
+    "archived_sha256": "dde69837ac0dc8128872eaaf723751eda3135c39c7591c0beae2f6114bab31ed",
     "kind": "image",
+    "original_bytes": 69016,
+    "original_dimensions": [
+      1200,
+      675
+    ],
     "original_path": "/Users/justin/Code/iterative_image_generation/seeds/dnd-2024-player-handbook-art.jpg",
+    "resize_bounds": [
+      1024,
+      1024
+    ],
+    "resized": true,
     "sha256": "2e15ca3a073bad44741d463b7a857d0103978a1e225842c323f5b5e3e23a1f32"
   },
   "status": "completed",
@@ -247,5 +263,5 @@
     "wall_time_seconds": 440.05
   },
   "title": "Dnd 2024 Player Handbook Art",
-  "updated_at": "2026-08-09T19:03:38.152433+00:00"
+  "updated_at": "2026-08-10T15:57:06.741939+00:00"
 }

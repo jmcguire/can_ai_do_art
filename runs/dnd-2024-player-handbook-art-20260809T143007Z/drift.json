@@ -26,7 +26,7 @@
     }
   },
   "baseline_generation": 0,
-  "generated_at": "2026-08-10T15:10:58.323221+00:00",
+  "generated_at": "2026-08-10T15:57:20.221172+00:00",
   "images": [
     {
       "baseline": {
@@ -37,28 +37,28 @@
       "generation": 0,
       "path": "0000/dnd-2024-player-handbook-art.jpg",
       "previous": null,
-      "sha256": "2e15ca3a073bad44741d463b7a857d0103978a1e225842c323f5b5e3e23a1f32"
+      "sha256": "dde69837ac0dc8128872eaaf723751eda3135c39c7591c0beae2f6114bab31ed"
     },
     {
       "baseline": {
-        "dreamsim": 0.26547861099243164,
+        "dreamsim": 0.2660161256790161,
         "generation": 0,
-        "ssim": 0.13419159584835413
+        "ssim": 0.13428699317279447
       },
       "generation": 2,
       "path": "0002-image/image.png",
       "previous": {
-        "dreamsim": 0.26547861099243164,
+        "dreamsim": 0.2660161256790161,
         "generation": 0,
-        "ssim": 0.13419159584835413
+        "ssim": 0.13428699317279447
       },
       "sha256": "cc0df2f3b930ab7cbcbb60cf82d63283a86876bfc5a1b9bb071c93f858f11aed"
     },
     {
       "baseline": {
-        "dreamsim": 0.35995280742645264,
+        "dreamsim": 0.35964077711105347,
         "generation": 0,
-        "ssim": 0.11424908189571174
+        "ssim": 0.11400608391386781
       },
       "generation": 4,
       "path": "0004-image/image.png",
@@ -71,9 +71,9 @@
     },
     {
       "baseline": {
-        "dreamsim": 0.39052116870880127,
+        "dreamsim": 0.3930851221084595,
         "generation": 0,
-        "ssim": 0.11552953722696906
+        "ssim": 0.11537563265359381
       },
       "generation": 6,
       "path": "0006-image/image.png",
@@ -86,9 +86,9 @@
     },
     {
       "baseline": {
-        "dreamsim": 0.4018394947052002,
+        "dreamsim": 0.40277934074401855,
         "generation": 0,
-        "ssim": 0.0947240703207123
+        "ssim": 0.0945952108456987
       },
       "generation": 8,
       "path": "0008-image/image.png",
@@ -101,9 +101,9 @@
     },
     {
       "baseline": {
-        "dreamsim": 0.40062111616134644,
+        "dreamsim": 0.4020709991455078,
         "generation": 0,
-        "ssim": 0.08089567168839606
+        "ssim": 0.080814190159444
       },
       "generation": 10,
       "path": "0010-image/image.png",
@@ -116,9 +116,9 @@
     },
     {
       "baseline": {
-        "dreamsim": 0.42409729957580566,
+        "dreamsim": 0.42514151334762573,
         "generation": 0,
-        "ssim": 0.07517353699073265
+        "ssim": 0.07526487862472266
       },
       "generation": 12,
       "path": "0012-image/image.png",
@@ -131,9 +131,9 @@
     },
     {
       "baseline": {
-        "dreamsim": 0.4137810468673706,
+        "dreamsim": 0.4141831398010254,
         "generation": 0,
-        "ssim": 0.08514624302461131
+        "ssim": 0.08515116931476734
       },
       "generation": 14,
       "path": "0014-image/image.png",
@@ -146,9 +146,9 @@
     },
     {
       "baseline": {
-        "dreamsim": 0.37657856941223145,
+        "dreamsim": 0.37734001874923706,
         "generation": 0,
-        "ssim": 0.07706167461988887
+        "ssim": 0.07711447318469875
       },
       "generation": 16,
       "path": "0016-image/image.png",
@@ -161,9 +161,9 @@
     },
     {
       "baseline": {
-        "dreamsim": 0.4238058924674988,
+        "dreamsim": 0.42369699478149414,
         "generation": 0,
-        "ssim": 0.06752063830048406
+        "ssim": 0.06749737849538405
       },
       "generation": 18,
       "path": "0018-image/image.png",
@@ -176,9 +176,9 @@
     },
     {
       "baseline": {
-        "dreamsim": 0.44168949127197266,
+        "dreamsim": 0.4414536952972412,
         "generation": 0,
-        "ssim": 0.06800210808570979
+        "ssim": 0.0678990035072099
       },
       "generation": 20,
       "path": "0020-image/image.png",
@@ -190,6 +190,6 @@
       "sha256": "05747013f878b93f6dfe72d41812214b8d32a6dd438eb469eaa9b65758d32113"
     }
   ],
-  "input_signature": "be1ed8a311fcab2baff58f7227beb71cdc1884751f3790d014e09de6e65bf7f3",
+  "input_signature": "c19aa02044b2d56e573c31e8e6575d83400dec0bb40733e8bf850d124e63ef34",
   "schema_version": 1
 }

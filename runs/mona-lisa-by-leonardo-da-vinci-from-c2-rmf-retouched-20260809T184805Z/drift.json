@@ -26,7 +26,7 @@
     }
   },
   "baseline_generation": 0,
-  "generated_at": "2026-08-10T15:11:00.889465+00:00",
+  "generated_at": "2026-08-10T15:57:20.981305+00:00",
   "images": [
     {
       "baseline": {
@@ -37,28 +37,28 @@
       "generation": 0,
       "path": "0000/Mona_Lisa,_by_Leonardo_da_Vinci,_from_C2RMF_retouched.jpg",
       "previous": null,
-      "sha256": "393ba286ba82c9633117314a393e0641e47cfa214af5663e2323a20af52306de"
+      "sha256": "e00b15154183ff7707972607b64cd0866ab9f09821bd40d17854e5d23546fbe6"
     },
     {
       "baseline": {
-        "dreamsim": 0.09889411926269531,
+        "dreamsim": 0.09940093755722046,
         "generation": 0,
-        "ssim": 0.39060924265215563
+        "ssim": 0.38752381412739223
       },
       "generation": 2,
       "path": "0002-image/image.png",
       "previous": {
-        "dreamsim": 0.09889411926269531,
+        "dreamsim": 0.09940093755722046,
         "generation": 0,
-        "ssim": 0.39060924265215563
+        "ssim": 0.38752381412739223
       },
       "sha256": "1858b5d53ec5bff6a3d376988f8906cd77042ffad83c1ef584a14689d3d01bad"
     },
     {
       "baseline": {
-        "dreamsim": 0.10561704635620117,
+        "dreamsim": 0.10601133108139038,
         "generation": 0,
-        "ssim": 0.37920290010435426
+        "ssim": 0.3767789420520402
       },
       "generation": 4,
       "path": "0004-image/image.png",
@@ -71,9 +71,9 @@
     },
     {
       "baseline": {
-        "dreamsim": 0.10642039775848389,
+        "dreamsim": 0.10666078329086304,
         "generation": 0,
-        "ssim": 0.34322076937405677
+        "ssim": 0.34115135602828855
       },
       "generation": 6,
       "path": "0006-image/image.png",
@@ -86,9 +86,9 @@
     },
     {
       "baseline": {
-        "dreamsim": 0.09387552738189697,
+        "dreamsim": 0.09474468231201172,
         "generation": 0,
-        "ssim": 0.39703290560487864
+        "ssim": 0.39357583214965275
       },
       "generation": 8,
       "path": "0008-image/image.png",
@@ -101,9 +101,9 @@
     },
     {
       "baseline": {
-        "dreamsim": 0.1104816198348999,
+        "dreamsim": 0.11060869693756104,
         "generation": 0,
-        "ssim": 0.3380882830034359
+        "ssim": 0.3354549475163913
       },
       "generation": 10,
       "path": "0010-image/image.png",
@@ -116,9 +116,9 @@
     },
     {
       "baseline": {
-        "dreamsim": 0.11055707931518555,
+        "dreamsim": 0.1108202338218689,
         "generation": 0,
-        "ssim": 0.32124941396185386
+        "ssim": 0.31917218592292323
       },
       "generation": 12,
       "path": "0012-image/image.png",
@@ -131,9 +131,9 @@
     },
     {
       "baseline": {
-        "dreamsim": 0.10420835018157959,
+        "dreamsim": 0.10465574264526367,
         "generation": 0,
-        "ssim": 0.3515733505268828
+        "ssim": 0.3487064889127128
       },
       "generation": 14,
       "path": "0014-image/image.png",
@@ -146,9 +146,9 @@
     },
     {
       "baseline": {
-        "dreamsim": 0.12120813131332397,
+        "dreamsim": 0.12188339233398438,
         "generation": 0,
-        "ssim": 0.3517344127762594
+        "ssim": 0.3481713465045824
       },
       "generation": 16,
       "path": "0016-image/image.png",
@@ -161,9 +161,9 @@
     },
     {
       "baseline": {
-        "dreamsim": 0.10930800437927246,
+        "dreamsim": 0.11022984981536865,
         "generation": 0,
-        "ssim": 0.2892477074474762
+        "ssim": 0.2872063051356743
       },
       "generation": 18,
       "path": "0018-image/image.png",
@@ -176,9 +176,9 @@
     },
     {
       "baseline": {
-        "dreamsim": 0.13975906372070312,
+        "dreamsim": 0.14094513654708862,
         "generation": 0,
-        "ssim": 0.2783321095334946
+        "ssim": 0.27580037279852715
       },
       "generation": 20,
       "path": "0020-image/image.png",
@@ -190,6 +190,6 @@
       "sha256": "5faec1e5b3990629a18485cdaf7500972e300d3eab944698e20fd6a40c65d0d4"
     }
   ],
-  "input_signature": "ad3fde4e039b68139341a2c03c65eb6e63153b2619269ffec95b6eae6b7cf786",
+  "input_signature": "7836d9d7b3ef3af98fd69be0f7aa773dc52fde8fe7c4456192770825f90d73dd",
   "schema_version": 1
 }

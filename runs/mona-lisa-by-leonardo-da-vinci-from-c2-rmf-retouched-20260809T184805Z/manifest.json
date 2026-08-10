@@ -26,9 +26,25 @@
   "schema_version": 1,
   "slug": "mona-lisa-by-leonardo-da-vinci-from-c2-rmf-retouched",
   "start": {
+    "archived_bytes": 209172,
+    "archived_dimensions": [
+      687,
+      1024
+    ],
     "archived_path": "0000/Mona_Lisa,_by_Leonardo_da_Vinci,_from_C2RMF_retouched.jpg",
+    "archived_sha256": "e00b15154183ff7707972607b64cd0866ab9f09821bd40d17854e5d23546fbe6",
     "kind": "image",
+    "original_bytes": 94310471,
+    "original_dimensions": [
+      7479,
+      11146
+    ],
     "original_path": "/Users/justin/Code/iterative_image_generation/seeds/Mona_Lisa,_by_Leonardo_da_Vinci,_from_C2RMF_retouched.jpg",
+    "resize_bounds": [
+      1024,
+      1024
+    ],
+    "resized": true,
     "sha256": "393ba286ba82c9633117314a393e0641e47cfa214af5663e2323a20af52306de"
   },
   "status": "completed",
@@ -307,5 +323,5 @@
     "wall_time_seconds": 374.118
   },
   "title": "Mona Lisa, By Leonardo Da Vinci, From C2 Rmf Retouched",
-  "updated_at": "2026-08-09T19:03:38.156021+00:00"
+  "updated_at": "2026-08-10T15:57:07.597446+00:00"
 }
