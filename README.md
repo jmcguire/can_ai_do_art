@@ -153,10 +153,13 @@ with the exact pricing assumptions and date used. Image response base64 is
 decoded to the image file; its location and checksum replace the duplicate
 base64 string in `response.json`. No API key is archived.
 
-Each run also receives a self-contained HTML gallery. It begins with the seed as
-generation 0, followed by the generated images. Open its `index.html` to flip
-through them with the buttons, thumbnails, or left and right arrow keys. The
-parent `runs/index.html` catalogs every archived run.
+Each run also receives a self-contained HTML gallery. Its front page presents
+the run title and description with thumbnails for the seed and every generated
+image. Selecting a thumbnail opens that generation with the image and its input
+and output descriptions side by side; the run title returns to the overview,
+and the left and right arrow keys move through the sequence. Run date, elapsed
+time, estimated cost, and artifact count appear in a quiet footer. The parent
+`runs/index.html` catalogs every archived run.
 
 Each step sees only the immediately preceding artifact. Earlier images,
 descriptions, and conversation state are not sent back to the model.
@@ -207,3 +210,13 @@ The test suite uses a fake provider and makes no network requests:
 ```bash
 PYTHONPATH=src python -m unittest discover -s tests -v
 ```
+
+Preview the generated archive design locally using a temporary copy of an
+existing run:
+
+```bash
+scripts/test_html_generation.sh [run-directory]
+```
+
+Then open <http://localhost:8765>. The temporary preview is removed when the
+server stops, so the archived run remains unchanged.
