@@ -1,0 +1,195 @@
+{
+  "algorithms": {
+    "dreamsim": {
+      "display_name": "DreamSim OpenCLIP ViT-B/32",
+      "kind": "perceptual_distance",
+      "lower_is_more_similar": true,
+      "model": "open_clip_vitb32",
+      "package": "dreamsim",
+      "package_version": "0.2.1",
+      "project_url": "https://github.com/ssundaram21/dreamsim"
+    },
+    "ssim": {
+      "display_name": "Structural Similarity Index",
+      "higher_is_more_similar": true,
+      "kind": "structural_similarity",
+      "package": "scikit-image",
+      "package_version": "0.26.0",
+      "preprocessing": {
+        "color_mode": "RGB",
+        "resampling": "Lanczos",
+        "resize": [
+          256,
+          256
+        ]
+      }
+    }
+  },
+  "baseline_generation": 0,
+  "generated_at": "2026-08-10T15:11:00.889465+00:00",
+  "images": [
+    {
+      "baseline": {
+        "dreamsim": 0.0,
+        "generation": 0,
+        "ssim": 1.0
+      },
+      "generation": 0,
+      "path": "0000/Mona_Lisa,_by_Leonardo_da_Vinci,_from_C2RMF_retouched.jpg",
+      "previous": null,
+      "sha256": "393ba286ba82c9633117314a393e0641e47cfa214af5663e2323a20af52306de"
+    },
+    {
+      "baseline": {
+        "dreamsim": 0.09889411926269531,
+        "generation": 0,
+        "ssim": 0.39060924265215563
+      },
+      "generation": 2,
+      "path": "0002-image/image.png",
+      "previous": {
+        "dreamsim": 0.09889411926269531,
+        "generation": 0,
+        "ssim": 0.39060924265215563
+      },
+      "sha256": "1858b5d53ec5bff6a3d376988f8906cd77042ffad83c1ef584a14689d3d01bad"
+    },
+    {
+      "baseline": {
+        "dreamsim": 0.10561704635620117,
+        "generation": 0,
+        "ssim": 0.37920290010435426
+      },
+      "generation": 4,
+      "path": "0004-image/image.png",
+      "previous": {
+        "dreamsim": 0.02401900291442871,
+        "generation": 2,
+        "ssim": 0.6616396370978657
+      },
+      "sha256": "085184f5c7a20f945203e2ee08259908fd49df2eab248a97179963eb56fe1bc3"
+    },
+    {
+      "baseline": {
+        "dreamsim": 0.10642039775848389,
+        "generation": 0,
+        "ssim": 0.34322076937405677
+      },
+      "generation": 6,
+      "path": "0006-image/image.png",
+      "previous": {
+        "dreamsim": 0.018973231315612793,
+        "generation": 4,
+        "ssim": 0.6514099645155882
+      },
+      "sha256": "550eeab81e2df785926a92ebec0e486df4c1a991033dec9f5802398e8afaee45"
+    },
+    {
+      "baseline": {
+        "dreamsim": 0.09387552738189697,
+        "generation": 0,
+        "ssim": 0.39703290560487864
+      },
+      "generation": 8,
+      "path": "0008-image/image.png",
+      "previous": {
+        "dreamsim": 0.022072911262512207,
+        "generation": 6,
+        "ssim": 0.6858719908676143
+      },
+      "sha256": "d52ee4f9cb82834cc5d60cdcf8f808c07c680cab2f302ecf8f3b96c3393d2c07"
+    },
+    {
+      "baseline": {
+        "dreamsim": 0.1104816198348999,
+        "generation": 0,
+        "ssim": 0.3380882830034359
+      },
+      "generation": 10,
+      "path": "0010-image/image.png",
+      "previous": {
+        "dreamsim": 0.017305314540863037,
+        "generation": 8,
+        "ssim": 0.6322709763098198
+      },
+      "sha256": "44a18126e57c970c3481b8fb08300f904cb1d75622b7da053dd26449a98b1532"
+    },
+    {
+      "baseline": {
+        "dreamsim": 0.11055707931518555,
+        "generation": 0,
+        "ssim": 0.32124941396185386
+      },
+      "generation": 12,
+      "path": "0012-image/image.png",
+      "previous": {
+        "dreamsim": 0.011586248874664307,
+        "generation": 10,
+        "ssim": 0.7075633818473833
+      },
+      "sha256": "7931977c47ca01fcf37d58eb847c5d8e8e07511f8fa1196e965367e00a19b09a"
+    },
+    {
+      "baseline": {
+        "dreamsim": 0.10420835018157959,
+        "generation": 0,
+        "ssim": 0.3515733505268828
+      },
+      "generation": 14,
+      "path": "0014-image/image.png",
+      "previous": {
+        "dreamsim": 0.022732138633728027,
+        "generation": 12,
+        "ssim": 0.6512683540353402
+      },
+      "sha256": "7cef11eb59eb331e29870652d81a7a5b848377cc3052b9ec39461c3bbb912a71"
+    },
+    {
+      "baseline": {
+        "dreamsim": 0.12120813131332397,
+        "generation": 0,
+        "ssim": 0.3517344127762594
+      },
+      "generation": 16,
+      "path": "0016-image/image.png",
+      "previous": {
+        "dreamsim": 0.019159018993377686,
+        "generation": 14,
+        "ssim": 0.6806448389227487
+      },
+      "sha256": "3545af62b27546ac0c729cc2bb8e676516c1dfc5d60b6ab164d3b8bc8fbe002d"
+    },
+    {
+      "baseline": {
+        "dreamsim": 0.10930800437927246,
+        "generation": 0,
+        "ssim": 0.2892477074474762
+      },
+      "generation": 18,
+      "path": "0018-image/image.png",
+      "previous": {
+        "dreamsim": 0.03210335969924927,
+        "generation": 16,
+        "ssim": 0.5962537265917192
+      },
+      "sha256": "383280492b9d2751bdd0520bec3adfc617d674f54546440364a023d4e857144b"
+    },
+    {
+      "baseline": {
+        "dreamsim": 0.13975906372070312,
+        "generation": 0,
+        "ssim": 0.2783321095334946
+      },
+      "generation": 20,
+      "path": "0020-image/image.png",
+      "previous": {
+        "dreamsim": 0.04010164737701416,
+        "generation": 18,
+        "ssim": 0.5975426659524206
+      },
+      "sha256": "5faec1e5b3990629a18485cdaf7500972e300d3eab944698e20fd6a40c65d0d4"
+    }
+  ],
+  "input_signature": "ad3fde4e039b68139341a2c03c65eb6e63153b2619269ffec95b6eae6b7cf786",
+  "schema_version": 1
+}

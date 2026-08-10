@@ -1,0 +1,195 @@
+{
+  "algorithms": {
+    "dreamsim": {
+      "display_name": "DreamSim OpenCLIP ViT-B/32",
+      "kind": "perceptual_distance",
+      "lower_is_more_similar": true,
+      "model": "open_clip_vitb32",
+      "package": "dreamsim",
+      "package_version": "0.2.1",
+      "project_url": "https://github.com/ssundaram21/dreamsim"
+    },
+    "ssim": {
+      "display_name": "Structural Similarity Index",
+      "higher_is_more_similar": true,
+      "kind": "structural_similarity",
+      "package": "scikit-image",
+      "package_version": "0.26.0",
+      "preprocessing": {
+        "color_mode": "RGB",
+        "resampling": "Lanczos",
+        "resize": [
+          256,
+          256
+        ]
+      }
+    }
+  },
+  "baseline_generation": 0,
+  "generated_at": "2026-08-10T15:10:58.323221+00:00",
+  "images": [
+    {
+      "baseline": {
+        "dreamsim": 0.0,
+        "generation": 0,
+        "ssim": 1.0
+      },
+      "generation": 0,
+      "path": "0000/dnd-2024-player-handbook-art.jpg",
+      "previous": null,
+      "sha256": "2e15ca3a073bad44741d463b7a857d0103978a1e225842c323f5b5e3e23a1f32"
+    },
+    {
+      "baseline": {
+        "dreamsim": 0.26547861099243164,
+        "generation": 0,
+        "ssim": 0.13419159584835413
+      },
+      "generation": 2,
+      "path": "0002-image/image.png",
+      "previous": {
+        "dreamsim": 0.26547861099243164,
+        "generation": 0,
+        "ssim": 0.13419159584835413
+      },
+      "sha256": "cc0df2f3b930ab7cbcbb60cf82d63283a86876bfc5a1b9bb071c93f858f11aed"
+    },
+    {
+      "baseline": {
+        "dreamsim": 0.35995280742645264,
+        "generation": 0,
+        "ssim": 0.11424908189571174
+      },
+      "generation": 4,
+      "path": "0004-image/image.png",
+      "previous": {
+        "dreamsim": 0.11077678203582764,
+        "generation": 2,
+        "ssim": 0.12548955816685284
+      },
+      "sha256": "4f78ed3a85511662b4e7863a3431cf75e9170a77169fde806dad8272726d14b1"
+    },
+    {
+      "baseline": {
+        "dreamsim": 0.39052116870880127,
+        "generation": 0,
+        "ssim": 0.11552953722696906
+      },
+      "generation": 6,
+      "path": "0006-image/image.png",
+      "previous": {
+        "dreamsim": 0.11874353885650635,
+        "generation": 4,
+        "ssim": 0.15456669896179207
+      },
+      "sha256": "2740571a097d45a0ca754f551cf2329621b10df1a69ac74852635b93fb1a7191"
+    },
+    {
+      "baseline": {
+        "dreamsim": 0.4018394947052002,
+        "generation": 0,
+        "ssim": 0.0947240703207123
+      },
+      "generation": 8,
+      "path": "0008-image/image.png",
+      "previous": {
+        "dreamsim": 0.12336099147796631,
+        "generation": 6,
+        "ssim": 0.15430006436008062
+      },
+      "sha256": "9b54f5589eeae68f8b588d33233bdabf48dca5fb6976c499f7d822e3498ec6f6"
+    },
+    {
+      "baseline": {
+        "dreamsim": 0.40062111616134644,
+        "generation": 0,
+        "ssim": 0.08089567168839606
+      },
+      "generation": 10,
+      "path": "0010-image/image.png",
+      "previous": {
+        "dreamsim": 0.06647896766662598,
+        "generation": 8,
+        "ssim": 0.16010237748401526
+      },
+      "sha256": "5036753585d812ff809a31b2e2246467170bd2418bde95048926a2b41782e25d"
+    },
+    {
+      "baseline": {
+        "dreamsim": 0.42409729957580566,
+        "generation": 0,
+        "ssim": 0.07517353699073265
+      },
+      "generation": 12,
+      "path": "0012-image/image.png",
+      "previous": {
+        "dreamsim": 0.07593458890914917,
+        "generation": 10,
+        "ssim": 0.14511918095213105
+      },
+      "sha256": "76c20b984fe0a619cc1a8a68cd29080a8bfa7d3608553a4f11a17f212ba37185"
+    },
+    {
+      "baseline": {
+        "dreamsim": 0.4137810468673706,
+        "generation": 0,
+        "ssim": 0.08514624302461131
+      },
+      "generation": 14,
+      "path": "0014-image/image.png",
+      "previous": {
+        "dreamsim": 0.07211565971374512,
+        "generation": 12,
+        "ssim": 0.14302820946674308
+      },
+      "sha256": "9ce3dbaf205638d38f2cba8c486107b5bc6970b0d08686e07a7b9712a35d571b"
+    },
+    {
+      "baseline": {
+        "dreamsim": 0.37657856941223145,
+        "generation": 0,
+        "ssim": 0.07706167461988887
+      },
+      "generation": 16,
+      "path": "0016-image/image.png",
+      "previous": {
+        "dreamsim": 0.052384138107299805,
+        "generation": 14,
+        "ssim": 0.1524779503822643
+      },
+      "sha256": "0de7e55c92d19b04e719378d3593e3155323fd50669d223d69e5f5d7728c9bcb"
+    },
+    {
+      "baseline": {
+        "dreamsim": 0.4238058924674988,
+        "generation": 0,
+        "ssim": 0.06752063830048406
+      },
+      "generation": 18,
+      "path": "0018-image/image.png",
+      "previous": {
+        "dreamsim": 0.0786544680595398,
+        "generation": 16,
+        "ssim": 0.1659877590930201
+      },
+      "sha256": "cb12e456dc5d3adc9f9962cacc328af9448d826e4460b9d8a4c3acb3ce5ee97e"
+    },
+    {
+      "baseline": {
+        "dreamsim": 0.44168949127197266,
+        "generation": 0,
+        "ssim": 0.06800210808570979
+      },
+      "generation": 20,
+      "path": "0020-image/image.png",
+      "previous": {
+        "dreamsim": 0.05217224359512329,
+        "generation": 18,
+        "ssim": 0.1422992761813678
+      },
+      "sha256": "05747013f878b93f6dfe72d41812214b8d32a6dd438eb469eaa9b65758d32113"
+    }
+  ],
+  "input_signature": "be1ed8a311fcab2baff58f7227beb71cdc1884751f3790d014e09de6e65bf7f3",
+  "schema_version": 1
+}

@@ -1,0 +1,45 @@
+{
+  "algorithms": {
+    "dreamsim": {
+      "display_name": "DreamSim OpenCLIP ViT-B/32",
+      "kind": "perceptual_distance",
+      "lower_is_more_similar": true,
+      "model": "open_clip_vitb32",
+      "package": "dreamsim",
+      "package_version": "0.2.1",
+      "project_url": "https://github.com/ssundaram21/dreamsim"
+    },
+    "ssim": {
+      "display_name": "Structural Similarity Index",
+      "higher_is_more_similar": true,
+      "kind": "structural_similarity",
+      "package": "scikit-image",
+      "package_version": "0.26.0",
+      "preprocessing": {
+        "color_mode": "RGB",
+        "resampling": "Lanczos",
+        "resize": [
+          256,
+          256
+        ]
+      }
+    }
+  },
+  "baseline_generation": 1,
+  "generated_at": "2026-08-10T15:10:56.715686+00:00",
+  "images": [
+    {
+      "baseline": {
+        "dreamsim": 0.0,
+        "generation": 1,
+        "ssim": 1.0
+      },
+      "generation": 1,
+      "path": "0001-image/image.png",
+      "previous": null,
+      "sha256": "3e9d5997d80ff299fb460521daec6a10d868482d3de4050c9adfb6e63f9fac14"
+    }
+  ],
+  "input_signature": "aef007b8bcedc752e28a70d18c4680dd0a64a63392ae63b2c06b24c7192bcdb2",
+  "schema_version": 1
+}

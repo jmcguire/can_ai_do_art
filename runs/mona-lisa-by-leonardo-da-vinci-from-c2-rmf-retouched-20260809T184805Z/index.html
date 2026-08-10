@@ -29,6 +29,8 @@
     .text-thumb { display:grid; place-items:center; aspect-ratio:1; padding:15%; background:#f7f6f1; color:#4d4942; text-align:center; font:clamp(.75rem,2vw,1rem)/1.35 Georgia,serif; overflow:hidden; }
     .thumb-label { display:flex; justify-content:space-between; gap:8px; margin-top:8px; font-size:10px; color:#5d5952; }
     .thumb-label strong { color:#25231f; font-weight:400; }
+    .object-record { width:min(760px,100%); margin:15px auto 0; display:flex; justify-content:center; flex-wrap:wrap; gap:3px 8px; color:#87827a; font:10px/1.4 Arial,sans-serif; }
+    .object-record strong { color:#77726a; font-weight:400; }
     .work { width:min(1020px,calc(100% - 72px)); margin:auto; padding:40px 0 46px; }
     .object-heading { text-align:center; margin-bottom:22px; }
     .object-heading h1 { margin:6px 0 0; font:400 21px/1.2 Georgia,serif; }
@@ -44,6 +46,31 @@
     .work-nav { margin-top:19px; display:flex; justify-content:center; align-items:center; gap:22px; font-size:11px; }
     .work-nav a { padding:4px; }
     .work-nav .disabled { color:#8b867e; text-decoration:none; }
+    .drift-study { width:min(948px,calc(100% - 72px)); margin:0 auto 42px; padding-top:22px; border-top:1px solid #aaa69d; }
+    .study-heading { display:flex; justify-content:space-between; align-items:flex-start; gap:20px; margin-bottom:10px; }
+    .study-heading h2 { margin:5px 0 0; font:400 20px/1.2 Georgia,serif; }
+    .legend { display:flex; flex-wrap:wrap; gap:17px; color:#5f5a53; font-size:11px; }
+    .legend span { display:flex; align-items:center; gap:6px; }
+    .legend i { width:24px; border-top:2px solid #2f5452; }
+    .legend .baseline i { border-color:#92643d; border-top-style:dashed; }
+    .chart-wrap { position:relative; width:100%; }
+    .chart-wrap svg { display:block; width:100%; height:auto; }
+    .chart-frame { fill:#f7f6f1; stroke:#aaa69d; }
+    .chart-grid { stroke:#cbc7be; stroke-width:1; }
+    .chart-axis { fill:#5f5a53; font:10px Arial,sans-serif; }
+    .chart-title { fill:#4d4942; font:11px Arial,sans-serif; }
+    .chart-previous { fill:none; stroke:#2f5452; stroke-width:2.25; }
+    .chart-baseline { fill:none; stroke:#92643d; stroke-width:2.25; stroke-dasharray:6 5; }
+    .chart-point-previous { fill:#f7f6f1; stroke:#2f5452; stroke-width:2; }
+    .chart-point-baseline { fill:#f7f6f1; stroke:#92643d; stroke-width:2; }
+    .chart-hover-hit { fill:transparent; cursor:crosshair; }
+    .chart-guide { display:none; stroke:#6f6a62; stroke-width:1; }
+    .chart-hover-marker { display:none; }
+    .chart-tooltip { display:none; position:absolute; pointer-events:none; background:#fff; border:1px solid #aaa69d; padding:8px 10px; color:#25231f; box-shadow:0 2px 5px rgba(35,30,22,.08); font:11px/1.45 Arial,sans-serif; }
+    .chart-tooltip strong { display:block; font-weight:400; margin-bottom:3px; }
+    details.method { margin-top:12px; border-top:1px solid #cbc7be; padding-top:9px; color:#57534c; font:11px/1.55 Georgia,serif; }
+    details.method summary { width:max-content; cursor:pointer; color:#25231f; font-family:Arial,sans-serif; text-decoration:underline; text-underline-offset:3px; }
+    details.method p { max-width:720px; margin:9px 0 0; }
     .run-footer { background:#dedbd4; border-top:1px solid #b6b2a9; }
     .run-footer-inner { width:min(1020px,calc(100% - 72px)); margin:auto; padding:25px 0 29px; display:grid; grid-template-columns:minmax(270px,1.35fr) minmax(380px,1fr); gap:48px; }
     .run-index .run-footer-inner { display:block; }
@@ -73,9 +100,11 @@
       .runs { grid-template-columns:repeat(2,minmax(0,1fr)); }
       .run-footer-inner { grid-template-columns:1fr; gap:22px; }
       .run-index .run-facts { grid-template-columns:repeat(2,1fr); }
+      .study-heading { display:block; }
+      .legend { margin-top:10px; }
     }
     @media (max-width:560px) {
-      .site-header,.run-hero,.sequence,.work,.run-footer-inner,.archive { width:calc(100% - 40px); }
+      .site-header,.run-hero,.sequence,.work,.run-footer-inner,.archive,.drift-study { width:calc(100% - 40px); }
       .site-header { align-items:flex-start; }
       .run-hero { padding-top:40px; }
       .thumbs { grid-template-columns:repeat(2,1fr); gap:22px 14px; }
@@ -94,7 +123,30 @@
 <section class="run-index active" id="run-index">
   <header class="site-header"><a class="run-link" href="#run-index" aria-current="page">Mona Lisa, By Leonardo Da Vinci, From C2 Rmf Retouched</a><a class="collection-link" href="../">Roomtone Study Collection</a></header>
   <div class="run-hero"><div class="eyebrow">Roomtone run</div><h1>Mona Lisa, By Leonardo Da Vinci, From C2 Rmf Retouched</h1><p>A vertically oriented Renaissance oil portrait of a seated young woman shown from the waist up in three-quarter view, her torso angled slightly left while her face turns toward the viewer. She has pale golden skin, a high smooth forehead, softly arched nearly invisible eyebrows, half-lidded brown eyes, a long straight nose, and a subtle closed-mouth smile.</p></div>
-  <main class="sequence"><header class="sequence-head"><span>The complete image sequence</span><span>11 images · 11 views including seed</span></header><div class="thumbs"><a class="thumb" href="#generation-0"><div class="thumb-frame"><img src="0000/Mona_Lisa,_by_Leonardo_da_Vinci,_from_C2RMF_retouched.jpg" alt=""></div><span class="thumb-label"><strong>Generation 0</strong><span>Image</span></span></a><a class="thumb" href="#generation-2"><div class="thumb-frame"><img src="0002-image/image.png" alt=""></div><span class="thumb-label"><strong>Generation 2</strong><span>Image</span></span></a><a class="thumb" href="#generation-4"><div class="thumb-frame"><img src="0004-image/image.png" alt=""></div><span class="thumb-label"><strong>Generation 4</strong><span>Image</span></span></a><a class="thumb" href="#generation-6"><div class="thumb-frame"><img src="0006-image/image.png" alt=""></div><span class="thumb-label"><strong>Generation 6</strong><span>Image</span></span></a><a class="thumb" href="#generation-8"><div class="thumb-frame"><img src="0008-image/image.png" alt=""></div><span class="thumb-label"><strong>Generation 8</strong><span>Image</span></span></a><a class="thumb" href="#generation-10"><div class="thumb-frame"><img src="0010-image/image.png" alt=""></div><span class="thumb-label"><strong>Generation 10</strong><span>Image</span></span></a><a class="thumb" href="#generation-12"><div class="thumb-frame"><img src="0012-image/image.png" alt=""></div><span class="thumb-label"><strong>Generation 12</strong><span>Image</span></span></a><a class="thumb" href="#generation-14"><div class="thumb-frame"><img src="0014-image/image.png" alt=""></div><span class="thumb-label"><strong>Generation 14</strong><span>Image</span></span></a><a class="thumb" href="#generation-16"><div class="thumb-frame"><img src="0016-image/image.png" alt=""></div><span class="thumb-label"><strong>Generation 16</strong><span>Image</span></span></a><a class="thumb" href="#generation-18"><div class="thumb-frame"><img src="0018-image/image.png" alt=""></div><span class="thumb-label"><strong>Generation 18</strong><span>Image</span></span></a><a class="thumb" href="#generation-20"><div class="thumb-frame"><img src="0020-image/image.png" alt=""></div><span class="thumb-label"><strong>Generation 20</strong><span>Image</span></span></a></div></main>
+  <main class="sequence"><header class="sequence-head"><span>The complete image sequence</span><span>11 images · 11 views including seed</span></header><div class="thumbs"><a class="thumb" href="#generation-0"><div class="thumb-frame"><img src="0000/Mona_Lisa,_by_Leonardo_da_Vinci,_from_C2RMF_retouched.jpg" alt=""></div><span class="thumb-label"><strong>Generation 0</strong><span>Baseline</span></span></a><a class="thumb" href="#generation-2"><div class="thumb-frame"><img src="0002-image/image.png" alt=""></div><span class="thumb-label"><strong>Generation 2</strong><span>0.099 drift</span></span></a><a class="thumb" href="#generation-4"><div class="thumb-frame"><img src="0004-image/image.png" alt=""></div><span class="thumb-label"><strong>Generation 4</strong><span>0.024 drift</span></span></a><a class="thumb" href="#generation-6"><div class="thumb-frame"><img src="0006-image/image.png" alt=""></div><span class="thumb-label"><strong>Generation 6</strong><span>0.019 drift</span></span></a><a class="thumb" href="#generation-8"><div class="thumb-frame"><img src="0008-image/image.png" alt=""></div><span class="thumb-label"><strong>Generation 8</strong><span>0.022 drift</span></span></a><a class="thumb" href="#generation-10"><div class="thumb-frame"><img src="0010-image/image.png" alt=""></div><span class="thumb-label"><strong>Generation 10</strong><span>0.017 drift</span></span></a><a class="thumb" href="#generation-12"><div class="thumb-frame"><img src="0012-image/image.png" alt=""></div><span class="thumb-label"><strong>Generation 12</strong><span>0.012 drift</span></span></a><a class="thumb" href="#generation-14"><div class="thumb-frame"><img src="0014-image/image.png" alt=""></div><span class="thumb-label"><strong>Generation 14</strong><span>0.023 drift</span></span></a><a class="thumb" href="#generation-16"><div class="thumb-frame"><img src="0016-image/image.png" alt=""></div><span class="thumb-label"><strong>Generation 16</strong><span>0.019 drift</span></span></a><a class="thumb" href="#generation-18"><div class="thumb-frame"><img src="0018-image/image.png" alt=""></div><span class="thumb-label"><strong>Generation 18</strong><span>0.032 drift</span></span></a><a class="thumb" href="#generation-20"><div class="thumb-frame"><img src="0020-image/image.png" alt=""></div><span class="thumb-label"><strong>Generation 20</strong><span>0.040 drift</span></span></a></div></main>
+
+<section class="drift-study" aria-labelledby="drift-chart-title">
+  <header class="study-heading"><div><div class="eyebrow">Image analysis</div><h2 id="drift-chart-title">Visual drift across the run</h2></div><div class="legend"><span><i></i>From previous image</span><span class="baseline"><i></i>From baseline</span></div></header>
+  <div class="chart-wrap">
+    <svg viewBox="0 0 900 250" role="img" aria-labelledby="drift-chart-title drift-chart-description">
+      <desc id="drift-chart-description">DreamSim raw distance for each image compared with the previous image and the first image in this run.</desc>
+      <rect class="chart-frame" x="60.00" y="18.00" width="818.00" height="190.00"></rect>
+      <line class="chart-grid" x1="60.00" y1="208.00" x2="878.00" y2="208.00"></line><text class="chart-axis" x="52.00" y="211.00" text-anchor="end">0.00</text><line class="chart-grid" x1="60.00" y1="160.50" x2="878.00" y2="160.50"></line><text class="chart-axis" x="52.00" y="163.50" text-anchor="end">0.04</text><line class="chart-grid" x1="60.00" y1="113.00" x2="878.00" y2="113.00"></line><text class="chart-axis" x="52.00" y="116.00" text-anchor="end">0.08</text><line class="chart-grid" x1="60.00" y1="65.50" x2="878.00" y2="65.50"></line><text class="chart-axis" x="52.00" y="68.50" text-anchor="end">0.12</text><line class="chart-grid" x1="60.00" y1="18.00" x2="878.00" y2="18.00"></line><text class="chart-axis" x="52.00" y="21.00" text-anchor="end">0.15</text>
+      <text class="chart-title" transform="translate(15 150) rotate(-90)" text-anchor="middle">DreamSim raw distance</text>
+      <text class="chart-title" x="469.00" y="248.00" text-anchor="middle">Generation</text>
+      <text class="chart-axis" x="60.00" y="232.00" text-anchor="middle">0</text><text class="chart-axis" x="223.60" y="232.00" text-anchor="middle">4</text><text class="chart-axis" x="387.20" y="232.00" text-anchor="middle">8</text><text class="chart-axis" x="550.80" y="232.00" text-anchor="middle">12</text><text class="chart-axis" x="714.40" y="232.00" text-anchor="middle">16</text><text class="chart-axis" x="878.00" y="232.00" text-anchor="middle">20</text>
+      <path class="chart-previous" d="M141.80,85.78 L223.60,178.32 L305.40,184.55 L387.20,180.72 L469.00,186.61 L550.80,193.68 L632.60,179.91 L714.40,184.32 L796.20,168.32 L878.00,158.44"></path>
+      <path class="chart-baseline" d="M60.00,208.00 L141.80,85.78 L223.60,77.47 L305.40,76.48 L387.20,91.98 L469.00,71.46 L550.80,71.36 L632.60,79.21 L714.40,58.20 L796.20,72.91 L878.00,35.27"></path>
+      <circle class="chart-point-previous" cx="141.80" cy="85.78" r="3.5"></circle><circle class="chart-point-previous" cx="223.60" cy="178.32" r="3.5"></circle><circle class="chart-point-previous" cx="305.40" cy="184.55" r="3.5"></circle><circle class="chart-point-previous" cx="387.20" cy="180.72" r="3.5"></circle><circle class="chart-point-previous" cx="469.00" cy="186.61" r="3.5"></circle><circle class="chart-point-previous" cx="550.80" cy="193.68" r="3.5"></circle><circle class="chart-point-previous" cx="632.60" cy="179.91" r="3.5"></circle><circle class="chart-point-previous" cx="714.40" cy="184.32" r="3.5"></circle><circle class="chart-point-previous" cx="796.20" cy="168.32" r="3.5"></circle><circle class="chart-point-previous" cx="878.00" cy="158.44" r="3.5"></circle><circle class="chart-point-baseline" cx="60.00" cy="208.00" r="3.5"></circle><circle class="chart-point-baseline" cx="141.80" cy="85.78" r="3.5"></circle><circle class="chart-point-baseline" cx="223.60" cy="77.47" r="3.5"></circle><circle class="chart-point-baseline" cx="305.40" cy="76.48" r="3.5"></circle><circle class="chart-point-baseline" cx="387.20" cy="91.98" r="3.5"></circle><circle class="chart-point-baseline" cx="469.00" cy="71.46" r="3.5"></circle><circle class="chart-point-baseline" cx="550.80" cy="71.36" r="3.5"></circle><circle class="chart-point-baseline" cx="632.60" cy="79.21" r="3.5"></circle><circle class="chart-point-baseline" cx="714.40" cy="58.20" r="3.5"></circle><circle class="chart-point-baseline" cx="796.20" cy="72.91" r="3.5"></circle><circle class="chart-point-baseline" cx="878.00" cy="35.27" r="3.5"></circle>
+      <line class="chart-guide" x1="0" y1="18.00" x2="0" y2="208.00"></line>
+      <circle class="chart-hover-marker chart-point-previous" r="5"></circle>
+      <circle class="chart-hover-marker chart-point-baseline" r="5"></circle>
+      <rect class="chart-hover-hit" x="60.00" y="18.00" width="40.90" height="190.00" data-x="60.00" data-generation="0" data-previous="" data-previous-y="" data-baseline="0.000000" data-baseline-y="208.00"></rect><rect class="chart-hover-hit" x="100.90" y="18.00" width="81.80" height="190.00" data-x="141.80" data-generation="2" data-previous="0.098894" data-previous-y="85.78" data-baseline="0.098894" data-baseline-y="85.78"></rect><rect class="chart-hover-hit" x="182.70" y="18.00" width="81.80" height="190.00" data-x="223.60" data-generation="4" data-previous="0.024019" data-previous-y="178.32" data-baseline="0.105617" data-baseline-y="77.47"></rect><rect class="chart-hover-hit" x="264.50" y="18.00" width="81.80" height="190.00" data-x="305.40" data-generation="6" data-previous="0.018973" data-previous-y="184.55" data-baseline="0.106420" data-baseline-y="76.48"></rect><rect class="chart-hover-hit" x="346.30" y="18.00" width="81.80" height="190.00" data-x="387.20" data-generation="8" data-previous="0.022073" data-previous-y="180.72" data-baseline="0.093876" data-baseline-y="91.98"></rect><rect class="chart-hover-hit" x="428.10" y="18.00" width="81.80" height="190.00" data-x="469.00" data-generation="10" data-previous="0.017305" data-previous-y="186.61" data-baseline="0.110482" data-baseline-y="71.46"></rect><rect class="chart-hover-hit" x="509.90" y="18.00" width="81.80" height="190.00" data-x="550.80" data-generation="12" data-previous="0.011586" data-previous-y="193.68" data-baseline="0.110557" data-baseline-y="71.36"></rect><rect class="chart-hover-hit" x="591.70" y="18.00" width="81.80" height="190.00" data-x="632.60" data-generation="14" data-previous="0.022732" data-previous-y="179.91" data-baseline="0.104208" data-baseline-y="79.21"></rect><rect class="chart-hover-hit" x="673.50" y="18.00" width="81.80" height="190.00" data-x="714.40" data-generation="16" data-previous="0.019159" data-previous-y="184.32" data-baseline="0.121208" data-baseline-y="58.20"></rect><rect class="chart-hover-hit" x="755.30" y="18.00" width="81.80" height="190.00" data-x="796.20" data-generation="18" data-previous="0.032103" data-previous-y="168.32" data-baseline="0.109308" data-baseline-y="72.91"></rect><rect class="chart-hover-hit" x="837.10" y="18.00" width="40.90" height="190.00" data-x="878.00" data-generation="20" data-previous="0.040102" data-previous-y="158.44" data-baseline="0.139759" data-baseline-y="35.27"></rect>
+    </svg>
+    <div class="chart-tooltip" role="tooltip"></div>
+  </div>
+  <details class="method"><summary>How visual drift is measured</summary><p>These values compare images only; generated and source text are not included. The displayed raw distance uses the single-branch <a href="https://github.com/ssundaram21/dreamsim">DreamSim</a> OpenCLIP ViT-B/32 model. DreamSim compares learned visual features that reflect both overall meaning and lower-level appearance, producing a smaller distance when two images look more alike.</p></details>
+</section>
   <footer class="run-footer"><div class="run-footer-inner"><dl class="run-facts">
   <div><dt>Date</dt><dd>August 09, 2026</dd></div>
   <div><dt>Estimated cost</dt><dd>$0.2718</dd></div>
@@ -108,6 +160,7 @@
   <main class="work">
     <header class="object-heading"><div class="eyebrow">Image</div><h1>Generation 0 of 20</h1></header>
     <div class="frame"><img src="0000/Mona_Lisa,_by_Leonardo_da_Vinci,_from_C2RMF_retouched.jpg" alt="Generation 0"></div>
+
     <section class="comparison" aria-label="Text before and after this artifact"><article class="text-record"><h2>Text that produced this image</h2><p>This is the original image seed; no text produced it.</p></article><article class="text-record"><h2>Text produced from this image</h2><p>A vertically oriented Renaissance oil portrait of a seated young woman shown from the waist up in three-quarter view, her torso angled slightly left while her face turns toward the viewer. She has pale golden skin, a high smooth forehead, softly arched nearly invisible eyebrows, half-lidded brown eyes, a long straight nose, and a subtle closed-mouth smile. Her dark brown hair is center-parted and falls in long, smooth waves past her shoulders.
 
 She wears a dark brown-black gown with a low, softly rounded neckline, fine gold embroidery along the bodice, warm brown gathered sleeves, and a muted olive-brown translucent shawl draped diagonally over her right shoulder. Her forearms rest calmly on the arm of a chair or ledge at the bottom of the composition. Her right hand lies gently over her left wrist, with long relaxed fingers; the left hand is partially visible beneath.
@@ -127,6 +180,7 @@ Behind her is a hazy, imaginary landscape viewed from an elevated position: wind
   <main class="work">
     <header class="object-heading"><div class="eyebrow">Image</div><h1>Generation 2 of 20</h1></header>
     <div class="frame"><img src="0002-image/image.png" alt="Generation 2"></div>
+<div class="object-record"><span>Visual drift:</span><strong>0.099 from previous image</strong><span>·</span><strong>0.099 from baseline</strong></div>
     <section class="comparison" aria-label="Text before and after this artifact"><article class="text-record"><h2>Text that produced this image</h2><p>A vertically oriented Renaissance oil portrait of a seated young woman shown from the waist up in three-quarter view, her torso angled slightly left while her face turns toward the viewer. She has pale golden skin, a high smooth forehead, softly arched nearly invisible eyebrows, half-lidded brown eyes, a long straight nose, and a subtle closed-mouth smile. Her dark brown hair is center-parted and falls in long, smooth waves past her shoulders.
 
 She wears a dark brown-black gown with a low, softly rounded neckline, fine gold embroidery along the bodice, warm brown gathered sleeves, and a muted olive-brown translucent shawl draped diagonally over her right shoulder. Her forearms rest calmly on the arm of a chair or ledge at the bottom of the composition. Her right hand lies gently over her left wrist, with long relaxed fingers; the left hand is partially visible beneath.
@@ -152,6 +206,7 @@ Lighting is soft and diffuse, illuminating the face, neck, chest, and hands with
   <main class="work">
     <header class="object-heading"><div class="eyebrow">Image</div><h1>Generation 4 of 20</h1></header>
     <div class="frame"><img src="0004-image/image.png" alt="Generation 4"></div>
+<div class="object-record"><span>Visual drift:</span><strong>0.024 from previous image</strong><span>·</span><strong>0.106 from baseline</strong></div>
     <section class="comparison" aria-label="Text before and after this artifact"><article class="text-record"><h2>Text that produced this image</h2><p>A square-format Renaissance oil portrait of a seated young woman shown from the waist up, centered against a distant mountainous landscape. She is turned slightly three-quarters toward the viewer’s left while looking directly outward with a calm, faintly enigmatic smile. Her face is softly modeled, with a high forehead, arched brows, almond-shaped brown eyes, a long straight nose, and softly closed lips. Long dark brown hair, center-parted and mostly covered by a translucent dark veil, falls around her shoulders in subtle waves.
 
 She wears a dark brown-black gown with a low, gently curved neckline edged in intricate gold embroidery. A heavy dark mantle drapes diagonally over her right shoulder and across her torso. The sleeves are warm brown with muted golden highlights and fine gathered folds. Her forearms rest on the arm of a dark chair or ledge at the bottom; one hand lies gracefully over the other, with long relaxed fingers.
@@ -177,6 +232,7 @@ Behind her is an atmospheric, fantastical landscape of winding roads and waterwa
   <main class="work">
     <header class="object-heading"><div class="eyebrow">Image</div><h1>Generation 6 of 20</h1></header>
     <div class="frame"><img src="0006-image/image.png" alt="Generation 6"></div>
+<div class="object-record"><span>Visual drift:</span><strong>0.019 from previous image</strong><span>·</span><strong>0.106 from baseline</strong></div>
     <section class="comparison" aria-label="Text before and after this artifact"><article class="text-record"><h2>Text that produced this image</h2><p>A square-format Renaissance oil portrait of a seated young woman shown from the waist up, centered against a distant landscape. Her body is turned slightly toward the viewer’s right while her face looks directly outward with a restrained, enigmatic half-smile. She has a broad smooth forehead, softly arched brows, almond-shaped brown eyes, a long straight nose, and warm golden-olive skin. Dark brown, center-parted hair falls in long subtle waves on both sides of her face and merges into a nearly black translucent veil.
 
 She wears a dark, low square-necked gown with fine gold embroidery along the neckline and warm brown-gold patterned sleeves. A heavy black drape crosses over her left shoulder. Her forearms rest on a dark ledge at the bottom of the composition; one hand lies gently across the opposite wrist and forearm, with elongated relaxed fingers.
@@ -200,6 +256,7 @@ Behind her is an expansive imaginary landscape viewed from above: winding ochre 
   <main class="work">
     <header class="object-heading"><div class="eyebrow">Image</div><h1>Generation 8 of 20</h1></header>
     <div class="frame"><img src="0008-image/image.png" alt="Generation 8"></div>
+<div class="object-record"><span>Visual drift:</span><strong>0.022 from previous image</strong><span>·</span><strong>0.094 from baseline</strong></div>
     <section class="comparison" aria-label="Text before and after this artifact"><article class="text-record"><h2>Text that produced this image</h2><p>Square-format Renaissance oil portrait of a seated young woman shown from the waist up, centered and turned slightly toward the viewer’s left while looking directly outward. She has a softly rounded face, pale golden-olive skin, a high forehead with nearly invisible eyebrows, almond-shaped brown eyes, a long straight nose, and a subtle closed-mouth smile. Her dark brown hair is center-parted, smooth over the crown, and falls in long, slightly wavy strands over both shoulders.
 
 She wears a very dark brown-black Renaissance gown with a low square neckline, delicate gold embroidery along the bodice edge, and warm brown sleeves decorated with fine gold linear patterns. A dark translucent shawl drapes over her left shoulder and across her torso. Her forearms rest on a dark horizontal ledge at the bottom; her right hand lies gently over her left wrist, with elongated relaxed fingers.
@@ -225,6 +282,7 @@ The image has aged oil-paint texture throughout, including fine craquelure, worn
   <main class="work">
     <header class="object-heading"><div class="eyebrow">Image</div><h1>Generation 10 of 20</h1></header>
     <div class="frame"><img src="0010-image/image.png" alt="Generation 10"></div>
+<div class="object-record"><span>Visual drift:</span><strong>0.017 from previous image</strong><span>·</span><strong>0.110 from baseline</strong></div>
     <section class="comparison" aria-label="Text before and after this artifact"><article class="text-record"><h2>Text that produced this image</h2><p>A square-format Renaissance-style oil portrait of a seated young woman, shown from the waist up in a three-quarter pose behind a dark stone parapet. She occupies the center foreground, with her torso angled slightly to the viewer’s right while her face turns toward the viewer. Her expression is calm and enigmatic, with a faint closed-mouth smile, softly modeled cheeks, almond-shaped brown eyes, a straight nose, and nearly invisible eyebrows. Her pale golden-olive skin is illuminated by warm, diffuse light.
 
 Her long, dark brown hair is center-parted, smooth over the crown, and falls in loose subtle waves along both sides of her face and shoulders. She wears a dark brown-black Renaissance gown with a low square neckline edged in delicate gold embroidery. A heavy dark mantle drapes over her shoulders in broad folds. The sleeves are deep brown with warm ochre-gold highlights and intricate folded or stitched patterns. Her hands rest gracefully crossed at the bottom center: one forearm lies horizontally while the upper hand extends diagonally across it, with long relaxed fingers.
@@ -250,6 +308,7 @@ Behind her is an expansive blue-green and ochre landscape with winding roads or 
   <main class="work">
     <header class="object-heading"><div class="eyebrow">Image</div><h1>Generation 12 of 20</h1></header>
     <div class="frame"><img src="0012-image/image.png" alt="Generation 12"></div>
+<div class="object-record"><span>Visual drift:</span><strong>0.012 from previous image</strong><span>·</span><strong>0.111 from baseline</strong></div>
     <section class="comparison" aria-label="Text before and after this artifact"><article class="text-record"><h2>Text that produced this image</h2><p>A square-format Renaissance oil portrait of a seated young woman shown from the waist up, centered against a distant atmospheric landscape. She is turned slightly toward the viewer’s left while facing forward, with calm brown eyes, a faint enigmatic smile, softly modeled cheeks, no visible eyebrows, and a warm golden-olive complexion. Her long dark brown hair is center-parted, smooth over the crown, and falls in loose subtle curls around her shoulders.
 
 She wears a nearly black, low square-necked gown with fine gold embroidery along the neckline and gathered bodice, plus brown-gold patterned sleeves. A heavy dark mantle drapes over her left shoulder and across her torso, edged with delicate gold ornament. Her forearms rest on a dark stone ledge at the bottom; one hand lies gently across the opposite wrist, with long relaxed fingers.
@@ -275,6 +334,7 @@ The lighting is soft and directional, warmly illuminating the face, chest, and h
   <main class="work">
     <header class="object-heading"><div class="eyebrow">Image</div><h1>Generation 14 of 20</h1></header>
     <div class="frame"><img src="0014-image/image.png" alt="Generation 14"></div>
+<div class="object-record"><span>Visual drift:</span><strong>0.023 from previous image</strong><span>·</span><strong>0.104 from baseline</strong></div>
     <section class="comparison" aria-label="Text before and after this artifact"><article class="text-record"><h2>Text that produced this image</h2><p>A square-format Renaissance oil portrait closely resembling the Mona Lisa. A seated adult woman is shown from the waist up in a three-quarter pose, centered against a distant atmospheric landscape. Her torso turns slightly toward the viewer’s right while her face looks directly outward. She has pale golden-olive skin, an oval face, softly modeled cheeks, narrow brown eyes, an elongated straight nose, thin brows, and a subtle closed-mouth smile. Long, dark brown, center-parted hair falls in loose waves over both shoulders.
 
 She wears a nearly black, low square-necked Renaissance gown with fine vertical pleating and narrow gold embroidered trim around the neckline. A dark mantle drapes diagonally over her right shoulder and across her torso. The sleeves are deep reddish brown with warm ochre-gold highlights and decorative curved stitching. Her forearms rest on a dark stone or wooden ledge at the bottom of the image; one hand lies gracefully across the opposite wrist, with long relaxed fingers, while the lower hand rests along the ledge.
@@ -302,6 +362,7 @@ The entire image has the appearance of a centuries-old oil painting on wood: fin
   <main class="work">
     <header class="object-heading"><div class="eyebrow">Image</div><h1>Generation 16 of 20</h1></header>
     <div class="frame"><img src="0016-image/image.png" alt="Generation 16"></div>
+<div class="object-record"><span>Visual drift:</span><strong>0.019 from previous image</strong><span>·</span><strong>0.121 from baseline</strong></div>
     <section class="comparison" aria-label="Text before and after this artifact"><article class="text-record"><h2>Text that produced this image</h2><p>A square-format Renaissance oil portrait closely resembling Leonardo da Vinci’s Mona Lisa. A seated woman is shown from the waist up in a three-quarter pose, centered against a distant mountainous landscape. Her torso angles slightly to the viewer’s right while her face turns forward, meeting the viewer with a calm, faintly enigmatic smile. She has pale warm-ochre skin, softly modeled features, dark almond-shaped eyes, no visible eyebrows, and long dark brown hair parted at the center and falling loosely over both shoulders.
 
 She wears a nearly black, low square-necked Renaissance gown with subtle gathered pleats and narrow gold embroidery along the neckline. A heavy dark mantle drapes diagonally across her right shoulder and chest. Her sleeves are muted reddish brown with fine gold linear ornament. Her forearms rest on a dark ledge at the bottom; one hand lies gracefully over the opposite wrist and hand, with long relaxed fingers.
@@ -327,6 +388,7 @@ Behind her is an atmospheric, fantastical landscape in muted olive green, brown,
   <main class="work">
     <header class="object-heading"><div class="eyebrow">Image</div><h1>Generation 18 of 20</h1></header>
     <div class="frame"><img src="0018-image/image.png" alt="Generation 18"></div>
+<div class="object-record"><span>Visual drift:</span><strong>0.032 from previous image</strong><span>·</span><strong>0.109 from baseline</strong></div>
     <section class="comparison" aria-label="Text before and after this artifact"><article class="text-record"><h2>Text that produced this image</h2><p>A square-format Renaissance-style oil portrait of a seated young woman, shown from the waist up in a three-quarter pose against a distant landscape. She occupies the center, facing slightly toward the viewer’s left while looking directly outward with a calm, restrained expression and a subtle closed-mouth smile. Her oval face has softly modeled warm golden skin, a high forehead, thin arched brows, almond-shaped brown eyes, a long straight nose, and rounded cheeks. Dark brown, center-parted hair falls smoothly past her shoulders and blends into the shadows.
 
 She wears a nearly black, low square-necked gown with fine vertical pleating and a dark draped mantle crossing over her right shoulder. The sleeves are deep reddish brown, decorated near the wrists with delicate curved gold embroidery. Her forearms rest on a dark wooden ledge at the bottom of the composition; one hand lies gently over the opposite wrist, with long relaxed fingers crossing at center.
@@ -352,6 +414,7 @@ The entire image has a dark amber-brown patina, dense fine craquelure across the
   <main class="work">
     <header class="object-heading"><div class="eyebrow">Image</div><h1>Generation 20 of 20</h1></header>
     <div class="frame"><img src="0020-image/image.png" alt="Generation 20"></div>
+<div class="object-record"><span>Visual drift:</span><strong>0.040 from previous image</strong><span>·</span><strong>0.140 from baseline</strong></div>
     <section class="comparison" aria-label="Text before and after this artifact"><article class="text-record"><h2>Text that produced this image</h2><p>A square, aged Renaissance-style oil portrait of a seated young woman shown from the waist up in three-quarter view, her torso angled slightly right while her face turns toward the viewer. She has pale golden-olive skin, an oval face, softly arched brows, almond-shaped brown eyes, a long straight nose, and a subtle closed-mouth smile. Her dark brown hair is center-parted, smooth over the crown, and falls in long loose waves around her shoulders.
 
 She wears a nearly black, low square-necked dress with fine vertical pleating and narrow gold trim along the neckline. A dark green-black draped mantle crosses her right shoulder. Deep burgundy sleeves emerge beneath the dark outer garment, decorated with thin curving gold embroidery. Her forearms rest on a dark horizontal ledge at the bottom of the image; one hand lies gracefully across the opposite wrist, with long relaxed fingers, while the lower hand is partly visible beneath.
@@ -373,6 +436,18 @@ The entire image has a dark amber-brown patina, dense fine craquelure across the
   const runIndex=document.querySelector('.run-index'), pages=[...document.querySelectorAll('.generation-page')];
   const show=()=>{const match=location.hash.match(/^#generation-(\d+)$/), target=match&&document.querySelector(location.hash); runIndex.classList.toggle('active',!target); pages.forEach(page=>page.classList.toggle('active',page===target)); window.scrollTo(0,0);};
   window.addEventListener('hashchange',show); document.addEventListener('keydown',event=>{const active=document.querySelector('.generation-page.active'); if(!active)return; const target=active.querySelector(event.key==='ArrowLeft'?'a[rel="prev"]':event.key==='ArrowRight'?'a[rel="next"]':'none'); if(target)location.hash=target.hash;}); show();
+  const chart=document.querySelector('.chart-wrap');
+  if(chart){
+    const svg=chart.querySelector('svg'),guide=chart.querySelector('.chart-guide'),tooltip=chart.querySelector('.chart-tooltip'),markers=[...chart.querySelectorAll('.chart-hover-marker')];
+    chart.querySelectorAll('.chart-hover-hit').forEach(hit=>hit.addEventListener('pointermove',event=>{
+      const x=hit.dataset.x, previous=hit.dataset.previous, baseline=hit.dataset.baseline;
+      guide.setAttribute('x1',x); guide.setAttribute('x2',x); guide.style.display='block';
+      [[previous,hit.dataset.previousY],[baseline,hit.dataset.baselineY]].forEach(([value,y],index)=>{const marker=markers[index]; if(value&&y){marker.setAttribute('cx',x); marker.setAttribute('cy',y); marker.style.display='block';}else marker.style.display='none';});
+      tooltip.innerHTML=`<strong>Generation ${hit.dataset.generation}</strong>${previous?`Previous: ${Number(previous).toFixed(3)}<br>`:''}Baseline: ${Number(baseline).toFixed(3)}`;
+      const bounds=chart.getBoundingClientRect(); tooltip.style.left=`${Math.min(event.clientX-bounds.left+12,bounds.width-150)}px`; tooltip.style.top=`${Math.max(4,event.clientY-bounds.top-54)}px`; tooltip.style.display='block';
+    }));
+    chart.addEventListener('pointerleave',()=>{guide.style.display='none'; markers.forEach(marker=>marker.style.display='none'); tooltip.style.display='none';});
+  }
 })();
 </script></body>
 </html>
