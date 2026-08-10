@@ -250,13 +250,9 @@ Enable the repository's commit guard once per clone:
 git config core.hooksPath .githooks
 ```
 
-The guard keeps generated archives separate from code: a commit may contain
-project files or run files, but not both. Run data commits may contain only one
-top-level run directory plus the generated `runs/index.html` and `.nojekyll`.
-As an exception, a gallery refresh may update `index.html` and root-level
-`drift.json` files across any number of runs, together with `runs/index.html`
-and `.nojekyll`, so analysis and presentation changes can be published in one
-commit.
+The guard keeps generated archives separate from code: a commit may contain any
+combination of files under `runs/`, including multiple new or updated runs, or
+it may contain project files outside `runs/`, but it cannot contain both.
 
 The test suite uses a fake provider and makes no network requests:
 

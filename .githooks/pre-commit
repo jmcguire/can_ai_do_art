@@ -9,34 +9,6 @@ non_run_paths=$(printf '%s\n' "$staged_paths" | awk '!/^runs\//')
 
 if [ -n "$run_paths" ] && [ -n "$non_run_paths" ]; then
     echo "Roomtone commit guard: do not mix runs with project changes." >&2
-    echo "Commit the project changes and each run separately." >&2
-    exit 1
-fi
-
-[ -n "$run_paths" ] || exit 0
-
-run_directories=$(
-    printf '%s\n' "$run_paths" |
-        awk -F/ '$2 != "index.html" && $2 != ".nojekyll" && $2 != "" {print $2}' |
-        sort -u
-)
-run_count=$(printf '%s\n' "$run_directories" | awk 'NF {count++} END {print count + 0}')
-
-if [ "$run_count" -gt 1 ]; then
-    non_gallery_paths=$(
-        printf '%s\n' "$run_paths" |
-            awk -F/ '
-                $2 == "index.html" || $2 == ".nojekyll" || $2 == "" {next}
-                NF == 3 && ($3 == "index.html" || $3 == "drift.json") {next}
-                {print}
-            '
-    )
-    if [ -z "$non_gallery_paths" ]; then
-        exit 0
-    fi
-    echo "Roomtone commit guard: a run commit may contain only one run directory." >&2
-    echo "Exception: generated gallery HTML and drift.json files may be refreshed across all runs together." >&2
-    printf 'Staged run directories:\n%s\n' "$run_directories" >&2
-    printf 'Non-gallery paths preventing a bulk refresh:\n%s\n' "$non_gallery_paths" >&2
+    echo "Commit all runs/ changes separately from project changes." >&2
     exit 1
 fi
