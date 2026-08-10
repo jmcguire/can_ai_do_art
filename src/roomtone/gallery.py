@@ -6,6 +6,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+from .drift import DREAMSIM_PROJECT_URL, load_current_drift
+
 
 def _read_text(path: Path) -> str:
     try:
@@ -110,6 +112,8 @@ def _page_shell(title: str, body: str, *, script: str = "") -> str:
     .text-thumb {{ display:grid; place-items:center; aspect-ratio:1; padding:15%; background:#f7f6f1; color:#4d4942; text-align:center; font:clamp(.75rem,2vw,1rem)/1.35 Georgia,serif; overflow:hidden; }}
     .thumb-label {{ display:flex; justify-content:space-between; gap:8px; margin-top:8px; font-size:10px; color:#5d5952; }}
     .thumb-label strong {{ color:#25231f; font-weight:400; }}
+    .object-record {{ width:min(760px,100%); margin:15px auto 0; display:flex; justify-content:center; flex-wrap:wrap; gap:3px 8px; color:#87827a; font:10px/1.4 Arial,sans-serif; }}
+    .object-record strong {{ color:#77726a; font-weight:400; }}
     .work {{ width:min(1020px,calc(100% - 72px)); margin:auto; padding:40px 0 46px; }}
     .object-heading {{ text-align:center; margin-bottom:22px; }}
     .object-heading h1 {{ margin:6px 0 0; font:400 21px/1.2 Georgia,serif; }}
@@ -125,6 +129,31 @@ def _page_shell(title: str, body: str, *, script: str = "") -> str:
     .work-nav {{ margin-top:19px; display:flex; justify-content:center; align-items:center; gap:22px; font-size:11px; }}
     .work-nav a {{ padding:4px; }}
     .work-nav .disabled {{ color:#8b867e; text-decoration:none; }}
+    .drift-study {{ width:min(948px,calc(100% - 72px)); margin:0 auto 42px; padding-top:22px; border-top:1px solid #aaa69d; }}
+    .study-heading {{ display:flex; justify-content:space-between; align-items:flex-start; gap:20px; margin-bottom:10px; }}
+    .study-heading h2 {{ margin:5px 0 0; font:400 20px/1.2 Georgia,serif; }}
+    .legend {{ display:flex; flex-wrap:wrap; gap:17px; color:#5f5a53; font-size:11px; }}
+    .legend span {{ display:flex; align-items:center; gap:6px; }}
+    .legend i {{ width:24px; border-top:2px solid #2f5452; }}
+    .legend .baseline i {{ border-color:#92643d; border-top-style:dashed; }}
+    .chart-wrap {{ position:relative; width:100%; }}
+    .chart-wrap svg {{ display:block; width:100%; height:auto; }}
+    .chart-frame {{ fill:#f7f6f1; stroke:#aaa69d; }}
+    .chart-grid {{ stroke:#cbc7be; stroke-width:1; }}
+    .chart-axis {{ fill:#5f5a53; font:10px Arial,sans-serif; }}
+    .chart-title {{ fill:#4d4942; font:11px Arial,sans-serif; }}
+    .chart-previous {{ fill:none; stroke:#2f5452; stroke-width:2.25; }}
+    .chart-baseline {{ fill:none; stroke:#92643d; stroke-width:2.25; stroke-dasharray:6 5; }}
+    .chart-point-previous {{ fill:#f7f6f1; stroke:#2f5452; stroke-width:2; }}
+    .chart-point-baseline {{ fill:#f7f6f1; stroke:#92643d; stroke-width:2; }}
+    .chart-hover-hit {{ fill:transparent; cursor:crosshair; }}
+    .chart-guide {{ display:none; stroke:#6f6a62; stroke-width:1; }}
+    .chart-hover-marker {{ display:none; }}
+    .chart-tooltip {{ display:none; position:absolute; pointer-events:none; background:#fff; border:1px solid #aaa69d; padding:8px 10px; color:#25231f; box-shadow:0 2px 5px rgba(35,30,22,.08); font:11px/1.45 Arial,sans-serif; }}
+    .chart-tooltip strong {{ display:block; font-weight:400; margin-bottom:3px; }}
+    details.method {{ margin-top:12px; border-top:1px solid #cbc7be; padding-top:9px; color:#57534c; font:11px/1.55 Georgia,serif; }}
+    details.method summary {{ width:max-content; cursor:pointer; color:#25231f; font-family:Arial,sans-serif; text-decoration:underline; text-underline-offset:3px; }}
+    details.method p {{ max-width:720px; margin:9px 0 0; }}
     .run-footer {{ background:#dedbd4; border-top:1px solid #b6b2a9; }}
     .run-footer-inner {{ width:min(1020px,calc(100% - 72px)); margin:auto; padding:25px 0 29px; display:grid; grid-template-columns:minmax(270px,1.35fr) minmax(380px,1fr); gap:48px; }}
     .run-index .run-footer-inner {{ display:block; }}
@@ -154,9 +183,11 @@ def _page_shell(title: str, body: str, *, script: str = "") -> str:
       .runs {{ grid-template-columns:repeat(2,minmax(0,1fr)); }}
       .run-footer-inner {{ grid-template-columns:1fr; gap:22px; }}
       .run-index .run-facts {{ grid-template-columns:repeat(2,1fr); }}
+      .study-heading {{ display:block; }}
+      .legend {{ margin-top:10px; }}
     }}
     @media (max-width:560px) {{
-      .site-header,.run-hero,.sequence,.work,.run-footer-inner,.archive {{ width:calc(100% - 40px); }}
+      .site-header,.run-hero,.sequence,.work,.run-footer-inner,.archive,.drift-study {{ width:calc(100% - 40px); }}
       .site-header {{ align-items:flex-start; }}
       .run-hero {{ padding-top:40px; }}
       .thumbs {{ grid-template-columns:repeat(2,1fr); gap:22px 14px; }}
@@ -214,6 +245,143 @@ def _gallery_items(run_dir: Path, manifest: dict[str, Any]) -> list[dict[str, An
     return items
 
 
+def _drift_records(drift: dict[str, Any] | None) -> dict[int, dict[str, Any]]:
+    if not drift:
+        return {}
+    records: dict[int, dict[str, Any]] = {}
+    for record in drift.get("images", []):
+        if not isinstance(record, dict) or not isinstance(record.get("generation"), int):
+            continue
+        records[record["generation"]] = record
+    return records
+
+
+def _drift_value(record: dict[str, Any], comparison: str) -> float | None:
+    values = record.get(comparison)
+    value = values.get("dreamsim") if isinstance(values, dict) else None
+    return float(value) if isinstance(value, (int, float)) else None
+
+
+def _drift_record_markup(record: dict[str, Any] | None) -> str:
+    if not record:
+        return ""
+    previous = _drift_value(record, "previous")
+    baseline = _drift_value(record, "baseline")
+    if previous is None or baseline is None:
+        return ""
+    return (
+        '<div class="object-record"><span>Visual drift:</span>'
+        f"<strong>{previous:.3f} from previous image</strong><span>·</span>"
+        f"<strong>{baseline:.3f} from baseline</strong></div>"
+    )
+
+
+def _polyline(points: list[tuple[float, float]]) -> str:
+    if not points:
+        return ""
+    return "M" + " L".join(f"{x:.2f},{y:.2f}" for x, y in points)
+
+
+def _drift_chart(drift: dict[str, Any] | None) -> str:
+    records = sorted(_drift_records(drift).values(), key=lambda item: item["generation"])
+    if len(records) < 2:
+        return ""
+
+    width, height = 900.0, 250.0
+    left, right, top, bottom = 60.0, 22.0, 18.0, 42.0
+    plot_width = width - left - right
+    plot_height = height - top - bottom
+    values = [
+        value
+        for record in records
+        for value in (
+            _drift_value(record, "previous"),
+            _drift_value(record, "baseline"),
+        )
+        if value is not None
+    ]
+    maximum = max(values, default=0.0)
+    ceiling = maximum * 1.1 if maximum > 0 else 1.0
+
+    def x_position(index: int) -> float:
+        return left + (plot_width * index / (len(records) - 1))
+
+    def y_position(value: float) -> float:
+        return top + plot_height * (1 - value / ceiling)
+
+    previous_points = [
+        (x_position(index), y_position(value))
+        for index, record in enumerate(records)
+        if (value := _drift_value(record, "previous")) is not None
+    ]
+    baseline_points = [
+        (x_position(index), y_position(value))
+        for index, record in enumerate(records)
+        if (value := _drift_value(record, "baseline")) is not None
+    ]
+    grid: list[str] = []
+    for tick in range(5):
+        value = ceiling * tick / 4
+        y = y_position(value)
+        grid.append(
+            f'<line class="chart-grid" x1="{left:.2f}" y1="{y:.2f}" x2="{width-right:.2f}" y2="{y:.2f}"></line>'
+            f'<text class="chart-axis" x="{left-8:.2f}" y="{y+3:.2f}" text-anchor="end">{value:.2f}</text>'
+        )
+
+    label_stride = max(1, (len(records) - 1 + 7) // 8)
+    x_labels = [
+        f'<text class="chart-axis" x="{x_position(index):.2f}" y="{height-18:.2f}" text-anchor="middle">{record["generation"]}</text>'
+        for index, record in enumerate(records)
+        if index % label_stride == 0 or index == len(records) - 1
+    ]
+    point_markup = [
+        f'<circle class="chart-point-previous" cx="{x:.2f}" cy="{y:.2f}" r="3.5"></circle>'
+        for x, y in previous_points
+    ] + [
+        f'<circle class="chart-point-baseline" cx="{x:.2f}" cy="{y:.2f}" r="3.5"></circle>'
+        for x, y in baseline_points
+    ]
+    hit_width = plot_width / max(1, len(records) - 1)
+    hits: list[str] = []
+    for index, record in enumerate(records):
+        x = x_position(index)
+        previous = _drift_value(record, "previous")
+        baseline = _drift_value(record, "baseline")
+        hits.append(
+            f'<rect class="chart-hover-hit" x="{max(left, x-hit_width/2):.2f}" y="{top:.2f}" '
+            f'width="{min(width-right, x+hit_width/2)-max(left, x-hit_width/2):.2f}" height="{plot_height:.2f}" '
+            f'data-x="{x:.2f}" data-generation="{record["generation"]}" '
+            f'data-previous="{"" if previous is None else f"{previous:.6f}"}" '
+            f'data-previous-y="{"" if previous is None else f"{y_position(previous):.2f}"}" '
+            f'data-baseline="{"" if baseline is None else f"{baseline:.6f}"}" '
+            f'data-baseline-y="{"" if baseline is None else f"{y_position(baseline):.2f}"}"></rect>'
+        )
+
+    return f"""
+<section class="drift-study" aria-labelledby="drift-chart-title">
+  <header class="study-heading"><div><div class="eyebrow">Image analysis</div><h2 id="drift-chart-title">Visual drift across the run</h2></div><div class="legend"><span><i></i>From previous image</span><span class="baseline"><i></i>From baseline</span></div></header>
+  <div class="chart-wrap">
+    <svg viewBox="0 0 900 250" role="img" aria-labelledby="drift-chart-title drift-chart-description">
+      <desc id="drift-chart-description">DreamSim raw distance for each image compared with the previous image and the first image in this run.</desc>
+      <rect class="chart-frame" x="{left:.2f}" y="{top:.2f}" width="{plot_width:.2f}" height="{plot_height:.2f}"></rect>
+      {"".join(grid)}
+      <text class="chart-title" transform="translate(15 150) rotate(-90)" text-anchor="middle">DreamSim raw distance</text>
+      <text class="chart-title" x="{left + plot_width/2:.2f}" y="{height-2:.2f}" text-anchor="middle">Generation</text>
+      {"".join(x_labels)}
+      <path class="chart-previous" d="{_polyline(previous_points)}"></path>
+      <path class="chart-baseline" d="{_polyline(baseline_points)}"></path>
+      {"".join(point_markup)}
+      <line class="chart-guide" x1="0" y1="{top:.2f}" x2="0" y2="{top+plot_height:.2f}"></line>
+      <circle class="chart-hover-marker chart-point-previous" r="5"></circle>
+      <circle class="chart-hover-marker chart-point-baseline" r="5"></circle>
+      {"".join(hits)}
+    </svg>
+    <div class="chart-tooltip" role="tooltip"></div>
+  </div>
+  <details class="method"><summary>How visual drift is measured</summary><p>These values compare images only; generated and source text are not included. The displayed raw distance uses the single-branch <a href="{DREAMSIM_PROJECT_URL}">DreamSim</a> OpenCLIP ViT-B/32 model. DreamSim compares learned visual features that reflect both overall meaning and lower-level appearance, producing a smaller distance when two images look more alike.</p></details>
+</section>"""
+
+
 def _facts_markup(manifest: dict[str, Any], artifact_count: int) -> str:
     summary = manifest.get("summary") or {}
     return f"""<dl class="run-facts">
@@ -235,6 +403,8 @@ def generate_run_gallery(run_dir: Path, manifest: dict[str, Any] | None = None) 
     run_title = str(manifest.get("title") or run_dir.name)
     description = _run_description(run_dir, manifest)
     facts = _facts_markup(manifest, len(steps) + 1)
+    drift = load_current_drift(run_dir, manifest)
+    drift_records = _drift_records(drift)
 
     thumbnails: list[str] = []
     generation_pages: list[str] = []
@@ -248,6 +418,14 @@ def generate_run_gallery(run_dir: Path, manifest: dict[str, Any] | None = None) 
             input_label = "Text that produced this image"
             output_label = "Text produced from this image"
             output_text = item["output_text"] or "No description was generated after this image."
+            record = drift_records.get(generation)
+            previous_drift = _drift_value(record, "previous") if record else None
+            thumbnail_note = (
+                f"{previous_drift:.3f} drift"
+                if previous_drift is not None
+                else "Baseline" if record else "Image"
+            )
+            drift_markup = _drift_record_markup(record)
         else:
             seed_text = str(item["input_text"])
             thumbnail_visual = f'<div class="text-thumb">{escape(seed_text)}</div>'
@@ -255,11 +433,13 @@ def generate_run_gallery(run_dir: Path, manifest: dict[str, Any] | None = None) 
             input_label = "Starting text"
             output_label = "What followed"
             output_text = "The first generated image follows this seed."
+            thumbnail_note = "Text"
+            drift_markup = ""
 
         thumbnails.append(
             f'<a class="thumb" href="#generation-{generation}">'
             f'<div class="thumb-frame">{thumbnail_visual}</div>'
-            f'<span class="thumb-label"><strong>Generation {generation}</strong><span>{escape(kind.title())}</span></span>'
+            f'<span class="thumb-label"><strong>Generation {generation}</strong><span>{escape(thumbnail_note)}</span></span>'
             "</a>"
         )
         previous_link = (
@@ -276,6 +456,7 @@ def generate_run_gallery(run_dir: Path, manifest: dict[str, Any] | None = None) 
   <main class="work">
     <header class="object-heading"><div class="eyebrow">{escape(kind.title())}</div><h1>Generation {generation} of {escape(str(manifest.get("generations_requested", "?")))}</h1></header>
     {main_visual}
+{drift_markup}
     <section class="comparison" aria-label="Text before and after this artifact"><article class="text-record"><h2>{input_label}</h2><p>{escape(str(item["input_text"]))}</p></article><article class="text-record"><h2>{output_label}</h2><p>{escape(str(output_text))}</p></article></section>
     <nav class="work-nav" aria-label="Generation navigation">{previous_link}<span>{index + 1} / {len(items)}</span>{next_link}</nav>
   </main>
@@ -292,6 +473,7 @@ def generate_run_gallery(run_dir: Path, manifest: dict[str, Any] | None = None) 
   <header class="site-header"><a class="run-link" href="#run-index" aria-current="page">{escape(run_title)}</a><a class="collection-link" href="../">Roomtone Study Collection</a></header>
   <div class="run-hero"><div class="eyebrow">Roomtone run</div><h1>{escape(run_title)}</h1><p>{escape(description)}</p></div>
   <main class="sequence"><header class="sequence-head"><span>The complete image sequence</span><span>{image_count} images · {len(items)} views including seed</span></header>{listing}</main>
+{_drift_chart(drift)}
   <footer class="run-footer"><div class="run-footer-inner">{facts}</div></footer>
 </section>
 {"".join(generation_pages)}
@@ -301,6 +483,18 @@ def generate_run_gallery(run_dir: Path, manifest: dict[str, Any] | None = None) 
   const runIndex=document.querySelector('.run-index'), pages=[...document.querySelectorAll('.generation-page')];
   const show=()=>{const match=location.hash.match(/^#generation-(\\d+)$/), target=match&&document.querySelector(location.hash); runIndex.classList.toggle('active',!target); pages.forEach(page=>page.classList.toggle('active',page===target)); window.scrollTo(0,0);};
   window.addEventListener('hashchange',show); document.addEventListener('keydown',event=>{const active=document.querySelector('.generation-page.active'); if(!active)return; const target=active.querySelector(event.key==='ArrowLeft'?'a[rel="prev"]':event.key==='ArrowRight'?'a[rel="next"]':'none'); if(target)location.hash=target.hash;}); show();
+  const chart=document.querySelector('.chart-wrap');
+  if(chart){
+    const svg=chart.querySelector('svg'),guide=chart.querySelector('.chart-guide'),tooltip=chart.querySelector('.chart-tooltip'),markers=[...chart.querySelectorAll('.chart-hover-marker')];
+    chart.querySelectorAll('.chart-hover-hit').forEach(hit=>hit.addEventListener('pointermove',event=>{
+      const x=hit.dataset.x, previous=hit.dataset.previous, baseline=hit.dataset.baseline;
+      guide.setAttribute('x1',x); guide.setAttribute('x2',x); guide.style.display='block';
+      [[previous,hit.dataset.previousY],[baseline,hit.dataset.baselineY]].forEach(([value,y],index)=>{const marker=markers[index]; if(value&&y){marker.setAttribute('cx',x); marker.setAttribute('cy',y); marker.style.display='block';}else marker.style.display='none';});
+      tooltip.innerHTML=`<strong>Generation ${hit.dataset.generation}</strong>${previous?`Previous: ${Number(previous).toFixed(3)}<br>`:''}Baseline: ${Number(baseline).toFixed(3)}`;
+      const bounds=chart.getBoundingClientRect(); tooltip.style.left=`${Math.min(event.clientX-bounds.left+12,bounds.width-150)}px`; tooltip.style.top=`${Math.max(4,event.clientY-bounds.top-54)}px`; tooltip.style.display='block';
+    }));
+    chart.addEventListener('pointerleave',()=>{guide.style.display='none'; markers.forEach(marker=>marker.style.display='none'); tooltip.style.display='none';});
+  }
 })();
 </script>"""
     destination = run_dir / "index.html"

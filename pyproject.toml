@@ -14,12 +14,21 @@ dependencies = [
   "python-dotenv>=1.0,<2",
 ]
 
+[project.optional-dependencies]
+analysis = [
+  "dreamsim>=0.2.1,<1",
+  "numpy>=1.26,<3",
+  "scikit-image>=0.22,<1",
+]
+
 [project.urls]
 Homepage = "https://jmcguire.github.io/can_ai_do_art/"
 Repository = "https://github.com/jmcguire/can_ai_do_art"
 
 [project.scripts]
 roomtone = "roomtone.cli:main"
+roomtone-drift = "roomtone.drift_cli:main"
+roomtone-gallery = "roomtone.gallery_cli:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/roomtone"]

@@ -36,6 +36,17 @@ Some OpenAI accounts may need API organization verification before GPT Image
 models can be used. See OpenAI's image generation guide if the API reports an
 access error.
 
+Image-drift analysis is optional because its local vision model is much larger
+than Roomtone's normal runtime dependencies. Install it when needed with:
+
+```bash
+python -m pip install -e '.[analysis]'
+```
+
+The first analysis downloads the DreamSim model weights to
+`~/.cache/roomtone/dreamsim`. Set `ROOMTONE_CACHE_DIR` to change the parent cache
+directory. Drift calculation is local and makes no OpenAI API calls.
+
 ## Run
 
 ```bash
@@ -115,6 +126,7 @@ for uniqueness, for example:
 ```text
 runs/a-simple-wooden-chair-20260809T143210Z/
 ├── manifest.json
+├── drift.json
 ├── commands.txt
 ├── index.html
 ├── profile/
@@ -153,13 +165,50 @@ with the exact pricing assumptions and date used. Image response base64 is
 decoded to the image file; its location and checksum replace the duplicate
 base64 string in `response.json`. No API key is archived.
 
+## Visual drift analysis
+
+Measure every run under the default `runs/` directory and refresh its published
+pages with:
+
+```bash
+roomtone-drift
+```
+
+The first image in each run is the baseline, whether that is the generation 0
+seed or the first generated image after a text seed. Each later image is compared
+with both the baseline and the immediately previous image. Unchanged runs are
+skipped; use `--force` to recompute them. To limit the command to one run or use
+a different archive location:
+
+```bash
+roomtone-drift --run runs/example-20260809T143210Z
+roomtone-drift --runs-dir other-runs
+```
+
+Each run receives one root-level `drift.json`. It contains the raw distance and
+similarity observations for every configured algorithm: single-branch DreamSim
+OpenCLIP ViT-B/32 is the displayed perceptual-distance metric, while SSIM is
+retained as a structural diagnostic. This derived file is separate from the run
+manifest and can be safely recomputed from the archived images.
+
+Regenerate every HTML page without recalculating drift or making API calls:
+
+```bash
+roomtone-gallery
+```
+
+`roomtone-gallery` also accepts `--run` and `--runs-dir`. Both archive commands
+default to `runs/`; there is no required positional `runs` argument.
+
 Each run also receives a self-contained HTML gallery. Its front page presents
 the run title and description with thumbnails for the seed and every generated
-image. Selecting a thumbnail opens that generation with the image and its input
-and output descriptions side by side; the run title returns to the overview,
-and the left and right arrow keys move through the sequence. Run date, elapsed
-time, estimated cost, and artifact count appear in a quiet footer. The parent
-`runs/index.html` catalogs every archived run.
+image. When drift data is present, the front page adds a chart comparing each
+image with the previous image and the baseline. Selecting a thumbnail opens that
+generation with the image and its input and output descriptions side by side;
+the run title returns to the overview, and the left and right arrow keys move
+through the sequence. Run date, elapsed time, estimated cost, and artifact count
+appear in a quiet footer. The parent `runs/index.html` catalogs every archived
+run.
 
 Each step sees only the immediately preceding artifact. Earlier images,
 descriptions, and conversation state are not sent back to the model.
@@ -202,8 +251,11 @@ git config core.hooksPath .githooks
 ```
 
 The guard keeps generated archives separate from code: a commit may contain
-project files or one run, but not both, and a run commit may contain only one
+project files or run files, but not both. Run data commits may contain only one
 top-level run directory plus the generated `runs/index.html` and `.nojekyll`.
+As an exception, a gallery refresh may update only `index.html` files across any
+number of runs, together with `runs/index.html` and `.nojekyll`, so presentation
+changes can be published in one commit.
 
 The test suite uses a fake provider and makes no network requests:
 

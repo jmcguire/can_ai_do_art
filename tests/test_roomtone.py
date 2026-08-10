@@ -1,15 +1,20 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 import tempfile
 import unittest
 
 from PIL import Image
 
-from roomtone.archive import derive_run_title, load_run, slugify_title
+from roomtone.archive import create_run, derive_run_title, load_run, slugify_title
 from roomtone.cli import build_parser, main
 from roomtone.config import load_profile
 from roomtone.engine import run_transformations
+from roomtone.drift import analyze_run
+from roomtone.gallery import generate_run_gallery
+from roomtone.gallery_cli import build_parser as build_gallery_parser
+from roomtone.drift_cli import build_parser as build_drift_parser, main as drift_main
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -64,6 +69,32 @@ class FailsOnceProvider(FakeProvider):
         self.calls.append("text_to_image")
         destination.write_bytes(b"partial")
         raise RuntimeError("simulated failure")
+
+
+class ImageProvider(FakeProvider):
+    def text_to_image(self, prompt: str, destination: Path):
+        request, response = super().text_to_image(prompt, destination)
+        generation = int(destination.parent.name.split("-", 1)[0])
+        Image.new("RGB", (32, 32), (generation * 20, 40, 80)).save(destination)
+        return request, response
+
+
+class FakeDreamSim:
+    package_version = "test-dreamsim"
+
+    def distance(self, first: Path, second: Path) -> float:
+        left = int(first.parent.name.split("-", 1)[0])
+        right = int(second.parent.name.split("-", 1)[0])
+        return abs(right - left) / 10
+
+
+class FakeSSIM:
+    package_version = "test-skimage"
+
+    def similarity(self, first: Path, second: Path) -> float:
+        left = int(first.parent.name.split("-", 1)[0])
+        right = int(second.parent.name.split("-", 1)[0])
+        return 1 - abs(right - left) / 100
 
 
 class RoomtoneTests(unittest.TestCase):
@@ -152,6 +183,31 @@ class RoomtoneTests(unittest.TestCase):
         self.assertEqual(args.generations, 12)
         self.assertEqual(args.profile, Path("profiles/default"))
 
+    def test_archive_tool_commands_default_to_runs(self):
+        gallery_args = build_gallery_parser().parse_args([])
+        drift_args = build_drift_parser().parse_args([])
+        self.assertEqual(gallery_args.runs_dir, Path("runs"))
+        self.assertEqual(drift_args.runs_dir, Path("runs"))
+        self.assertFalse(drift_args.force)
+
+    def test_bulk_drift_skips_run_without_images(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            start = root / "seed.txt"
+            start.write_text("Only text so far", encoding="utf-8")
+            profile = load_profile(DEFAULT_PROFILE)
+            run_dir, _ = create_run(
+                root / "runs",
+                start,
+                profile,
+                profile.settings,
+                1,
+                ["roomtone"],
+            )
+            self.assertEqual(drift_main(["--runs-dir", str(root / "runs")]), 0)
+            self.assertFalse((run_dir / "drift.json").exists())
+            self.assertTrue((run_dir / "index.html").is_file())
+
     def test_title_derivation_and_slugging(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
@@ -224,6 +280,61 @@ class RoomtoneTests(unittest.TestCase):
                 manifest["start"]["sha256"],
                 manifest["start"]["archived_sha256"],
             )
+
+    def test_drift_json_stores_both_algorithms_and_gallery_uses_dreamsim(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            start = root / "seed.png"
+            Image.new("RGB", (32, 32), "navy").save(start)
+            profile = load_profile(DEFAULT_PROFILE)
+            run_dir = run_transformations(
+                provider=ImageProvider(),
+                start=start,
+                profile=profile,
+                settings=profile.settings,
+                generations=4,
+                output_dir=root / "runs",
+                argv=["roomtone"],
+            )
+
+            destination, changed = analyze_run(
+                run_dir,
+                dreamsim_metric=FakeDreamSim(),
+                ssim_metric=FakeSSIM(),
+            )
+            self.assertTrue(changed)
+            self.assertEqual(destination, run_dir / "drift.json")
+            drift = json.loads(destination.read_text(encoding="utf-8"))
+            self.assertEqual(set(drift["algorithms"]), {"dreamsim", "ssim"})
+            self.assertEqual([item["generation"] for item in drift["images"]], [0, 2, 4])
+            self.assertIsNone(drift["images"][0]["previous"])
+            self.assertAlmostEqual(drift["images"][2]["previous"]["dreamsim"], 0.2)
+            self.assertAlmostEqual(drift["images"][2]["baseline"]["dreamsim"], 0.4)
+            self.assertAlmostEqual(drift["images"][2]["previous"]["ssim"], 0.98)
+
+            _, changed = analyze_run(
+                run_dir,
+                dreamsim_metric=FakeDreamSim(),
+                ssim_metric=FakeSSIM(),
+            )
+            self.assertFalse(changed)
+
+            generate_run_gallery(run_dir)
+            gallery = (run_dir / "index.html").read_text(encoding="utf-8")
+            self.assertIn("Visual drift across the run", gallery)
+            self.assertIn("DreamSim raw distance", gallery)
+            self.assertIn("0.200 from previous image", gallery)
+            self.assertIn("0.400 from baseline", gallery)
+            self.assertIn("https://github.com/ssundaram21/dreamsim", gallery)
+            self.assertNotIn("SSIM is also recorded", gallery)
+            self.assertNotIn(">how measured<", gallery)
+
+            Image.new("RGB", (32, 32), "white").save(
+                run_dir / drift["images"][-1]["path"]
+            )
+            generate_run_gallery(run_dir)
+            stale_gallery = (run_dir / "index.html").read_text(encoding="utf-8")
+            self.assertNotIn("Visual drift across the run", stale_gallery)
 
     def test_dry_run_makes_no_run_directory(self):
         with tempfile.TemporaryDirectory() as temporary:
